@@ -165,6 +165,15 @@ nav .wrap { display: flex; justify-content: space-between; align-items: center; 
 .fcard li em { color: var(--muted); font-style: normal; font-size: 0.82rem; }
 .fcard p { font-size: 0.9rem; color: var(--dim); font-weight: 300; line-height: 1.6; }
 
+/* --- Coursework --- */
+.cw-section { margin-bottom: 44px; }
+.cw-list { display: flex; flex-direction: column; }
+.cw-item { display: grid; grid-template-columns: 110px 1fr; gap: 24px; padding: 18px 0; border-bottom: 1px solid var(--border); align-items: baseline; }
+.cw-item:last-child { border-bottom: none; }
+.cw-code { font-family: var(--mono); font-size: 0.68rem; color: var(--accent); padding-top: 3px; }
+.cw-name { font-weight: 500; font-size: 0.95rem; color: var(--text); margin-bottom: 3px; }
+.cw-desc { font-size: 0.84rem; color: var(--muted); font-weight: 300; line-height: 1.55; }
+
 /* --- Footer --- */
 footer { border-top: 1px solid var(--border); padding: 24px 0; text-align: center; }
 footer p { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); letter-spacing: 0.06em; }
@@ -185,6 +194,7 @@ footer p { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); le
   .hero h1 { font-size: 2.2rem; }
   .hero-btns { flex-direction: column; }
   .w-item { grid-template-columns: 1fr; gap: 2px; }
+  .cw-item { grid-template-columns: 1fr; gap: 4px; }
 }
 @media print {
   nav, footer { display: none; }
