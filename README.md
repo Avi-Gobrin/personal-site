@@ -1,36 +1,23 @@
-# Personal Site
+# Avi Gobrin — Personal Site
 
-Minimal personal portfolio site. Pure HTML + CSS, no frameworks, no JavaScript.
+Personal site for Avi Gobrin, third-year Applied Mathematics specialist at the University of Toronto (Statistics major, Computer Science minor). Built with pure HTML and CSS — no frameworks, no JavaScript, no build step.
 
-## Setup
+Live at [avigobrin.com](https://avigobrin.com).
 
-1. Replace placeholder content in all `.html` files with your real information
-2. Add your `resume.pdf` to `assets/`
-3. Update social links in `index.html` (GitHub, LinkedIn, email)
-4. If using a custom domain, add it to the `CNAME` file
+## Pages
 
-## Deploy to GitHub Pages
+- `index.html` — Home / bio
+- `projects.html` — Projects
+- `writing.html` — Writing
+- `coursework.html` — Coursework
+- `featured.html` — Featured work (detailed writeups)
+- `style.css` — All styles (CSS variables at the top)
+- `assets/` — Resume PDF and other static files
 
-1. Create a repo called `yourusername.github.io`
-2. Push all files to the `main` branch
-3. Site will be live at `https://yourusername.github.io`
+## Alternatives
 
-## Custom Domain (optional)
+The `alternatives/` folder contains experimental versions of the site built as side projects:
 
-1. Buy a domain (Namecheap, Cloudflare, etc.)
-2. Add the domain to the `CNAME` file
-3. In your domain registrar, add these DNS records:
-   - A record: `185.199.108.153`
-   - A record: `185.199.109.153`
-   - A record: `185.199.110.153`
-   - A record: `185.199.111.153`
-   - CNAME: `www` -> `yourusername.github.io`
-4. In GitHub repo settings, go to Pages and enter your custom domain
-
-## Files to Edit
-
-- `index.html` - Your bio, social links, tagline
-- `projects.html` - Your projects (add/remove project cards)
-- `writing.html` - Your articles (add/remove entries)
-- `fun.html` - Books, beliefs, currently section
-- `style.css` - Colors, fonts, spacing (CSS variables at top)
+- `avi-desktop.html` — OS-style windowed interface
+- `avi-pixel.html` — Pixel-art RPG town you walk around
+- `avi-latex.html` — LaTeX document aesthetic
