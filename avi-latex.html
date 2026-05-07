@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>On the Existence of Optimal Career Trajectories in Finite-Dimensional Opportunity Spaces</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body, {delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]});"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+
+  :root {
+    --paper: #f5f1e8;
+    --paper-dark: #e8e0d0;
+    --ink: #1a1a1a;
+    --ink-light: #444;
+    --ink-faint: #888;
+    --accent: #8b0000;
+    --blue: #1a3a6a;
+    --rule: #c0b8a8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    font-size: 12pt;
+    background: #d4cfc4;
+  }
+
+  body {
+    font-family: 'EB Garamond', 'Crimson Pro', Georgia, 'Times New Roman', serif;
+    color: var(--ink);
+    line-height: 1.65;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 60px 48px 80px;
+    background: var(--paper);
+    min-height: 100vh;
+    box-shadow: 0 0 40px rgba(0,0,0,0.12);
+    position: relative;
+  }
+
+  /* Page texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    background: url("data:image/svg+xml,%3Csvg width='4' height='4' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0' y='0' width='1' height='1' fill='%23000' opacity='0.015'/%3E%3C/svg%3E");
+    z-index: 1000;
+  }
+
+  @media (max-width: 740px) {
+    body { padding: 40px 24px 60px; }
+  }
+
+  /* Title block */
+  .title-block {
+    text-align: center;
+    margin-bottom: 36px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .journal-name {
+    font-variant: small-caps;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    color: var(--ink-faint);
+    margin-bottom: 4px;
+  }
+
+  .journal-info {
+    font-size: 0.75rem;
+    color: var(--ink-faint);
+    margin-bottom: 28px;
+    letter-spacing: 0.05em;
+  }
+
+  h1.paper-title {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 1.65rem;
+    font-weight: 500;
+    line-height: 1.35;
+    margin-bottom: 18px;
+    color: var(--ink);
+  }
+
+  .author {
+    font-size: 1.05rem;
+    font-variant: small-caps;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+
+  .affiliation {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--ink-light);
+    margin-bottom: 4px;
+  }
+
+  .email {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.75rem;
+    color: var(--ink-faint);
+  }
+
+  .email a { color: var(--blue); text-decoration: none; }
+  .email a:hover { text-decoration: underline; }
+
+  .date {
+    font-size: 0.8rem;
+    color: var(--ink-faint);
+    margin-top: 12px;
+    font-style: italic;
+  }
+
+  /* Abstract */
+  .abstract {
+    margin: 28px 36px;
+    padding: 0;
+  }
+
+  .abstract-label {
+    font-weight: 700;
+    font-size: 0.85rem;
+    font-variant: small-caps;
+    letter-spacing: 0.1em;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .abstract p {
+    font-size: 0.92rem;
+    text-align: justify;
+    text-indent: 1.5em;
+    hyphens: auto;
+  }
+
+  .keywords {
+    margin-top: 12px;
+    font-size: 0.8rem;
+    color: var(--ink-light);
+  }
+  .keywords strong {
+    font-variant: small-caps;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  .msc {
+    font-size: 0.8rem;
+    color: var(--ink-light);
+    margin-top: 4px;
+  }
+
+  /* Sections */
+  h2 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-top: 32px;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+
+  h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 20px;
+    margin-bottom: 8px;
+    font-style: italic;
+  }
+
+  p {
+    text-align: justify;
+    text-indent: 1.5em;
+    margin-bottom: 8px;
+    hyphens: auto;
+  }
+
+  p.no-indent { text-indent: 0; }
+
+  /* Theorem environments */
+  .theorem, .lemma, .definition, .corollary, .remark, .proof, .proposition {
+    margin: 18px 0;
+    padding: 0;
+  }
+
+  .theorem, .lemma, .proposition, .corollary {
+    font-style: italic;
+  }
+
+  .env-label {
+    font-weight: 700;
+    font-style: normal;
+    margin-right: 4px;
+  }
+
+  .env-name {
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .definition { font-style: normal; }
+  .definition .env-label { font-weight: 700; font-style: italic; }
+
+  .remark { font-style: normal; font-size: 0.92rem; }
+  .remark .env-label { font-style: italic; }
+
+  .proof {
+    font-style: normal;
+    margin-bottom: 16px;
+  }
+  .proof .env-label { font-style: italic; }
+  .proof::after {
+    content: '\25A1';
+    float: right;
+    font-size: 0.9rem;
+    color: var(--ink-light);
+    margin-top: -1.6em;
+  }
+
+  /* Footnotes */
+  .footnote-ref {
+    font-size: 0.7em;
+    vertical-align: super;
+    color: var(--accent);
+    text-decoration: none;
+    cursor: pointer;
+    line-height: 0;
+  }
+
+  .footnotes {
+    margin-top: 36px;
+    padding-top: 12px;
+    border-top: 1px solid var(--rule);
+    font-size: 0.82rem;
+    color: var(--ink-light);
+  }
+
+  .footnote {
+    margin-bottom: 6px;
+    text-indent: 0;
+    padding-left: 1.5em;
+    text-align: left;
+    position: relative;
+  }
+
+  .footnote-num {
+    position: absolute;
+    left: 0;
+    font-size: 0.7em;
+    vertical-align: super;
+    color: var(--accent);
+  }
+
+  /* References */
+  .references {
+    margin-top: 32px;
+  }
+
+  .references h2 { font-size: 1.05rem; }
+
+  .ref-item {
+    font-size: 0.88rem;
+    margin-bottom: 8px;
+    padding-left: 2.5em;
+    text-indent: -2.5em;
+    text-align: left;
+  }
+
+  .ref-item a {
+    color: var(--blue);
+    text-decoration: none;
+  }
+  .ref-item a:hover { text-decoration: underline; }
+
+  /* Equations */
+  .katex-display {
+    margin: 16px 0;
+  }
+
+  /* Links */
+  .social-links {
+    margin-top: 28px;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+    font-size: 0.85rem;
+  }
+
+  .social-links a {
+    color: var(--blue);
+    text-decoration: none;
+    margin: 0 12px;
+  }
+  .social-links a:hover { text-decoration: underline; }
+
+  /* Separator */
+  hr {
+    border: none;
+    border-top: 0.5px solid var(--rule);
+    margin: 24px 0;
+  }
+
+  /* Appendix */
+  .appendix h2::before {
+    content: '';
+  }
+
+  /* Side margin notes (for wider screens) */
+  .margin-note {
+    font-size: 0.75rem;
+    color: var(--ink-faint);
+    font-style: italic;
+    margin: 4px 0 8px;
+    text-indent: 0;
+    text-align: left;
+  }
+
+  /* Table */
+  table {
+    border-collapse: collapse;
+    margin: 16px auto;
+    font-size: 0.9rem;
+  }
+  th, td {
+    padding: 4px 14px;
+    text-align: left;
+    border-bottom: 0.5px solid var(--rule);
+  }
+  th {
+    font-variant: small-caps;
+    font-weight: 600;
+    border-bottom: 1.5px solid var(--ink);
+    letter-spacing: 0.05em;
+  }
+  caption {
+    font-size: 0.82rem;
+    font-style: italic;
+    margin-bottom: 6px;
+    color: var(--ink-light);
+  }
+
+  /* Print */
+  @media print {
+    html { background: white; }
+    body { box-shadow: none; padding: 40px; }
+  }
+
+  /* Smooth scroll for footnotes */
+  html { scroll-behavior: smooth; }
+
+  /* Running header */
+  .running-header {
+    position: sticky;
+    top: 0;
+    background: var(--paper);
+    padding: 8px 0;
+    margin: -8px 0 0;
+    z-index: 10;
+    font-size: 0.72rem;
+    font-variant: small-caps;
+    letter-spacing: 0.15em;
+    color: var(--ink-faint);
+    border-bottom: 0.5px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  @media (max-width: 740px) {
+    .running-header { display: none; }
+    .abstract { margin: 20px 12px; }
+  }
+
+  /* Animation */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .title-block, .abstract, h2, .theorem, .definition, .lemma, .proof, .corollary, .proposition, .remark, .ref-item {
+    animation: fadeIn 0.6s ease both;
+  }
+  .abstract { animation-delay: 0.1s; }
+</style>
+</head>
+<body>
+
+<div class="running-header">
+  <span>Gobrin, 2026</span>
+  <span>On Optimal Career Trajectories</span>
+</div>
+
+<div class="title-block">
+  <div class="journal-name">Journal of Applied Mathematics &amp; Personal Websites</div>
+  <div class="journal-info">Vol. 1, No. 1, pp. 1--7, May 2026</div>
+  
+  <h1 class="paper-title">On the Existence of Optimal Career Trajectories<br>in Finite-Dimensional Opportunity Spaces</h1>
+  
+  <div class="author">Avi Gobrin</div>
+  <div class="affiliation">Department of Mathematics, University of Toronto</div>
+  <div class="email"><a href="mailto:avichaigobrin@gmail.com">avichaigobrin@gmail.com</a></div>
+  <div class="date">May 6, 2026</div>
+</div>
+
+<div class="abstract">
+  <div class="abstract-label">Abstract</div>
+  <p>
+    We present a comprehensive study of the author, a specimen of the genus <em>mathematicus appliedus</em>, 
+    currently observed in the wild at the University of Toronto. Through a combination of theoretical results, 
+    computational experiments, and questionable life choices, we establish the existence of a unique career 
+    trajectory $\gamma^*$ in the space of quantitative finance roles satisfying certain optimality conditions. 
+    Along the way, we construct a chess engine, prove several theorems of dubious practical value, and 
+    reach Grandmaster in StarCraft II. We conjecture that rigorous thinking actually matters somewhere.
+  </p>
+  <div class="keywords">
+    <strong>Keywords:</strong> applied mathematics, statistics, quantitative finance, chess engines, 
+    existential optimization, competitive gaming
+  </div>
+  <div class="msc">
+    <strong>MSC 2020:</strong> 91G99, 68T05, 62-07, 00A09
+  </div>
+</div>
+
+<hr>
+
+<!-- Section 1 -->
+<h2>1. Introduction</h2>
+
+<p>
+  The problem of finding an optimal career trajectory has attracted significant attention in the literature, 
+  particularly among graduating students with bills to pay. Let $\Omega$ denote the space of all possible 
+  career outcomes, equipped with the natural $\sigma$-algebra of "things that could go wrong." We seek 
+  a path $\gamma: [0,T] \to \Omega$ maximizing the functional
+</p>
+
+$$J[\gamma] = \int_0^T \Big( u\big(\gamma(t)\big) - c\big(\gamma'(t)\big) \Big)\, dt$$
+
+<p>
+  where $u$ denotes the utility derived from meaningful work and $c$ represents the cost of 
+  getting there, including but not limited to: analysis homework, measure theory, and debugging 
+  segmentation faults at 2 AM.<a href="#fn1" class="footnote-ref">1</a>
+</p>
+
+<p>
+  The author is an applied mathematics specialist at the University of Toronto, with a major in 
+  statistics and a minor in computer science. Most of his time goes toward hard problems, whether 
+  that means analysis proofs, building things from scratch, or figuring out why his chess engine 
+  keeps hanging its queen.<a href="#fn2" class="footnote-ref">2</a>
+</p>
+
+<p>
+  Outside of academics, the author reached Grandmaster in StarCraft II (Zerg), plays competitive 
+  Magic: The Gathering, and reads more than is probably reasonable. He is currently focused on 
+  quantitative finance and looking for roles where rigorous thinking actually matters.
+</p>
+
+<!-- Section 2 -->
+<h2>2. Preliminary Results</h2>
+
+<div class="definition">
+  <p>
+    <span class="env-label">Definition 2.1</span>
+    <span class="env-name">(Competence).</span>
+    We say an individual $x$ is <em>competent</em> in domain $D$ if there exists a measure $\mu$ on the 
+    space of problems $\mathcal{P}_D$ such that 
+    $\Pr[\text{$x$ solves $p$}] > 0.5$ for $\mu$-almost every $p \in \mathcal{P}_D$.
+  </p>
+</div>
+
+<div class="theorem">
+  <p>
+    <span class="env-label">Theorem 2.2</span>
+    <span class="env-name">(Employment Existence).</span>
+    The author is currently seeking employment. Moreover, this state is non-trivially persistent.
+  </p>
+</div>
+
+<div class="proof">
+  <p>
+    <span class="env-label">Proof.</span>
+    Immediate from the observation that the author is writing a personal website disguised as a 
+    mathematics paper. The persistence follows from the boundary condition that rent is due monthly.
+  </p>
+</div>
+
+<div class="lemma">
+  <p>
+    <span class="env-label">Lemma 2.3.</span>
+    Let $f: \mathbb{R}^n \to \mathbb{R}$ be the author's utility function over career attributes 
+    (intellectual challenge, compensation, coworker quality, free coffee). Then $f$ is 
+    strictly concave in each argument, and the unique maximizer $x^*$ satisfies
+  </p>
+</div>
+
+$$x^* = \arg\max_{x \in \mathcal{F}} f(x) \quad \text{where } \mathcal{F} = \{\text{quantitative finance roles}\}$$
+
+<!-- Section 3 -->
+<h2>3. Main Results (Projects)</h2>
+
+<p>
+  In this section, we present the author's principal contributions, each framed as a 
+  constructive proof of competence in a relevant domain.
+</p>
+
+<div class="theorem">
+  <p>
+    <span class="env-label">Theorem 3.1</span>
+    <span class="env-name">(The Chess Engine).</span>
+    There exists a chess engine, implemented in Python, employing alpha-beta pruning with iterative 
+    deepening and hand-tuned evaluation functions, such that:
+  </p>
+  <p class="no-indent" style="margin-left: 2em;">
+    (i) it evaluates positions with non-trivial accuracy,<br>
+    (ii) it occasionally plays good moves,<br>
+    (iii) it hangs its queen with probability bounded above by $\varepsilon$, where $\varepsilon$ 
+    is regrettably nonzero.
+  </p>
+</div>
+
+<div class="proof">
+  <p>
+    <span class="env-label">Proof.</span>
+    Constructive. The engine exists; the author wrote it. Correctness of the 
+    alpha-beta search follows from the minimax theorem (von Neumann, 1928). 
+    The queen-hanging behavior remains an open problem.
+  </p>
+</div>
+
+<div class="proposition">
+  <p>
+    <span class="env-label">Proposition 3.2</span>
+    <span class="env-name">(Monte Carlo Option Pricer).</span>
+    For a sufficiently large class of exotic derivatives, the author has constructed a pricer 
+    achieving variance reduction through antithetic variates and control variates, satisfying
+  </p>
+</div>
+
+$$\text{Var}[\hat{V}_n] = O(n^{-1-\delta}) \quad \text{for some } \delta > 0$$
+
+<p class="no-indent margin-note">
+  Because closed-form solutions are for quitters.
+</p>
+
+<div class="proposition">
+  <p>
+    <span class="env-label">Proposition 3.3</span>
+    <span class="env-name">(Statistical Learning Toolkit).</span>
+    From-scratch implementations of core machine learning algorithms exist in the author's 
+    repository, including: linear/logistic regression, decision trees, random forests, $k$-NN, 
+    PCA, and gradient descent variants. No <code>sklearn</code> was imported in the making of 
+    these implementations.<a href="#fn3" class="footnote-ref">3</a>
+  </p>
+</div>
+
+<div class="corollary">
+  <p>
+    <span class="env-label">Corollary 3.4</span>
+    <span class="env-name">(Competitive Programming Archive).</span>
+    The author maintains an archive of solutions and write-ups from competitive programming 
+    contests. These serve primarily as lessons in humility.
+  </p>
+</div>
+
+<!-- Section 4 -->
+<h2>4. Selected Publications</h2>
+
+<p>
+  The author has produced several expository works, listed in reverse chronological order. 
+  While none have appeared in journals with nonzero impact factor, each took longer 
+  than it should have, which the author considers evidence of thoroughness rather 
+  than inefficiency.
+</p>
+
+<table>
+  <caption>Table 1: Selected writings by the author</caption>
+  <tr>
+    <th>Date</th>
+    <th>Title</th>
+  </tr>
+  <tr><td>Mar 2026</td><td><em>On the Convergence of Stubborn Sequences</em></td></tr>
+  <tr><td>Jan 2026</td><td><em>Minimax Search and the Art of Losing Gracefully</em></td></tr>
+  <tr><td>Nov 2025</td><td><em>A Probabilistic Argument for Sleeping In</em></td></tr>
+  <tr><td>Sep 2025</td><td><em>Why Every Proof by Contradiction Feels Personal</em></td></tr>
+  <tr><td>Jun 2025</td><td><em>Notes on Measure Theory and Existential Dread</em></td></tr>
+  <tr><td>Apr 2025</td><td><em>The Unreasonable Effectiveness of Staring at a Whiteboard</em></td></tr>
+</table>
+
+<!-- Section 5 -->
+<h2>5. Non-Mathematical Investigations</h2>
+
+<h3>5.1. Competitive Gaming</h3>
+
+<div class="remark">
+  <p>
+    <span class="env-label">Remark 5.1.</span>
+    The author reached Grandmaster rank in StarCraft II, playing Zerg. Peak APM was unreasonable. 
+    The marginal utility of the $(n{+}1)$-th hour of practice was observed to be strictly decreasing 
+    yet somehow never reached zero.
+  </p>
+</div>
+
+<div class="remark">
+  <p>
+    <span class="env-label">Remark 5.2.</span>
+    In Magic: The Gathering, the author competes primarily in Limited formats. Draft is conjectured 
+    to be the purest form of the game; this conjecture remains unproven but is held with 
+    conviction approaching $1$.
+  </p>
+</div>
+
+<h3>5.2. Beliefs (Axiomatic)</h3>
+
+<p class="no-indent" style="margin-left: 1.5em; margin-bottom: 4px;">
+  <strong>(A1)</strong> Hard work beats talent when talent does not work hard.
+</p>
+<p class="no-indent" style="margin-left: 1.5em; margin-bottom: 4px;">
+  <strong>(A2)</strong> The best interface is no interface.
+</p>
+<p class="no-indent" style="margin-left: 1.5em; margin-bottom: 4px;">
+  <strong>(A3)</strong> Proofs should be beautiful.
+</p>
+
+<h3>5.3. Currently Reading</h3>
+
+<p>
+  <em>The Art of Problem Solving</em> (Zeitz), <em>Stochastic Calculus for Finance</em> (Shreve), 
+  and too many science fiction novels to list. The author conjectures that the reading list is 
+  a martingale: each book suggests two more, and the expected number of unread books is 
+  non-decreasing.
+</p>
+
+<h3>5.4. Currently Learning</h3>
+
+<p>
+  Measure-theoretic probability, Rust, and how to cook something that is not pasta. 
+  The last of these has proven to be the most challenging.
+</p>
+
+<!-- Section 6 -->
+<h2>6. Conclusion and Future Work</h2>
+
+<p>
+  We have established the existence of a career trajectory $\gamma^*$ satisfying the 
+  necessary optimality conditions. However, the uniqueness of $\gamma^*$ remains open, 
+  as does the question of whether the author will converge to it in finite time. 
+  Future work includes:
+</p>
+
+<p class="no-indent" style="margin-left: 1.5em; margin-bottom: 4px;">
+  (i) securing a quantitative finance role where rigorous thinking is valued,
+</p>
+<p class="no-indent" style="margin-left: 1.5em; margin-bottom: 4px;">
+  (ii) teaching the chess engine to stop hanging its queen,
+</p>
+<p class="no-indent" style="margin-left: 1.5em; margin-bottom: 4px;">
+  (iii) proving Axiom (A3) from first principles,
+</p>
+<p class="no-indent" style="margin-left: 1.5em; margin-bottom: 8px;">
+  (iv) cooking something that is not pasta.
+</p>
+
+<div class="remark">
+  <p>
+    <span class="env-label">Remark 6.1.</span>
+    If you are a recruiter who read this far, the author would like to note that 
+    this is, in fact, a personal website. Inquiries may be directed to the email 
+    address listed above or to any of the channels in the Acknowledgments.
+  </p>
+</div>
+
+<!-- Acknowledgments -->
+<h2>Acknowledgments</h2>
+
+<p>
+  The author thanks the University of Toronto for providing an environment in which 
+  one can simultaneously study measure theory and build chess engines. He also thanks 
+  the StarCraft II matchmaking system for its contributions to his understanding of 
+  decision-making under uncertainty.
+</p>
+
+<!-- References -->
+<div class="references">
+  <h2>References</h2>
+  
+  <p class="ref-item">
+    [1] A. Gobrin. "Chess Engine: Alpha-Beta Pruning and the Art of Computational Stubbornness." 
+    <em>GitHub</em>, 2025. <a href="https://github.com/Avi-Gobrin">github.com/Avi-Gobrin</a>
+  </p>
+  <p class="ref-item">
+    [2] A. Gobrin. "Monte Carlo Option Pricer." <em>Unpublished manuscript</em>, 2025.
+  </p>
+  <p class="ref-item">
+    [3] A. Gobrin. "Statistical Learning Toolkit: From-Scratch Implementations." 
+    <em>GitHub</em>, 2025. <a href="https://github.com/Avi-Gobrin">github.com/Avi-Gobrin</a>
+  </p>
+  <p class="ref-item">
+    [4] A. Gobrin. "Competitive Programming Archive." <em>Various online judges</em>, 2024--2026.
+  </p>
+  <p class="ref-item">
+    [5] J. von Neumann. "Zur Theorie der Gesellschaftsspiele." 
+    <em>Math. Ann.</em>, 100(1):295--320, 1928.
+  </p>
+  <p class="ref-item">
+    [6] S. Shreve. <em>Stochastic Calculus for Finance I &amp; II</em>. Springer, 2004.
+  </p>
+  <p class="ref-item">
+    [7] P. Zeitz. <em>The Art and Craft of Problem Solving</em>. Wiley, 2006.
+  </p>
+  <p class="ref-item">
+    [8] Blizzard Entertainment. <em>StarCraft II: Wings of Liberty</em>. 2010. 
+    Cited for its contributions to the author's APM and sleep deprivation.
+  </p>
+</div>
+
+<!-- Footnotes -->
+<div class="footnotes">
+  <p class="footnote" id="fn1">
+    <span class="footnote-num">1</span>
+    The cost functional $c$ is known to be unbounded near deadlines.
+  </p>
+  <p class="footnote" id="fn2">
+    <span class="footnote-num">2</span>
+    This remains the author's most vexing open problem.
+  </p>
+  <p class="footnote" id="fn3">
+    <span class="footnote-num">3</span>
+    The author acknowledges that this constraint was self-imposed and possibly masochistic.
+  </p>
+</div>
+
+<div class="social-links">
+  <a href="https://github.com/Avi-Gobrin">GitHub</a>
+  <a href="https://www.linkedin.com/in/avigobrin/">LinkedIn</a>
+  <a href="mailto:avichaigobrin@gmail.com">Email</a>
+</div>
+
+</body>
+</html>
