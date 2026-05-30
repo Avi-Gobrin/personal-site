@@ -4,6 +4,12 @@
 
 Never use em dashes (the long dash character) in any writing, anywhere: website copy, prose, chat, comments, commit messages. Use commas, colons, periods, semicolons, or parentheses instead. This is a hard rule.
 
+# Working
+
+## Context limit handoff
+
+When nearing the context limit, stop and return everything completed so far before truncating, then compact.
+
 # Principles
 
 ## 1. Intuition Before Formalism

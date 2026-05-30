@@ -36,20 +36,37 @@
 
     <div class="feat-works">
 
-      <!-- TODO: fill in featured work -->
-      <div class="feat-work" id="featured1">
+      <div class="feat-work" id="agents">
         <div class="feat-work-top">
           <div>
-            <p class="feat-work-kicker"></p>
-            <h2 class="feat-work-title"></h2>
-            <p class="feat-work-meta"></p>
+            <p class="feat-work-kicker">Personal Project &middot; 2026</p>
+            <h2 class="feat-work-title">Autonomous Planning &amp; Knowledge Agents</h2>
+            <p class="feat-work-meta">Claude Code &nbsp;&middot;&nbsp; Obsidian &nbsp;&middot;&nbsp; LLM Agents</p>
           </div>
         </div>
-        <div class="tags"></div>
-        <p class="feat-work-desc"></p>
+        <div class="tags">
+          <span class="tag">Claude Code</span>
+          <span class="tag">Obsidian</span>
+          <span class="tag">LLM Agents</span>
+          <span class="tag">Automation</span>
+          <span class="tag">Knowledge Management</span>
+        </div>
+        <p class="feat-work-desc">
+          A pair of LLM agents that automate my daily planning and coursework, built on Claude Code with an Obsidian
+          vault as the knowledge store. The planning agent runs on its own at the start and end of each day: every
+          evening it reviews what I completed, writes structured notes on the day, then regenerates and time-blocks the
+          next day's calendar from a parsed task file and a traffic-light priority scheme. A companion school-workflow
+          agent auto-formats lecture and problem-set notes and links related material into a connected knowledge base
+          of theorem references and cross-links.
+        </p>
         <div class="feat-findings">
-          <p class="feat-findings-label"></p>
-          <ul></ul>
+          <p class="feat-findings-label">Key Details</p>
+          <ul>
+            <li>Daily-planning agent regenerates and time-blocks the next day's calendar from a parsed task file and a traffic-light priority scheme</li>
+            <li>Evening review loop writes structured daily notes, closing the feedback loop between plan and outcome</li>
+            <li>School-workflow agent auto-formats lecture and problem-set notes and cross-links them into a connected knowledge base of theorem references</li>
+            <li>Surfaces relevant prior material to accelerate homework, projects, and exam preparation</li>
+          </ul>
         </div>
       </div>
 
@@ -118,6 +135,36 @@
             <li>GMM at K&nbsp;=&nbsp;4 achieves an adjusted Rand index of 0.137: assessment behavior partially but not fully recovers the four-way outcome taxonomy; Distinction and Pass students share the high-engagement cluster</li>
             <li>LDA reaches 64.5% five-fold CV accuracy versus a 53.0% naive baseline, with strong withdrawal recall (63.2%) but near-zero Distinction recall (3.2%); logistic regression closes the gap on Distinction (39.3%) by relaxing the shared-covariance assumption</li>
             <li>FA, GMM, and LDA converge on the same two dimensions; Prior Commitment describes academic history but carries near-zero weight in LDA and does not drive cluster separation</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="feat-work" id="f1">
+        <div class="feat-work-top">
+          <div>
+            <p class="feat-work-kicker">Personal Project &middot; 2024</p>
+            <h2 class="feat-work-title">F1 Race Winner Predictor</h2>
+            <p class="feat-work-meta">Python &nbsp;&middot;&nbsp; Machine Learning &nbsp;&middot;&nbsp; Feature Engineering</p>
+          </div>
+        </div>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">scikit-learn</span>
+          <span class="tag">Feature Engineering</span>
+          <span class="tag">Supervised Learning</span>
+        </div>
+        <p class="feat-work-desc">
+          A supervised machine-learning pipeline that predicts Formula 1 race winners from driver and constructor
+          rolling form, qualifying results, track characteristics, and weather. The model is trained on engineered
+          features such as driver-track history and pit-stop reliability, drawn from historical race and weather data,
+          and evaluated on held-out races.
+        </p>
+        <div class="feat-findings">
+          <p class="feat-findings-label">Key Details</p>
+          <ul>
+            <li>Engineered predictive features including driver-track history and pit-stop reliability from historical race and weather data</li>
+            <li>Reached 40% race-winner accuracy and 60% podium-finish accuracy on held-out races</li>
+            <li>Captures form, qualifying, track, and weather signals in a single supervised pipeline</li>
           </ul>
         </div>
       </div>

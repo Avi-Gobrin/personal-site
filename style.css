@@ -347,6 +347,10 @@ nav .wrap { display: flex; justify-content: space-between; align-items: center; 
 .cw-name { font-weight: 500; font-size: 0.97rem; color: var(--text); margin-bottom: 4px; }
 .cw-desc { font-size: 0.86rem; color: var(--dim); font-weight: 300; line-height: 1.6; }
 
+/* Home experience section */
+.home-section { padding: 84px 0; border-top: 1px solid var(--border); }
+.home-section .page-title { margin-bottom: 40px; }
+
 /* ============================================================
    Footer: warm band
    ============================================================ */
