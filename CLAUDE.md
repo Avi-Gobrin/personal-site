@@ -1,3 +1,9 @@
+# Writing Style
+
+## NEVER use em dashes
+
+Never use em dashes (the long dash character) in any writing, anywhere: website copy, prose, chat, comments, commit messages. Use commas, colons, periods, semicolons, or parentheses instead. This is a hard rule.
+
 # Principles
 
 ## 1. Intuition Before Formalism

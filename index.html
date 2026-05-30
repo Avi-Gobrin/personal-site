@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23c8a46e'>A</text></svg>">
-  <script>(function(){try{var t=localStorage.getItem('theme');if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
+  <script>(function(){try{var t=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -38,7 +38,9 @@
         <h1>Avi Gobrin</h1>
         <p class="hero-sub">Applied Math, Stats &amp; CS</p>
         <p class="hero-bio">
-          Third-year at the University of Toronto studying applied mathematics, statistics, and computer science.
+          Fourth-year at the University of Toronto studying applied mathematics, statistics, and computer science.
+          I'm most interested in the mathematics of machine learning: uncovering latent structure in
+          high-dimensional data, and the probability and optimization that make models work.
         </p>
         <p class="hero-bio">
           Grandmaster in StarCraft II (5100 MMR Terran rank 100), competitive Magic: The Gathering player, black belt in Shotokan Karate. I read mostly fantasy and philosophy.
@@ -69,9 +71,10 @@
           <a href="featured.html" class="featured-card-all">See all →</a>
         </div>
         <div class="feat-list">
-          <a href="featured.html#chess" class="feat-item">
-            <span class="feat-type">Project</span>
-            <span class="feat-title">Chess Engine from Scratch</span>
+          <!-- TODO: fill in featured item -->
+          <a href="featured.html#featured1" class="feat-item">
+            <span class="feat-type"></span>
+            <span class="feat-title"></span>
           </a>
           <a href="featured.html#plantinarium" class="feat-item">
             <span class="feat-type">Project</span>

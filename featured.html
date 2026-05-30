@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Featured Work &mdash; Avi Gobrin</title>
+  <title>Featured Work &middot; Avi Gobrin</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' fill='%23c8a46e'>A</text></svg>">
-  <script>(function(){try{var t=localStorage.getItem('theme');if(!t)t=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
+  <script>(function(){try{var t=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -36,48 +36,27 @@
 
     <div class="feat-works">
 
-      <div class="feat-work" id="chess">
+      <!-- TODO: fill in featured work -->
+      <div class="feat-work" id="featured1">
         <div class="feat-work-top">
           <div>
-            <p class="feat-work-kicker">Project &mdash; May 2026</p>
-            <h2 class="feat-work-title">Chess Engine from Scratch</h2>
-            <p class="feat-work-meta">Python &nbsp;&middot;&nbsp; Algorithms &nbsp;&middot;&nbsp; Search</p>
-          </div>
-          <div style="display:flex;gap:10px;flex-shrink:0;">
-            <a href="#" class="btn-ghost" target="_blank">GitHub &rarr;</a>
-            <a href="#" class="btn-ghost" target="_blank">Write-up &rarr;</a>
+            <p class="feat-work-kicker"></p>
+            <h2 class="feat-work-title"></h2>
+            <p class="feat-work-meta"></p>
           </div>
         </div>
-        <div class="tags">
-          <span class="tag">Alpha-Beta Pruning</span>
-          <span class="tag">Iterative Deepening</span>
-          <span class="tag">Zobrist Hashing</span>
-          <span class="tag">Quiescence Search</span>
-          <span class="tag">Transposition Tables</span>
-        </div>
-        <p class="feat-work-desc">
-          A fully functional chess engine built without external chess libraries, written entirely from scratch in Python.
-          The project covers every layer of the problem: a compact board representation using Zobrist hashing for fast
-          state identification, complete legal move generation including edge cases like en passant and castling, and a
-          search engine that combines alpha-beta pruning with iterative deepening and a transposition table to avoid
-          redundant work. Quiescence search extends the horizon at tactically volatile nodes to prevent the horizon effect
-          from distorting evaluation.
-        </p>
+        <div class="tags"></div>
+        <p class="feat-work-desc"></p>
         <div class="feat-findings">
-          <p class="feat-findings-label">Key Technical Details</p>
-          <ul>
-            <li>Zobrist hashing for O(1) board state comparison and efficient transposition table lookups</li>
-            <li>Full legal move generation covering all special moves; no pseudolegal shortcuts that require legality filtering</li>
-            <li>Alpha-beta pruning with iterative deepening allows the engine to return the best move found at any depth if time is cut short</li>
-            <li>Quiescence search at leaf nodes ensures the evaluation function only scores quiet positions, eliminating horizon-effect blunders</li>
-          </ul>
+          <p class="feat-findings-label"></p>
+          <ul></ul>
         </div>
       </div>
 
       <div class="feat-work" id="plantinarium">
         <div class="feat-work-top">
           <div>
-            <p class="feat-work-kicker">Project &mdash; 2025</p>
+            <p class="feat-work-kicker">Project &middot; 2025</p>
             <h2 class="feat-work-title">Plantinarium</h2>
             <p class="feat-work-meta">Python &nbsp;&middot;&nbsp; AI &nbsp;&middot;&nbsp; Web App</p>
           </div>
@@ -100,7 +79,7 @@
           <p class="feat-findings-label">Key Technical Details</p>
           <ul>
             <li>Photo upload pipeline feeds into an AI vision model for species identification with confidence scoring</li>
-            <li>User-generated annotations let individuals attach context — common names, habitat notes, personal observations — to each identification</li>
+            <li>User-generated annotations let individuals attach context (common names, habitat notes, personal observations) to each identification</li>
             <li>Social discovery layer allows finds to be shared, building a community record of sightings across locations</li>
           </ul>
         </div>
@@ -109,11 +88,11 @@
       <div class="feat-work" id="oulad">
         <div class="feat-work-top">
           <div>
-            <p class="feat-work-kicker">Academic Paper &mdash; April 2026</p>
+            <p class="feat-work-kicker">Academic Paper &middot; April 2026</p>
             <h2 class="feat-work-title">Engagement, Performance, and Student Outcomes at the Open University</h2>
-            <p class="feat-work-meta">STA437 &mdash; Multivariate Statistics &nbsp;&middot;&nbsp; Winter 2026</p>
+            <p class="feat-work-meta">STA437: Multivariate Statistics &nbsp;&middot;&nbsp; Winter 2026</p>
           </div>
-          <a href="assets/STA347_Project_3_Avi_Gobrin.pdf" class="btn-ghost" target="_blank">Read Paper &rarr;</a>
+          <a href="assets/STA437_Project_3_Avi_Gobrin.pdf" class="btn-ghost" target="_blank">Read Paper &rarr;</a>
         </div>
         <div class="tags">
           <span class="tag">PCA</span>
@@ -126,8 +105,8 @@
         <p class="feat-work-desc">
           The Open University Learning Analytics Dataset records six behavioral features across 25,820 student-course
           registrations, each carrying one of four outcome labels: Distinction, Fail, Pass, or Withdrawn. This paper runs
-          a full multivariate analysis pipeline — EDA, Mahalanobis-distance MVN testing, PCA, varimax factor analysis,
-          Gaussian mixture modeling, and LDA — asking whether unsupervised structure in assessment behavior can recover
+          a full multivariate analysis pipeline (EDA, Mahalanobis-distance MVN testing, PCA, varimax factor analysis,
+          Gaussian mixture modeling, and LDA), asking whether unsupervised structure in assessment behavior can recover
           the known outcome taxonomy, and whether early-observable features (submission count and timing) are sufficient
           for withdrawal prediction before any grade is issued. The chain of methods is motivated: each result raises
           the next question.
@@ -136,7 +115,7 @@
           <p class="feat-findings-label">Key Findings</p>
           <ul>
             <li>Three latent factors identified via parallel analysis and varimax rotation: <em>Engagement</em> (submission count &amp; timing, h²&nbsp;=&nbsp;0.84), <em>Consistent Performance</em> (mean score &amp; score SD, h²&nbsp;=&nbsp;0.72), and <em>Prior Commitment</em> (credits &amp; prior attempts)</li>
-            <li>GMM at K&nbsp;=&nbsp;4 achieves an adjusted Rand index of 0.137 — assessment behavior partially but not fully recovers the four-way outcome taxonomy; Distinction and Pass students share the high-engagement cluster</li>
+            <li>GMM at K&nbsp;=&nbsp;4 achieves an adjusted Rand index of 0.137: assessment behavior partially but not fully recovers the four-way outcome taxonomy; Distinction and Pass students share the high-engagement cluster</li>
             <li>LDA reaches 64.5% five-fold CV accuracy versus a 53.0% naive baseline, with strong withdrawal recall (63.2%) but near-zero Distinction recall (3.2%); logistic regression closes the gap on Distinction (39.3%) by relaxing the shared-covariance assumption</li>
             <li>FA, GMM, and LDA converge on the same two dimensions; Prior Commitment describes academic history but carries near-zero weight in LDA and does not drive cluster separation</li>
           </ul>

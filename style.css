@@ -120,7 +120,7 @@ nav .wrap { display: flex; justify-content: space-between; align-items: center; 
 [data-theme="dark"] .theme-toggle .icon-moon { display: none; }
 
 /* ============================================================
-   Hero — taupe textured panel with cream text
+   Hero: taupe textured panel with cream text
    ============================================================ */
 .hero {
   flex: 1;
@@ -170,7 +170,7 @@ nav .wrap { display: flex; justify-content: space-between; align-items: center; 
   max-width: 30rem;
 }
 
-/* Social icon badges — white circles on the taupe panel */
+/* Social icon badges: white circles on the taupe panel */
 .hero-icons { display: flex; gap: 12px; margin: 28px 0; align-items: center; }
 .hero-icons a {
   width: 42px; height: 42px; min-width: 42px; min-height: 42px;
@@ -191,7 +191,7 @@ nav .wrap { display: flex; justify-content: space-between; align-items: center; 
 }
 
 .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
-/* Pill buttons — generic */
+/* Pill buttons: generic */
 .btn-fill, .btn-ghost {
   padding: 12px 30px;
   font-size: 0.86rem; font-weight: 600;
@@ -204,7 +204,7 @@ nav .wrap { display: flex; justify-content: space-between; align-items: center; 
 .btn-ghost { border: 1px solid var(--border-strong); color: var(--text); font-weight: 500; }
 .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
 
-/* Hero buttons — cream pills on taupe, matching the reference */
+/* Hero buttons: cream pills on taupe, matching the reference */
 .hero .btn-fill {
   background: var(--hero-chip); color: var(--accent);
 }
@@ -316,7 +316,7 @@ nav .wrap { display: flex; justify-content: space-between; align-items: center; 
 .feat-findings-label { font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
 .feat-findings ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
 .feat-findings li { font-size: 0.9rem; color: var(--dim); font-weight: 300; line-height: 1.7; padding-left: 20px; position: relative; }
-.feat-findings li::before { content: '—'; position: absolute; left: 0; color: var(--accent); }
+.feat-findings li::before { content: '·'; position: absolute; left: 0; color: var(--accent); }
 .feat-findings li em { color: var(--text); font-style: normal; font-weight: 500; }
 @media (max-width: 640px) {
   .feat-work-top { flex-direction: column; gap: 16px; }
@@ -348,7 +348,7 @@ nav .wrap { display: flex; justify-content: space-between; align-items: center; 
 .cw-desc { font-size: 0.86rem; color: var(--dim); font-weight: 300; line-height: 1.6; }
 
 /* ============================================================
-   Footer — warm band
+   Footer: warm band
    ============================================================ */
 footer {
   border-top: 1px solid var(--border);
