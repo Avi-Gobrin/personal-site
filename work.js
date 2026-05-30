@@ -67,7 +67,7 @@ const WORK = [
       `LDA reaches 64.5% five-fold CV accuracy versus a 53.0% naive baseline, with strong withdrawal recall (63.2%) but near-zero Distinction recall (3.2%); logistic regression closes the gap on Distinction (39.3%) by relaxing the shared-covariance assumption`,
       `FA, GMM, and LDA converge on the same two dimensions; Prior Commitment describes academic history but carries near-zero weight in LDA and does not drive cluster separation`
     ],
-    detailLinks: [{ label: 'Read Paper', href: 'assets/STA437_Project_3_Avi_Gobrin.pdf', external: true }]
+    detailLinks: [{ label: 'Read Paper', href: 'assets/oulad-sta437.pdf', external: true }]
   },
   {
     id: 'f1',

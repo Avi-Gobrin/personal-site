@@ -1,0 +1,5 @@
+# Local-only build/design notes, not for publishing
+plans/
+
+# Local Claude config (machine-specific, not for publishing)
+.claude/settings.local.json
