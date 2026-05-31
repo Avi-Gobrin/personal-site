@@ -159,10 +159,20 @@ document.addEventListener('DOMContentLoaded', function () {
   const featured = document.getElementById('js-featured');
   if (featured) {
     renderFeaturedDetail(featured);
-    // anchors are created here, so honor a deep link like featured.html#agents
+    // The sections are injected here, so the browser's own hash scroll already
+    // ran against an empty page and missed. Scroll to the deep-link target
+    // ourselves, then again once the web font loads and reflows the layout, so
+    // a late reflow cannot leave us at the wrong spot. scroll-padding-top in the
+    // CSS keeps the heading clear of the fixed nav.
     if (location.hash) {
-      const target = document.getElementById(location.hash.slice(1));
-      if (target) target.scrollIntoView();
+      const scrollToHash = function () {
+        const target = document.getElementById(location.hash.slice(1));
+        if (target) target.scrollIntoView();
+      };
+      scrollToHash();
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(scrollToHash);
+      }
     }
   }
 });
