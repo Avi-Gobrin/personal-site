@@ -2,7 +2,7 @@
 
 Personal site for Avi Gobrin, third-year Applied Mathematics specialist at the University of Toronto (Statistics major, Computer Science minor). Built with pure HTML and CSS — no frameworks, no JavaScript, no build step.
 
-Live at [avigobrin.com]([https://avigobrin.com](https://avi-gobrin.github.io/personal-site/)).
+Live at [https://avigobrin.com](https://avi-gobrin.github.io/personal-site/].
 
 ## Pages
 
