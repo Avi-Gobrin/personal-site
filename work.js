@@ -29,7 +29,8 @@ const WORK = [
       `School-workflow agent auto-formats lecture and problem-set notes and cross-links them into a connected knowledge base of theorem references`,
       `Surfaces relevant prior material to accelerate homework, projects, and exam preparation`
     ],
-    cardLinks: [{ label: 'Details', href: 'featured.html#agents' }]
+    cardLinks: [{ label: 'Details', href: 'featured.html#agents' }],
+    detailLinks: [{ label: 'GitHub', href: 'https://github.com/Avi-Gobrin/Obsidian', external: true }]
   },
   {
     id: 'plantinarium',
@@ -84,7 +85,8 @@ const WORK = [
       `Reached 40% race-winner accuracy and 60% podium-finish accuracy on held-out races`,
       `Captures form, qualifying, track, and weather signals in a single supervised pipeline`
     ],
-    cardLinks: [{ label: 'Details', href: 'featured.html#f1' }]
+    cardLinks: [{ label: 'Details', href: 'featured.html#f1' }],
+    detailLinks: [{ label: 'GitHub', href: 'https://github.com/Avi-Gobrin/F1-Race-predictor', external: true }]
   }
 ];
 

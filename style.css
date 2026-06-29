@@ -235,12 +235,6 @@ nav .wrap { display: flex; justify-content: space-between; align-items: center; 
 .feat-title { font-size: 0.95rem; color: var(--dim); font-weight: 400; transition: color 0.2s; }
 .feat-item:hover .feat-title { color: var(--text); }
 
-/* Currently card (kept for compatibility) */
-.cur-item { display: flex; flex-direction: column; gap: 3px; padding: 16px 0; border-bottom: 1px solid var(--border); }
-.cur-item:first-child { padding-top: 0; }
-.cur-item:last-child { border-bottom: none; padding-bottom: 0; }
-.cur-label { font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
-.cur-val { font-size: 0.9rem; color: var(--dim); font-weight: 300; }
 
 /* ============================================================
    Inner page sections
@@ -323,18 +317,6 @@ nav .wrap { display: flex; justify-content: space-between; align-items: center; 
   .feat-work { padding: 26px; }
 }
 
-/* --- Fun (kept for compatibility) --- */
-.fun-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
-.fcard { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 28px; box-shadow: var(--shadow-sm); }
-.fcard.wide { grid-column: 1 / -1; }
-.fcard h3 { font-family: var(--serif); font-size: 1.25rem; margin-bottom: 20px; }
-.fcard ul { list-style: none; }
-.fcard li { padding: 9px 0; font-size: 0.9rem; color: var(--dim); font-weight: 300; border-bottom: 1px solid var(--border); line-height: 1.55; }
-.fcard li:last-child { border-bottom: none; }
-.fcard li strong { color: var(--text); font-weight: 500; }
-.fcard li em { color: var(--muted); font-style: normal; font-size: 0.82rem; }
-.fcard p { font-size: 0.9rem; color: var(--dim); font-weight: 300; line-height: 1.6; }
-
 /* --- Coursework --- */
 .cw-section { margin-bottom: 46px; }
 .cw-list { display: flex; flex-direction: column; }
@@ -347,9 +329,6 @@ nav .wrap { display: flex; justify-content: space-between; align-items: center; 
 .cw-name { font-weight: 500; font-size: 0.97rem; color: var(--text); margin-bottom: 4px; }
 .cw-desc { font-size: 0.86rem; color: var(--dim); font-weight: 300; line-height: 1.6; }
 
-/* Home experience section */
-.home-section { padding: 84px 0; border-top: 1px solid var(--border); }
-.home-section .page-title { margin-bottom: 40px; }
 
 /* ============================================================
    Footer: warm band
