@@ -1,0 +1,207 @@
+%-------------------------
+% Academic CV -- Avi Gobrin
+% Research positions
+%-------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\input{glyphtounicode}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-6pt}]
+
+\pdfgentounicode=1
+
+\newcommand{\cvItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\cvSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-5pt}
+}
+
+\newcommand{\cvProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-5pt}
+}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\cvSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\cvSubHeadingListEnd}{\end{itemize}}
+\newcommand{\cvItemListStart}{\begin{itemize}}
+\newcommand{\cvItemListEnd}{\end{itemize}\vspace{-5pt}}
+
+\begin{document}
+
+%--- Header ----------------------------------------------------------
+\begin{center}
+  \textbf{\Huge \scshape Avi Gobrin} \\ \vspace{4pt}
+  \small avichaigobrin@gmail.com \,$\cdot$\,
+  (416) 670-2948 \,$\cdot$\,
+  \href{https://www.linkedin.com/in/avigobrin/}{\color{blue}linkedin.com/in/avigobrin} \,$\cdot$\,
+  \href{https://github.com/Avi-Gobrin}{\color{blue}github.com/Avi-Gobrin} \,$\cdot$\,
+  \href{https://avi-gobrin.github.io/personal-site/}{\color{blue}avi-gobrin.github.io}
+\end{center}
+
+\vspace{-4pt}
+
+%--- Research Interests ----------------------------------------------
+\section{Research Interests}
+\begin{itemize}[leftmargin=0.15in, label={}]
+  \small{\item{
+    Optimization for machine learning; model compression and quantization; efficient neural architectures; latent-structure modeling; applied statistical learning.
+  }}
+\end{itemize}
+
+\vspace{-8pt}
+
+%--- Education -------------------------------------------------------
+\section{Education}
+\cvSubHeadingListStart
+  \cvSubheading
+    {University of Toronto}{2023 -- Expected Apr 2027}
+    {B.Sc.\ Applied Mathematics (Specialist), Statistics (Major), Computer Science (Minor)}{Toronto, ON}
+\cvSubHeadingListEnd
+
+\vspace{2pt}
+{\small
+\begin{itemize}[leftmargin=0.3in, label={}]
+  \item cGPA: 2.97/4.00 \quad (expected 3.01 pending Summer 2026 grades)
+  \item Annual GPA: 2.70 (Year 1) $\;\to\;$ 3.00 (Year 2) $\;\to\;$ 3.31 (Year 3, most recent completed)
+  \item 300/400-level coursework GPA: 3.28/4.00 \quad (11 completed courses)
+  \item \textit{Honors:} Innis College Kitchen Sink Award (2023)
+
+  \vspace{4pt}
+  \item \textbf{Relevant Coursework (300/400-level):}
+  \vspace{-4pt}
+  \begin{flushleft}
+    Nonlinear Optimization (APM462, in progress), Methods for Multivariate Data (STA437),
+    Mathematical Modelling (APM348), Statistical Computation (STA410),
+    Algorithm Design and Analysis (CSC373), Methods of Data Analysis (STA302),
+    Advanced Calculus (MAT237), Introduction to Graph Theory (MAT332),
+    Introduction to Combinatorics (MAT344), Data Structures and Analysis (CSC263)
+  \end{flushleft}
+\end{itemize}}
+
+\vspace{-4pt}
+
+%--- Research & Projects ---------------------------------------------
+\section{Research and Projects}
+\cvSubHeadingListStart
+
+  \cvProjectHeading
+    {{\bf Latent-Structure Modeling of Student Outcomes (OULAD)}, Independent Research
+     \href{https://avi-gobrin.github.io/personal-site/assets/oulad-sta437.pdf}{\color{blue}[Report]}}{2026}
+    \cvItemListStart
+      \cvItem{Ran a complete multivariate analysis pipeline on 23,301 Open University student-course records: EDA, Mahalanobis-distance MVN testing, PCA, varimax factor analysis (3 components), GMM ($K=4$), and LDA.}
+      \cvItem{Showed that PCA, FA, GMM, and LDA converge on the same two-dimensional latent structure; identified three factors (Engagement, Consistent Performance, Prior Commitment) and quantified their predictive weight in a downstream classification task.}
+      \cvItem{Benchmarked discriminative vs.\ generative classifiers under 5-fold CV: logistic regression 67.0\% vs.\ LDA 64.5\% vs.\ 53.0\% baseline; robustness checks isolated shared-covariance violations as the key discriminator between the two approaches.}
+    \cvItemListEnd
+
+  \cvProjectHeading
+    {{\bf Autonomous Planning and Knowledge Agents}, Personal Project}{2026}
+    \cvItemListStart
+      \cvItem{Built a daily-planning agent (Claude Code, Obsidian) that reviews completed work, writes structured notes, and regenerates a time-blocked calendar from a parsed task file and priority scheme; reduced daily planning time from $\sim$30 minutes to under 2 minutes.}
+      \cvItem{Built a school-workflow agent that auto-formats lecture and problem-set notes into a cross-linked knowledge base of theorem references, reducing note-cleanup and lookup time by an estimated 40\%.}
+    \cvItemListEnd
+
+  \cvProjectHeading
+    {{\bf F1 Race Winner Predictor}, Personal Project}{2024}
+    \cvItemListStart
+      \cvItem{Built a supervised ML pipeline predicting Formula 1 race winners from driver/constructor rolling form, qualifying results, track characteristics, and weather; engineered driver-track history and pit-stop reliability features; reached 40\% winner and 60\% podium accuracy on held-out races.}
+    \cvItemListEnd
+
+\cvSubHeadingListEnd
+
+\vspace{-8pt}
+
+%--- Industry Experience ---------------------------------------------
+\section{Industry Experience}
+\cvSubHeadingListStart
+
+  \cvSubheading
+    {Nextdoor}{May 2026 -- Present}
+    {Machine Learning Intern}{San Francisco, CA}
+    \cvItemListStart
+      \cvItem{Took an open-ended research question to a production ML system: designed and shipped an end-to-end pipeline ranking neighborhoods by family-friendliness for live Nextdoor users, owning data ingestion, feature engineering, model selection, backend scoring, and the user-facing page.}
+      \cvItem{Engineered features over tens of thousands of records via Databricks and SQL; compared multiple model families to select the production scorer; validated ranking quality against a dedicated evaluation harness before launch.}
+    \cvItemListEnd
+
+  \cvSubheading
+    {Shopify}{May -- Aug 2025}
+    {Software Engineering Intern}{Toronto, ON}
+    \cvItemListStart
+      \cvItem{Launched a partner-attach system pairing new merchants with onboarding advisors, routing $\sim$100 merchants/day through guided onboarding, increasing activation and retention.}
+      \cvItem{Brought German VAT submissions into compliance with updated tax regulations by integrating the German tax-code API and aligning Shopify's existing tax flows, unblocking hundreds of affected merchants.}
+    \cvItemListEnd
+
+\cvSubHeadingListEnd
+
+\vspace{-8pt}
+
+%--- Technical Skills ------------------------------------------------
+\section{Technical Skills}
+\begin{itemize}[leftmargin=0.15in, label={}]
+  \small{\item{
+    \textbf{Languages:} Python, R, SQL, Java, JavaScript \\
+    \textbf{Libraries:} scikit-learn, NumPy, Pandas, SciPy, Matplotlib, statsmodels \\
+    \textbf{Tools:} Jupyter, Databricks, Git, \LaTeX \\
+    \textbf{AI/LLM:} Claude, Claude Code, LLM Agents
+  }}
+\end{itemize}
+
+\vspace{-8pt}
+
+%--- References ------------------------------------------------------
+\section{References}
+\begin{itemize}[leftmargin=0.15in, label={}]
+  \small{
+  \item \textbf{Prof.\ Almut Burchard} \hfill Department of Mathematics, University of Toronto \\
+    \textit{Instructor, MAT157Y1 (Analysis I)}
+
+  \vspace{4pt}
+  \item \textbf{Prof.\ Ricardo Baptista} \hfill Department of Statistical Sciences, University of Toronto \,$\cdot$\, Vector Institute \\
+    \textit{Course instructor; ongoing research discussions (project in preparation, Summer 2026)}
+  }
+\end{itemize}
+
+\end{document}

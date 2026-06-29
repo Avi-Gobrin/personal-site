@@ -1,0 +1,158 @@
+%-------------------------
+% Resume in Latex
+% Author : Jake Gutierrez
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\input{glyphtounicode}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{-6pt}\scshape\raggedright\Large
+}{}{0em}{}[\color{black}\titlerule \vspace{-8pt}]
+
+\pdfgentounicode=1
+
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-3pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-5pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-5pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-7pt}}
+
+\begin{document}
+
+\begin{center}
+    \textbf{\Huge \scshape Avi Gobrin} \\ \vspace{4pt}
+    \small avichaigobrin@gmail.com - (416)-670-2948 - \href{https://www.linkedin.com/in/avigobrin/}{\color{blue} LinkedIn} - \href{https://github.com/Avi-Gobrin}{\color{blue} GitHub} - \href{https://avi-gobrin.github.io/personal-site/}{\color{blue} Website} \vspace{-4pt}
+\end{center}
+
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {University of Toronto}{2023 -- Expected Apr 2027}
+      {Bachelor of Applied Mathematics Specialist, Statistics Major, Computer-Science Minor}{Toronto, ON}
+      \vspace{4pt}
+
+    {\bf Relevant Coursework}
+\vspace{-7pt}
+{\small\setlength{\topsep}{0pt}\setlength{\parskip}{0pt}
+\begin{flushleft}
+Probability and Statistics I/II, Multivariate Data Analysis, Statistical Computation, Nonlinear Optimization, Algorithm Design and Analysis, Data Structures, Real Analysis, Advanced Calculus
+\end{flushleft}}
+  \resumeSubHeadingListEnd
+
+\vspace{-15pt}
+\section{Experience}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Nextdoor}{May 2026 -- Present}
+      {Machine Learning Intern}{San Francisco, CA}
+      \resumeItemListStart
+        \resumeItem{Took an open-ended research question to a production ML system, deploying a pipeline that ranks neighborhoods by family-friendliness for live Nextdoor users and owning scoping, data, modeling, backend scoring, and the user-facing page end to end.}
+        \resumeItem{Engineered features over tens of thousands of records by ingesting external APIs and internal Nextdoor data through Databricks and SQL, compared multiple model families to select the production scorer, and resolved bugs across the pipeline and frontend.}
+      \resumeItemListEnd
+    \resumeSubheading
+      {Shopify}{May--Aug 2025}
+      {Software Engineering Intern}{Toronto, ON}
+      \resumeItemListStart
+        \resumeItem{Increased new-merchant activation and retention, routing roughly 100 merchants/day through guided onboarding, by launching a partner-attach system that automatically pairs each new merchant with a vetted onboarding advisor.}
+        \resumeItem{Brought German VAT submissions into compliance with updated tax regulations, unblocking hundreds of affected merchants and reducing compliance risk, by integrating the German tax-code API and aligning Shopify's existing tax flows with the new legal requirements.}
+        \resumeItem{Improved system reliability and reduced recurring issues by resolving cross-disciplinary technical debt assigned by adjacent teams, collaborating with engineering and product stakeholders to ship scalable fixes.}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+\section{Projects}
+  \resumeSubHeadingListStart
+    \resumeProjectHeading
+      {{\bf Latent-Structure Modeling of Student Outcomes (OULAD)}, Independent Research \href{https://avi-gobrin.github.io/personal-site/assets/oulad-sta437.pdf}{\color{blue}[Report]}}{{\em 2026}}
+      \resumeItemListStart
+        \resumeItem{Modeled latent structure in 23,301 student-course records via a 3-component PCA basis and varimax factor model, showing PCA, factor analysis, GMM, and LDA converge on the same two-dimensional representation.}
+        \resumeItem{Benchmarked generative and discriminative classifiers under 5-fold CV (logistic regression 67.0\% vs.\ LDA 64.5\% vs.\ 53.0\% baseline), with robustness checks isolating covariance-assumption violations.}
+      \resumeItemListEnd
+    \resumeProjectHeading
+      {{\bf Autonomous Planning \& School Knowledge Agents}, Personal Project}{{\em 2026}}
+      \resumeItemListStart
+        \resumeItem{Built an autonomous daily-planning agent (Claude Code, Obsidian) that reviews each day's completed work, writes structured notes, and regenerates a time-blocked calendar from a parsed task file and traffic-light priority scheme, cutting daily planning from about 30 minutes to under 2 minutes and saving an estimated 3--4 hours per week.}
+        \resumeItem{Built a companion school-workflow agent that auto-formats lecture and problem-set notes into a cross-linked knowledge base of theorem references, cutting note-cleanup and material-lookup time an estimated 40\% to accelerate homework and exam preparation.}
+      \resumeItemListEnd
+    \resumeProjectHeading
+      {{\bf F1 Race Winner Predictor}, Personal Project}{{\em 2024}}
+      \resumeItemListStart
+        \resumeItem{Built a supervised pipeline predicting Formula 1 race winners from driver/constructor rolling form, qualifying results, track characteristics, and weather.}
+        \resumeItem{Engineered features such as driver--track history and pit-stop reliability, framing per-race win prediction as a classification problem over historical data. Evaluated on held-out races, the classifier reached 40\% race-winner and 60\% podium-finish accuracy.}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+\section{Technical Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{Languages:} Python, R, SQL, Java, JavaScript, Bash \\
+     \textbf{Libraries \& Frameworks:} scikit-learn, NumPy, Pandas, SciPy, Matplotlib, statsmodels \\
+     \textbf{Tools \& Platforms:} Jupyter, Databricks, Git, GitHub, \LaTeX \\
+     \textbf{AI Tools:} Claude, Claude Code, Cursor, Hermes, LLM Agents
+    }}
+ \end{itemize}
+
+\end{document}
