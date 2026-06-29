@@ -1,70 +1,186 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Avi Gobrin</title>
-  <meta name="description" content="Avi Gobrin - Applied Math, Statistics & Computer Science at the University of Toronto.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <script>(function(){try{var t=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Avi Gobrin</title>
+        <meta
+            name="description"
+            content="Avi Gobrin - Applied Math, Statistics & Computer Science at the University of Toronto."
+        />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+        <script>
+            (function () {
+                try {
+                    var t = localStorage.getItem("theme") || "light";
+                    document.documentElement.setAttribute("data-theme", t);
+                } catch (e) {
+                    document.documentElement.setAttribute(
+                        "data-theme",
+                        "light",
+                    );
+                }
+            })();
+        </script>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <nav><div class="wrap"></div></nav>
+        <script src="nav.js"></script>
 
-  <nav><div class="wrap"></div></nav>
-  <script src="nav.js"></script>
+        <section class="hero">
+            <div class="wrap">
+                <div class="hero-grid">
+                    <div>
+                        <h1>Avi Gobrin</h1>
+                        <p class="hero-sub">Applied Math, Stats &amp; CS</p>
+                        <p class="hero-bio">
+                            Fourth-year at the University of Toronto studying
+                            applied mathematics, statistics, and computer
+                            science. I'm most interested in the mathematics of
+                            machine learning: uncovering latent structure in
+                            high-dimensional data, and the probability and
+                            optimization that make models work.
+                        </p>
+                        <p class="hero-bio">
+                            Grandmaster in StarCraft II (5100 MMR Terran rank
+                            100), competitive Magic: The Gathering player, black
+                            belt in Shotokan Karate. I read mostly fantasy and
+                            philosophy.
+                        </p>
+                        <div class="hero-icons">
+                            <a
+                                href="https://github.com/Avi-Gobrin"
+                                target="_blank"
+                                rel="noopener"
+                                aria-label="GitHub"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="17"
+                                    height="17"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                >
+                                    <path
+                                        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
+                                    />
+                                </svg>
+                            </a>
+                            <a
+                                href="https://www.linkedin.com/in/avigobrin/"
+                                target="_blank"
+                                rel="noopener"
+                                aria-label="LinkedIn"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="17"
+                                    height="17"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                >
+                                    <path
+                                        d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
+                                    />
+                                    <rect x="2" y="9" width="4" height="12" />
+                                    <circle cx="4" cy="4" r="2" />
+                                </svg>
+                            </a>
+                            <a
+                                href="https://x.com/AvichaiGobrin"
+                                target="_blank"
+                                rel="noopener"
+                                aria-label="X / Twitter"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="17"
+                                    height="17"
+                                    viewBox="0 0 24 24"
+                                    fill="currentColor"
+                                >
+                                    <path
+                                        d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+                                    />
+                                </svg>
+                            </a>
+                            <a
+                                href="https://mail.google.com/mail/?view=cm&to=avichaigobrin@gmail.com"
+                                target="_blank"
+                                rel="noopener"
+                                aria-label="Email"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="17"
+                                    height="17"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                >
+                                    <rect
+                                        x="2"
+                                        y="4"
+                                        width="20"
+                                        height="16"
+                                        rx="2"
+                                    />
+                                    <path
+                                        d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"
+                                    />
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="hero-btns">
+                            <a href="projects.html" class="btn-fill"
+                                >View Projects</a
+                            >
+                            <a
+                                href="assets/Resumes/resume_ml.pdf"
+                                download="Avi_Gobrin_Resume.pdf"
+                                class="btn-ghost"
+                                target="_blank"
+                                >Download Resume</a
+                            >
+                        </div>
+                    </div>
 
-  <section class="hero"><div class="wrap">
-    <div class="hero-grid">
+                    <div class="featured-card">
+                        <div class="featured-card-header">
+                            <h3>Featured Work</h3>
+                            <a href="featured.html" class="featured-card-all"
+                                >See all →</a
+                            >
+                        </div>
+                        <div class="feat-list" id="js-featured-home"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      <div>
-        <h1>Avi Gobrin</h1>
-        <p class="hero-sub">Applied Math, Stats &amp; CS</p>
-        <p class="hero-bio">
-          Fourth-year at the University of Toronto studying applied mathematics, statistics, and computer science.
-          I'm most interested in the mathematics of machine learning: uncovering latent structure in
-          high-dimensional data, and the probability and optimization that make models work.
-        </p>
-        <p class="hero-bio">
-          Grandmaster in StarCraft II (5100 MMR Terran rank 100), competitive Magic: The Gathering player, black belt in Shotokan Karate. I read mostly fantasy and philosophy.
-        </p>
-        <div class="hero-icons">
-          <a href="https://github.com/Avi-Gobrin" target="_blank" rel="noopener" aria-label="GitHub">
-            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-          </a>
-          <a href="https://www.linkedin.com/in/avigobrin/" target="_blank" rel="noopener" aria-label="LinkedIn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          </a>
-          <a href="https://x.com/AvichaiGobrin" target="_blank" rel="noopener" aria-label="X / Twitter">
-            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-          </a>
-          <a href="https://mail.google.com/mail/?view=cm&to=avichaigobrin@gmail.com" target="_blank" rel="noopener" aria-label="Email">
-            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-          </a>
-        </div>
-        <div class="hero-btns">
-          <a href="projects.html" class="btn-fill">View Projects</a>
-          <a href="assets/Resumes/resume_ml.pdf" class="btn-ghost" target="_blank">Download CV</a>
-        </div>
-      </div>
+        <footer>
+            <div class="wrap"><p>&copy; 2026 Avi Gobrin</p></div>
+        </footer>
 
-      <div class="featured-card">
-        <div class="featured-card-header">
-          <h3>Featured Work</h3>
-          <a href="featured.html" class="featured-card-all">See all →</a>
-        </div>
-        <div class="feat-list" id="js-featured-home"></div>
-      </div>
-
-    </div>
-  </div></section>
-
-  <footer><div class="wrap"><p>&copy; 2026 Avi Gobrin</p></div></footer>
-
-  <script src="work.js"></script>
-  <script src="theme.js"></script>
-</body>
+        <script src="work.js"></script>
+        <script src="theme.js"></script>
+    </body>
 </html>
