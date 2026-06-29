@@ -1,21 +1,21 @@
 /* ============================================================
    Single source of truth for projects, papers, and featured work.
 
-   To add a project or paper: add one object to the WORK array below.
-   To "star" something (show it on the homepage Featured Work list):
-     give it a `featured` number. The number is its order in that list.
-   Remove the `featured` key to unstar it.
+   To add a project or paper: add one object to the WORK array.
+   To show it on the homepage Featured Work list: set featured: true.
+   Array order is the display order everywhere.
 
    Where each field shows up:
      - projects.html cards      -> every item with type: 'Project'
-     - featured.html detail page -> every item (in array order)
-     - homepage Featured list    -> every item with a `featured` number
+     - writing.html list        -> every item with type: 'Paper'
+     - featured.html detail     -> every item (in array order)
+     - homepage Featured list   -> every item with featured: true
    ============================================================ */
 const WORK = [
   {
     id: 'agents',
     type: 'Project',
-    featured: 1,
+    featured: true,
     title: 'Autonomous Planning & Knowledge Agents',
     kicker: 'Personal Project · 2026',
     meta: 'Claude Code · Obsidian · LLM Agents',
@@ -34,7 +34,7 @@ const WORK = [
   {
     id: 'plantinarium',
     type: 'Project',
-    featured: 2,
+    featured: true,
     title: 'Plantinarium',
     kicker: 'Project · 2025',
     meta: 'Python · AI · Web App',
@@ -53,9 +53,9 @@ const WORK = [
   {
     id: 'oulad',
     type: 'Paper',
-    featured: 3,
+    featured: true,
+    date: 'Apr 2026',
     title: 'Engagement, Performance, and Student Outcomes at the Open University',
-    short: 'Engagement & Student Outcomes at the Open University',
     kicker: 'Academic Paper · April 2026',
     meta: 'STA437: Multivariate Statistics · Winter 2026',
     tags: ['PCA', 'Factor Analysis', 'GMM', 'LDA', 'MVN Testing', 'Logistic Regression'],
@@ -72,7 +72,7 @@ const WORK = [
   {
     id: 'f1',
     type: 'Project',
-    featured: 4,
+    featured: true,
     title: 'F1 Race Winner Predictor',
     kicker: 'Personal Project · 2024',
     meta: 'Python · Machine Learning · Feature Engineering',
@@ -87,6 +87,39 @@ const WORK = [
     ],
     cardLinks: [{ label: 'Details', href: 'featured.html#f1' }],
     detailLinks: [{ label: 'GitHub', href: 'https://github.com/Avi-Gobrin/F1-Race-predictor', external: true }]
+  },
+  {
+    id: 'apm',
+    type: 'Paper',
+    date: 'Apr 2026',
+    title: 'The Effect of Transaction Costs on Optimal Portfolio Rebalancing Frequency',
+    kicker: 'Academic Paper · April 2026',
+    meta: 'APM348: Applied Mathematics · Winter 2026',
+    tags: ['Portfolio Theory', 'Monte Carlo', 'Optimization', 'Transaction Costs'],
+    desc: `A discrete-time, two-asset model comparing periodic and band rebalancing policies under proportional transaction costs via Monte Carlo grid search over 10,000 paths. The band policy achieves a 17.3% improvement in cost-penalised objective over the periodic policy, with a CRRA certainty-equivalent-wealth analysis confirming that the primary value of rebalancing is risk control, not return enhancement.`,
+    detailLinks: [{ label: 'Read Paper', href: 'assets/apm-project.pdf', external: true }]
+  },
+  {
+    id: 'big-five',
+    type: 'Paper',
+    date: 'Mar 2026',
+    title: 'Discovering Latent Structure in the IPIP Big Five Personality Inventory',
+    kicker: 'Academic Paper · March 2026',
+    meta: 'STA437: Multivariate Statistics · Winter 2026',
+    tags: ['Factor Analysis', 'ICA', 'Parallel Analysis', 'Personality Psychology'],
+    desc: `Factor analysis and ICA applied to 19,718 personality questionnaire responses, confirming the canonical Big Five structure and probing whether additional dimensions emerge from parallel analysis.`,
+    detailLinks: [{ label: 'Read Paper', href: 'assets/big-five-sta437.pdf', external: true }]
+  },
+  {
+    id: 'wine',
+    type: 'Paper',
+    date: 'Feb 2026',
+    title: 'What Makes a Wine Good? Chemical Structure and Quality in Portuguese Wines',
+    kicker: 'Academic Paper · February 2026',
+    meta: 'STA437: Multivariate Statistics · Winter 2026',
+    tags: ['PCA', 'Mahalanobis Distance', 'Correlation Analysis', 'Chemometrics'],
+    desc: `PCA, Mahalanobis distance testing, and correlation analysis on 6,497 Portuguese wines to identify the latent chemical dimensions that separate red from white wine and predict sensory quality.`,
+    detailLinks: [{ label: 'Read Paper', href: 'assets/wine-quality-sta437.pdf', external: true }]
   }
 ];
 
@@ -104,17 +137,33 @@ function linkHtml(l, cls) {
 }
 
 function renderFeaturedHome(el) {
-  const items = WORK.filter(w => w.featured).sort((a, b) => a.featured - b.featured);
-  el.innerHTML = items.map(w => `
+  el.innerHTML = WORK.filter(w => w.featured).map(w => `
     <a href="featured.html#${w.id}" class="feat-item">
       <span class="feat-type">${esc(w.type)}</span>
-      <span class="feat-title">${esc(w.short || w.title)}</span>
+      <span class="feat-title">${esc(w.title)}</span>
     </a>`).join('');
 }
 
+function renderWriting(el) {
+  let html = '', currentYear = '';
+  WORK.filter(w => w.type === 'Paper').forEach(w => {
+    const year = w.date.slice(-4);
+    if (year !== currentYear) { html += `<p class="yr">${esc(year)}</p>`; currentYear = year; }
+    const star = w.featured ? '<span class="w-star" title="Featured">★</span>' : '';
+    const link = w.detailLinks?.[0]?.href || '#';
+    html += `<div class="w-item">
+      <span class="w-date">${esc(w.date)}</span>
+      <div>
+        <div class="w-title">${star}<a href="${link}" target="_blank">${esc(w.title)}</a></div>
+        <div class="w-desc">${esc(w.desc || '')}</div>
+      </div>
+    </div>`;
+  });
+  el.innerHTML = html;
+}
+
 function renderProjects(el) {
-  const items = WORK.filter(w => w.type === 'Project');
-  el.innerHTML = items.map(w => {
+  el.innerHTML = WORK.filter(w => w.type === 'Project').map(w => {
     const href = (w.cardLinks && w.cardLinks[0]) ? w.cardLinks[0].href : '#';
     return `
     <div class="proj">
@@ -155,17 +204,15 @@ document.addEventListener('DOMContentLoaded', function () {
   const home = document.getElementById('js-featured-home');
   if (home) renderFeaturedHome(home);
 
+  const writing = document.getElementById('js-writing');
+  if (writing) renderWriting(writing);
+
   const projects = document.getElementById('js-projects');
   if (projects) renderProjects(projects);
 
   const featured = document.getElementById('js-featured');
   if (featured) {
     renderFeaturedDetail(featured);
-    // The sections are injected here, so the browser's own hash scroll already
-    // ran against an empty page and missed. Scroll to the deep-link target
-    // ourselves, then again once the web font loads and reflows the layout, so
-    // a late reflow cannot leave us at the wrong spot. scroll-padding-top in the
-    // CSS keeps the heading clear of the fixed nav.
     if (location.hash) {
       const scrollToHash = function () {
         const target = document.getElementById(location.hash.slice(1));
