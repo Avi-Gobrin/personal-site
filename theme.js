@@ -1,20 +1,26 @@
-// Theme toggle: persists choice in localStorage. Initial theme is set by a
-// small inline script in <head> to avoid a flash of the wrong theme.
 (function () {
   var root = document.documentElement;
-  var btn = document.querySelector('.theme-toggle');
-  if (!btn) return;
 
-  function label(t) {
-    return t === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
+  // Theme toggle
+  var btn = document.querySelector('.theme-toggle');
+  if (btn) {
+    function label(t) { return t === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'; }
+    btn.setAttribute('aria-label', label(root.getAttribute('data-theme')));
+    btn.addEventListener('click', function () {
+      var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+      btn.setAttribute('aria-label', label(next));
+    });
   }
 
-  btn.setAttribute('aria-label', label(root.getAttribute('data-theme')));
-
-  btn.addEventListener('click', function () {
-    var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    root.setAttribute('data-theme', next);
-    try { localStorage.setItem('theme', next); } catch (e) {}
-    btn.setAttribute('aria-label', label(next));
-  });
+  // Mobile nav toggle
+  var nav = document.querySelector('nav');
+  var toggle = document.querySelector('.nav-toggle');
+  if (nav && toggle) {
+    toggle.addEventListener('click', function () { nav.classList.toggle('open'); });
+    document.addEventListener('click', function (e) {
+      if (!nav.contains(e.target)) nav.classList.remove('open');
+    });
+  }
 })();

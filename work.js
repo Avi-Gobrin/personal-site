@@ -29,8 +29,7 @@ const WORK = [
       `School-workflow agent auto-formats lecture and problem-set notes and cross-links them into a connected knowledge base of theorem references`,
       `Surfaces relevant prior material to accelerate homework, projects, and exam preparation`
     ],
-    cardLinks: [{ label: 'Details', href: 'featured.html#agents' }],
-    detailLinks: [{ label: 'GitHub', href: 'https://github.com/Avi-Gobrin/Obsidian', external: true }]
+    cardLinks: [{ label: 'Details', href: 'featured.html#agents' }]
   },
   {
     id: 'plantinarium',
@@ -73,6 +72,7 @@ const WORK = [
   {
     id: 'f1',
     type: 'Project',
+    featured: 4,
     title: 'F1 Race Winner Predictor',
     kicker: 'Personal Project · 2024',
     meta: 'Python · Machine Learning · Feature Engineering',
