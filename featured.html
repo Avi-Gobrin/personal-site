@@ -13,7 +13,7 @@
 </head>
 <body>
 
-  <nav><div class="wrap"></div></nav>
+  <nav><div class="wrap"><!-- prerender:start --><a href="index.html" class="logo">Avi Gobrin</a><div class="nav-right"><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="experience.html">Experience</a></li><li><a href="projects.html">Projects</a></li><li><a href="writing.html">Writing</a></li><li><a href="coursework.html">Coursework</a></li></ul><button class="nav-toggle" type="button" aria-label="Toggle navigation"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button><button class="theme-toggle" type="button" aria-label="Toggle dark mode"><svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></button></div><!-- prerender:end --></div></nav>
   <script src="nav.js"></script>
 
   <section class="page"><div class="wrap">
@@ -21,7 +21,114 @@
     <h1 class="page-title">Featured Work</h1>
 
     <!-- Detail sections render from work.js (the WORK array is the single source of truth). -->
-    <div class="feat-works" id="js-featured"></div>
+    <div class="feat-works" id="js-featured"><!-- prerender:start -->
+    <div class="feat-work" id="agents">
+      <div class="feat-work-top">
+        <div>
+          <p class="feat-work-kicker">Personal Project · 2026</p>
+          <h2 class="feat-work-title">Autonomous Planning &amp; Knowledge Agents</h2>
+          <p class="feat-work-meta">Claude Code · Obsidian · LLM Agents</p>
+        </div>
+        
+      </div>
+      <div class="tags"><span class="tag">Claude Code</span><span class="tag">Obsidian</span><span class="tag">LLM Agents</span><span class="tag">Automation</span><span class="tag">Knowledge Management</span></div>
+      <p class="feat-work-desc">A pair of LLM agents that automate my daily planning and coursework, built on Claude Code with an Obsidian vault as the knowledge store. The planning agent runs on its own at the start and end of each day: every evening it reviews what I completed, writes structured notes on the day, then regenerates and time-blocks the next day's calendar from a parsed task file and a traffic-light priority scheme. A companion school-workflow agent auto-formats lecture and problem-set notes and links related material into a connected knowledge base of theorem references and cross-links.</p>
+      
+      <div class="feat-findings">
+        <p class="feat-findings-label">Key Details</p>
+        <ul><li>Daily-planning agent regenerates and time-blocks the next day's calendar from a parsed task file and a traffic-light priority scheme</li><li>Evening review loop writes structured daily notes, closing the feedback loop between plan and outcome</li><li>School-workflow agent auto-formats lecture and problem-set notes and cross-links them into a connected knowledge base of theorem references</li><li>Surfaces relevant prior material to accelerate homework, projects, and exam preparation</li></ul>
+      </div>
+    </div>
+    <div class="feat-work" id="plantinarium">
+      <div class="feat-work-top">
+        <div>
+          <p class="feat-work-kicker">Group Project · 2025</p>
+          <h2 class="feat-work-title">Plantinarium</h2>
+          <p class="feat-work-meta">Java · Group Project</p>
+        </div>
+        <a href="https://github.com/Avi-Gobrin/plantinarium" target="_blank" rel="noopener" class="btn-ghost">GitHub &rarr;</a>
+      </div>
+      <div class="tags"><span class="tag">Java</span><span class="tag">Image Recognition</span><span class="tag">Social Features</span><span class="tag">Team Project</span></div>
+      <p class="feat-work-desc">Plantinarium is a plant identification app built around the idea that discovery should be shareable. Upload a photo and the system identifies the species; from there you can log your find, annotate it with notes or fun facts, and share it with others. The project pairs a computer vision identification backend with a lightweight social layer, turning a utilitarian lookup tool into something closer to a naturalist's field journal.</p>
+      
+      <div class="feat-findings">
+        <p class="feat-findings-label">Key Technical Details</p>
+        <ul><li>Photo upload pipeline feeds into an AI vision model for species identification with confidence scoring</li><li>User-generated annotations let individuals attach context (common names, habitat notes, personal observations) to each identification</li><li>Social discovery layer allows finds to be shared, building a community record of sightings across locations</li></ul>
+      </div>
+    </div>
+    <div class="feat-work" id="oulad">
+      <div class="feat-work-top">
+        <div>
+          <p class="feat-work-kicker">Academic Paper · April 2026</p>
+          <h2 class="feat-work-title">Engagement, Performance, and Student Outcomes at the Open University</h2>
+          <p class="feat-work-meta">STA437: Multivariate Statistics · Winter 2026</p>
+        </div>
+        <a href="assets/oulad-sta437.pdf" target="_blank" rel="noopener" class="btn-ghost">Read Paper &rarr;</a>
+      </div>
+      <div class="tags"><span class="tag">PCA</span><span class="tag">Factor Analysis</span><span class="tag">GMM</span><span class="tag">LDA</span><span class="tag">MVN Testing</span><span class="tag">Logistic Regression</span></div>
+      <p class="feat-work-desc">The Open University Learning Analytics Dataset records six behavioral features across 25,820 student-course registrations, each carrying one of four outcome labels: Distinction, Fail, Pass, or Withdrawn. This paper runs a full multivariate analysis pipeline (EDA, Mahalanobis-distance MVN testing, PCA, varimax factor analysis, Gaussian mixture modeling, and LDA), asking whether unsupervised structure in assessment behavior can recover the known outcome taxonomy, and whether early-observable features (submission count and timing) are sufficient for withdrawal prediction before any grade is issued. The chain of methods is motivated: each result raises the next question.</p>
+      
+      <div class="feat-findings">
+        <p class="feat-findings-label">Key Findings</p>
+        <ul><li>Three latent factors identified via parallel analysis and varimax rotation: <em>Engagement</em> (submission count &amp; timing, h²&nbsp;=&nbsp;0.84), <em>Consistent Performance</em> (mean score &amp; score SD, h²&nbsp;=&nbsp;0.72), and <em>Prior Commitment</em> (credits &amp; prior attempts)</li><li>GMM at K&nbsp;=&nbsp;4 achieves an adjusted Rand index of 0.137: assessment behavior partially but not fully recovers the four-way outcome taxonomy; Distinction and Pass students share the high-engagement cluster</li><li>LDA reaches 64.5% five-fold CV accuracy versus a 53.0% naive baseline, with strong withdrawal recall (63.2%) but near-zero Distinction recall (3.2%); logistic regression closes the gap on Distinction (39.3%) by relaxing the shared-covariance assumption</li><li>FA, GMM, and LDA converge on the same two dimensions; Prior Commitment describes academic history but carries near-zero weight in LDA and does not drive cluster separation</li></ul>
+      </div>
+    </div>
+    <div class="feat-work" id="f1">
+      <div class="feat-work-top">
+        <div>
+          <p class="feat-work-kicker">Personal Project · 2024</p>
+          <h2 class="feat-work-title">F1 Race Winner Predictor</h2>
+          <p class="feat-work-meta">Python · Machine Learning · Feature Engineering</p>
+        </div>
+        <a href="https://github.com/Avi-Gobrin/F1-Race-predictor" target="_blank" rel="noopener" class="btn-ghost">GitHub &rarr;</a>
+      </div>
+      <div class="tags"><span class="tag">Python</span><span class="tag">scikit-learn</span><span class="tag">Feature Engineering</span><span class="tag">Supervised Learning</span></div>
+      <p class="feat-work-desc">A supervised machine-learning pipeline that predicts Formula 1 race winners from driver and constructor rolling form, qualifying results, track characteristics, and weather. The model is trained on engineered features such as driver-track history and pit-stop reliability, drawn from historical race and weather data, and evaluated season by season with a walk-forward scheme so it never sees the future.</p>
+      
+      <div class="feat-findings">
+        <p class="feat-findings-label">Key Details</p>
+        <ul><li>Engineered predictive features including driver-track history and pit-stop reliability from historical race and weather data</li><li>Reached 33 to 46% race-winner accuracy and 53 to 74% podium precision across walk-forward seasons, competitive with the strong pole-sitter baseline</li><li>LASSO keeps the model sparse and interpretable: recent driver form and grid/qualifying position carry nearly all the signal</li></ul>
+      </div>
+    </div>
+    <div class="feat-work" id="apm">
+      <div class="feat-work-top">
+        <div>
+          <p class="feat-work-kicker">Academic Paper · April 2026</p>
+          <h2 class="feat-work-title">The Effect of Transaction Costs on Optimal Portfolio Rebalancing Frequency</h2>
+          <p class="feat-work-meta">APM348: Applied Mathematics · Winter 2026</p>
+        </div>
+        <a href="assets/apm-project.pdf" target="_blank" rel="noopener" class="btn-ghost">Read Paper &rarr;</a>
+      </div>
+      <div class="tags"><span class="tag">Portfolio Theory</span><span class="tag">Monte Carlo</span><span class="tag">Optimization</span><span class="tag">Transaction Costs</span></div>
+      <p class="feat-work-desc">A discrete-time, two-asset model comparing periodic and band rebalancing policies under proportional transaction costs via Monte Carlo grid search over 10,000 paths. The band policy achieves a 17.3% improvement in cost-penalised objective over the periodic policy, with a CRRA certainty-equivalent-wealth analysis confirming that the primary value of rebalancing is risk control, not return enhancement.</p>
+      
+    </div>
+    <div class="feat-work" id="big-five">
+      <div class="feat-work-top">
+        <div>
+          <p class="feat-work-kicker">Academic Paper · March 2026</p>
+          <h2 class="feat-work-title">Discovering Latent Structure in the IPIP Big Five Personality Inventory</h2>
+          <p class="feat-work-meta">STA437: Multivariate Statistics · Winter 2026</p>
+        </div>
+        <a href="assets/big-five-sta437.pdf" target="_blank" rel="noopener" class="btn-ghost">Read Paper &rarr;</a>
+      </div>
+      <div class="tags"><span class="tag">Factor Analysis</span><span class="tag">ICA</span><span class="tag">Parallel Analysis</span><span class="tag">Personality Psychology</span></div>
+      <p class="feat-work-desc">Factor analysis and ICA applied to 19,718 personality questionnaire responses, confirming the canonical Big Five structure and probing whether additional dimensions emerge from parallel analysis.</p>
+      
+    </div>
+    <div class="feat-work" id="wine">
+      <div class="feat-work-top">
+        <div>
+          <p class="feat-work-kicker">Academic Paper · February 2026</p>
+          <h2 class="feat-work-title">What Makes a Wine Good? Chemical Structure and Quality in Portuguese Wines</h2>
+          <p class="feat-work-meta">STA437: Multivariate Statistics · Winter 2026</p>
+        </div>
+        <a href="assets/wine-quality-sta437.pdf" target="_blank" rel="noopener" class="btn-ghost">Read Paper &rarr;</a>
+      </div>
+      <div class="tags"><span class="tag">PCA</span><span class="tag">Mahalanobis Distance</span><span class="tag">Correlation Analysis</span><span class="tag">Chemometrics</span></div>
+      <p class="feat-work-desc">PCA, Mahalanobis distance testing, and correlation analysis on 6,497 Portuguese wines to identify the latent chemical dimensions that separate red from white wine and predict sensory quality.</p>
+      
+    </div><!-- prerender:end --></div>
   </div></section>
 
   <footer><div class="wrap"><p>&copy; 2026 Avi Gobrin</p></div></footer>

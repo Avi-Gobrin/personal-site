@@ -36,9 +36,9 @@ const WORK = [
     type: 'Project',
     featured: true,
     title: 'Plantinarium',
-    kicker: 'Project · 2025',
-    meta: 'Python · AI · Web App',
-    tags: ['Python', 'AI', 'Image Recognition', 'Social Features'],
+    kicker: 'Group Project · 2025',
+    meta: 'Java · Group Project',
+    tags: ['Java', 'Image Recognition', 'Social Features', 'Team Project'],
     card: `Plantinarium makes identifying plants easy and fun. Just upload a photo, and the system will identify the species for you. It's more than just identification. You can share your discoveries and add notes or fun facts about the plants you encounter.`,
     desc: `Plantinarium is a plant identification app built around the idea that discovery should be shareable. Upload a photo and the system identifies the species; from there you can log your find, annotate it with notes or fun facts, and share it with others. The project pairs a computer vision identification backend with a lightweight social layer, turning a utilitarian lookup tool into something closer to a naturalist's field journal.`,
     findingsLabel: 'Key Technical Details',
@@ -77,13 +77,13 @@ const WORK = [
     kicker: 'Personal Project · 2024',
     meta: 'Python · Machine Learning · Feature Engineering',
     tags: ['Python', 'scikit-learn', 'Feature Engineering', 'Supervised Learning'],
-    card: `A supervised machine-learning pipeline that predicts Formula 1 race winners from driver and constructor rolling form, qualifying results, track characteristics, and weather. Features such as driver-track history and pit-stop reliability are engineered from historical race and weather data, and the model is evaluated on held-out races.`,
-    desc: `A supervised machine-learning pipeline that predicts Formula 1 race winners from driver and constructor rolling form, qualifying results, track characteristics, and weather. The model is trained on engineered features such as driver-track history and pit-stop reliability, drawn from historical race and weather data, and evaluated on held-out races.`,
+    card: `A supervised machine-learning pipeline that predicts Formula 1 race winners from driver and constructor rolling form, qualifying results, track characteristics, and weather. Features such as driver-track history and pit-stop reliability are engineered from historical race and weather data, and the model is evaluated with a walk-forward scheme: each season is predicted using only the seasons before it.`,
+    desc: `A supervised machine-learning pipeline that predicts Formula 1 race winners from driver and constructor rolling form, qualifying results, track characteristics, and weather. The model is trained on engineered features such as driver-track history and pit-stop reliability, drawn from historical race and weather data, and evaluated season by season with a walk-forward scheme so it never sees the future.`,
     findingsLabel: 'Key Details',
     findings: [
       `Engineered predictive features including driver-track history and pit-stop reliability from historical race and weather data`,
-      `Reached 40% race-winner accuracy and 60% podium-finish accuracy on held-out races`,
-      `Captures form, qualifying, track, and weather signals in a single supervised pipeline`
+      `Reached 33 to 46% race-winner accuracy and 53 to 74% podium precision across walk-forward seasons, competitive with the strong pole-sitter baseline`,
+      `LASSO keeps the model sparse and interpretable: recent driver form and grid/qualifying position carry nearly all the signal`
     ],
     cardLinks: [{ label: 'Details', href: 'featured.html#f1' }],
     detailLinks: [{ label: 'GitHub', href: 'https://github.com/Avi-Gobrin/F1-Race-predictor', external: true }]
