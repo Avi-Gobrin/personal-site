@@ -1,8 +1,9 @@
 # Local-only build/design notes, not for publishing
 plans/
 
-# Local Claude config (machine-specific, not for publishing)
-.claude/settings.local.json
+# Claude Code config and instructions (local tooling, not part of the site)
+.claude/
+CLAUDE.md
 
 # Local resume sync helper (contains machine-specific paths)
 sync-resumes.ps1
