@@ -4,6 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Projects &middot; Avi Gobrin</title>
+  <meta name="description" content="Projects by Avi Gobrin: a Transformer and a neural network built from scratch in NumPy, an F1 race-winner predictor, autonomous planning agents, and Plantinarium.">
+  <link rel="canonical" href="https://avi-gobrin.github.io/personal-site/projects.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Avi Gobrin">
+  <meta property="og:title" content="Projects &middot; Avi Gobrin">
+  <meta property="og:description" content="A Transformer and a neural network built from scratch in NumPy, an F1 race-winner predictor, autonomous planning agents, and Plantinarium.">
+  <meta property="og:url" content="https://avi-gobrin.github.io/personal-site/projects.html">
+  <meta property="og:image" content="https://avi-gobrin.github.io/personal-site/assets/og-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Projects &middot; Avi Gobrin">
+  <meta name="twitter:description" content="A Transformer and a neural network built from scratch in NumPy, an F1 race-winner predictor, autonomous planning agents, and Plantinarium.">
+  <meta name="twitter:image" content="https://avi-gobrin.github.io/personal-site/assets/og-card.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -13,7 +25,7 @@
 </head>
 <body>
 
-  <nav><div class="wrap"><!-- prerender:start --><a href="index.html" class="logo">Avi Gobrin</a><div class="nav-right"><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="experience.html">Experience</a></li><li><a href="projects.html" class="on">Projects</a></li><li><a href="writing.html">Writing</a></li><li><a href="coursework.html">Coursework</a></li></ul><button class="nav-toggle" type="button" aria-label="Toggle navigation"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button><button class="theme-toggle" type="button" aria-label="Toggle dark mode"><svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></button></div><!-- prerender:end --></div></nav>
+  <nav><div class="wrap"><!-- prerender:start --><a href="index.html" class="logo">Avi Gobrin</a><div class="nav-right"><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="experience.html">Experience</a></li><li><a href="projects.html" class="on">Projects</a></li><li><a href="research.html">Research</a></li><li><a href="coursework.html">Coursework</a></li></ul><button class="nav-toggle" type="button" aria-label="Toggle navigation"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button><button class="theme-toggle" type="button" aria-label="Toggle dark mode"><svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></button></div><!-- prerender:end --></div></nav>
   <script src="nav.js"></script>
 
   <section class="page"><div class="wrap">
@@ -24,15 +36,27 @@
     <div class="projects" id="js-projects"><!-- prerender:start -->
     <div class="proj">
       <h3><a href="featured.html#agents">Autonomous Planning &amp; Knowledge Agents</a></h3>
-      <p class="proj-desc">A pair of LLM agents built on Claude Code with an Obsidian vault as the knowledge store. A daily-planning agent runs on its own every morning and evening: it reviews what I finished, writes structured notes on the day, then regenerates and time-blocks the next day's calendar from a parsed task file and a traffic-light priority scheme. A companion school-workflow agent auto-formats lecture and problem-set notes and cross-links them into a connected knowledge base.</p>
+      <p class="proj-desc">A pair of LLM agents built on Claude Code with an Obsidian vault as the knowledge store. Each evening a daily-planning agent reviews what I finished, writes structured notes on the day, then regenerates and time-blocks the next day's calendar from a parsed task file and a traffic-light priority scheme; each morning it surfaces that day's plan. A companion school-workflow agent auto-formats lecture and problem-set notes and cross-links them into a connected knowledge base.</p>
       <div class="tags"><span class="tag">Claude Code</span><span class="tag">Obsidian</span><span class="tag">LLM Agents</span><span class="tag">Automation</span><span class="tag">Knowledge Management</span></div>
       <div class="proj-links"><a href="featured.html#agents">Details &rarr;</a></div>
     </div>
     <div class="proj">
-      <h3><a href="https://github.com/Avi-Gobrin/plantinarium">Plantinarium</a></h3>
-      <p class="proj-desc">Plantinarium makes identifying plants easy and fun. Just upload a photo, and the system will identify the species for you. It's more than just identification. You can share your discoveries and add notes or fun facts about the plants you encounter.</p>
-      <div class="tags"><span class="tag">Java</span><span class="tag">Image Recognition</span><span class="tag">Social Features</span><span class="tag">Team Project</span></div>
-      <div class="proj-links"><a href="https://github.com/Avi-Gobrin/plantinarium" target="_blank" rel="noopener">GitHub &rarr;</a></div>
+      <h3><a href="featured.html#gpt">Tiny GPT From Scratch</a></h3>
+      <p class="proj-desc">A character-level GPT built end-to-end in pure NumPy, with no deep-learning frameworks. The project grows one codebase from a bigram baseline into a full Transformer: tokenization, multi-head self-attention, LayerNorm, the Adam optimizer, and sampling, with every forward and backward pass derived and implemented by hand.</p>
+      <div class="tags"><span class="tag">NumPy</span><span class="tag">Transformers</span><span class="tag">Self-Attention</span><span class="tag">Backpropagation</span><span class="tag">From Scratch</span></div>
+      <div class="proj-links"><a href="featured.html#gpt">Details &rarr;</a></div>
+    </div>
+    <div class="proj">
+      <h3><a href="featured.html#mnist">Neural Network from Scratch (MNIST)</a></h3>
+      <p class="proj-desc">A two-layer feedforward neural network for MNIST digit classification, written in pure NumPy. Every gradient and backpropagation update is derived and coded by hand, with no PyTorch or TensorFlow, to make the mechanics of training a network fully explicit.</p>
+      <div class="tags"><span class="tag">NumPy</span><span class="tag">Neural Networks</span><span class="tag">Backpropagation</span><span class="tag">MNIST</span><span class="tag">From Scratch</span></div>
+      <div class="proj-links"><a href="featured.html#mnist">Details &rarr;</a></div>
+    </div>
+    <div class="proj">
+      <h3><a href="https://github.com/barnaste/plantinarium">Plantinarium</a></h3>
+      <p class="proj-desc">A plant-identification desktop app built by a six-person team in Java and Maven. Upload a photo and the system identifies the species, then share your find with notes or fun facts through public and private galleries. I owned the account-management flow, including secure account deletion with a full wipe of the user's data.</p>
+      <div class="tags"><span class="tag">Java</span><span class="tag">Maven</span><span class="tag">Image Recognition</span><span class="tag">Social Features</span><span class="tag">Team Project</span></div>
+      <div class="proj-links"><a href="https://github.com/barnaste/plantinarium" target="_blank" rel="noopener">GitHub &rarr;</a></div>
     </div>
     <div class="proj">
       <h3><a href="featured.html#f1">F1 Race Winner Predictor</a></h3>

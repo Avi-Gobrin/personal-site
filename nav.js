@@ -3,7 +3,7 @@
     { href: 'index.html',      label: 'Home' },
     { href: 'experience.html', label: 'Experience' },
     { href: 'projects.html',   label: 'Projects' },
-    { href: 'writing.html',    label: 'Writing' },
+    { href: 'research.html',   label: 'Research' },
     { href: 'coursework.html', label: 'Coursework' }
   ];
 

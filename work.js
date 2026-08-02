@@ -7,7 +7,7 @@
 
    Where each field shows up:
      - projects.html cards      -> every item with type: 'Project'
-     - writing.html list        -> every item with type: 'Paper'
+     - research.html list       -> every item with type: 'Paper'
      - featured.html detail     -> every item (in array order)
      - homepage Featured list   -> every item with featured: true
    ============================================================ */
@@ -20,8 +20,8 @@ const WORK = [
     kicker: 'Personal Project · 2026',
     meta: 'Claude Code · Obsidian · LLM Agents',
     tags: ['Claude Code', 'Obsidian', 'LLM Agents', 'Automation', 'Knowledge Management'],
-    card: `A pair of LLM agents built on Claude Code with an Obsidian vault as the knowledge store. A daily-planning agent runs on its own every morning and evening: it reviews what I finished, writes structured notes on the day, then regenerates and time-blocks the next day's calendar from a parsed task file and a traffic-light priority scheme. A companion school-workflow agent auto-formats lecture and problem-set notes and cross-links them into a connected knowledge base.`,
-    desc: `A pair of LLM agents that automate my daily planning and coursework, built on Claude Code with an Obsidian vault as the knowledge store. The planning agent runs on its own at the start and end of each day: every evening it reviews what I completed, writes structured notes on the day, then regenerates and time-blocks the next day's calendar from a parsed task file and a traffic-light priority scheme. A companion school-workflow agent auto-formats lecture and problem-set notes and links related material into a connected knowledge base of theorem references and cross-links.`,
+    card: `A pair of LLM agents built on Claude Code with an Obsidian vault as the knowledge store. Each evening a daily-planning agent reviews what I finished, writes structured notes on the day, then regenerates and time-blocks the next day's calendar from a parsed task file and a traffic-light priority scheme; each morning it surfaces that day's plan. A companion school-workflow agent auto-formats lecture and problem-set notes and cross-links them into a connected knowledge base.`,
+    desc: `A pair of LLM agents that automate my daily planning and coursework, built on Claude Code with an Obsidian vault as the knowledge store. The planning agent runs on its own at the start and end of each day: every evening it reviews what I completed, writes structured notes on the day, then regenerates and time-blocks the next day's calendar from a parsed task file and a traffic-light priority scheme, and each morning it surfaces that day's plan. A companion school-workflow agent auto-formats lecture and problem-set notes and links related material into a connected knowledge base of theorem references and cross-links.`,
     findingsLabel: 'Key Details',
     findings: [
       `Daily-planning agent regenerates and time-blocks the next day's calendar from a parsed task file and a traffic-light priority scheme`,
@@ -32,23 +32,60 @@ const WORK = [
     cardLinks: [{ label: 'Details', href: 'featured.html#agents' }]
   },
   {
-    id: 'plantinarium',
+    id: 'gpt',
     type: 'Project',
     featured: true,
+    title: 'Tiny GPT From Scratch',
+    kicker: 'Personal Project · In Progress · 2026',
+    meta: 'Python · NumPy · Transformers',
+    tags: ['NumPy', 'Transformers', 'Self-Attention', 'Backpropagation', 'From Scratch'],
+    card: `A character-level GPT built end-to-end in pure NumPy, with no deep-learning frameworks. The project grows one codebase from a bigram baseline into a full Transformer: tokenization, multi-head self-attention, LayerNorm, the Adam optimizer, and sampling, with every forward and backward pass derived and implemented by hand.`,
+    desc: `A character-level GPT built end-to-end in pure NumPy, with no deep-learning frameworks doing the heavy lifting. The project grows one codebase step by step from a bigram baseline into a working Transformer language model: character tokenization, stable softmax, multi-head causal self-attention, LayerNorm, residual connections, the Adam optimizer, and temperature and top-k sampling. Every gradient is derived on paper first and then implemented by hand, so the whole training loop stays transparent rather than delegated to autograd.`,
+    findingsLabel: 'Key Details',
+    findings: [
+      `Builds the full stack by hand: tokenization, stable softmax, multi-head causal self-attention, LayerNorm, residuals, Adam, and sampling`,
+      `Every forward and backward pass is derived on paper before being coded, with no PyTorch or TensorFlow autograd`,
+      `Structured as an incremental sequence of steps, each growing the same codebase from a bigram baseline toward a full Transformer`
+    ],
+    cardLinks: [{ label: 'Details', href: 'featured.html#gpt' }],
+    detailLinks: [{ label: 'GitHub', href: 'https://github.com/Avi-Gobrin/tiny-gpt-from-scratch', external: true }]
+  },
+  {
+    id: 'mnist',
+    type: 'Project',
+    featured: false,
+    title: 'Neural Network from Scratch (MNIST)',
+    kicker: 'Personal Project · 2026',
+    meta: 'Python · NumPy · Backpropagation',
+    tags: ['NumPy', 'Neural Networks', 'Backpropagation', 'MNIST', 'From Scratch'],
+    card: `A two-layer feedforward neural network for MNIST digit classification, written in pure NumPy. Every gradient and backpropagation update is derived and coded by hand, with no PyTorch or TensorFlow, to make the mechanics of training a network fully explicit.`,
+    desc: `A two-layer feedforward neural network that classifies MNIST handwritten digits, implemented in pure NumPy. The forward pass, loss, and every gradient in the backward pass are derived by hand and coded directly, with no autograd framework involved. The goal was to understand backpropagation from first principles by building it rather than calling it.`,
+    findingsLabel: 'Key Details',
+    findings: [
+      `Two-layer feedforward architecture trained on MNIST digit classification`,
+      `All gradient and backpropagation updates derived and implemented by hand in pure NumPy`,
+      `No PyTorch or TensorFlow: the full training loop is written from scratch`
+    ],
+    cardLinks: [{ label: 'Details', href: 'featured.html#mnist' }]
+  },
+  {
+    id: 'plantinarium',
+    type: 'Project',
+    featured: false,
     title: 'Plantinarium',
-    kicker: 'Group Project · 2025',
-    meta: 'Java · Group Project',
-    tags: ['Java', 'Image Recognition', 'Social Features', 'Team Project'],
-    card: `Plantinarium makes identifying plants easy and fun. Just upload a photo, and the system will identify the species for you. It's more than just identification. You can share your discoveries and add notes or fun facts about the plants you encounter.`,
-    desc: `Plantinarium is a plant identification app built around the idea that discovery should be shareable. Upload a photo and the system identifies the species; from there you can log your find, annotate it with notes or fun facts, and share it with others. The project pairs a computer vision identification backend with a lightweight social layer, turning a utilitarian lookup tool into something closer to a naturalist's field journal.`,
+    kicker: '6-Person Team · 2024',
+    meta: 'Java · Maven · 6-Person Team',
+    tags: ['Java', 'Maven', 'Image Recognition', 'Social Features', 'Team Project'],
+    card: `A plant-identification desktop app built by a six-person team in Java and Maven. Upload a photo and the system identifies the species, then share your find with notes or fun facts through public and private galleries. I owned the account-management flow, including secure account deletion with a full wipe of the user's data.`,
+    desc: `Plantinarium is a plant identification desktop app built by a six-person team in Java and Maven, around the idea that discovery should be shareable. Upload a photo and the system identifies the species; from there you can log your find, annotate it with notes or fun facts, and share it with others through public and private galleries. The project pairs a computer vision identification backend with a lightweight social layer, turning a utilitarian lookup tool into something closer to a naturalist's field journal. I owned the account-management flow, including secure account deletion with a full wipe of the user's data.`,
     findingsLabel: 'Key Technical Details',
     findings: [
-      `Photo upload pipeline feeds into an AI vision model for species identification with confidence scoring`,
-      `User-generated annotations let individuals attach context (common names, habitat notes, personal observations) to each identification`,
-      `Social discovery layer allows finds to be shared, building a community record of sightings across locations`
+      `Photo upload pipeline feeds into an AI vision model for species identification`,
+      `Public and private galleries, likes, and user-generated notes let individuals attach context to each identification and share finds`,
+      `Owned the account-management flow, including secure account deletion with a full wipe of the user's data`
     ],
-    cardLinks: [{ label: 'GitHub', href: 'https://github.com/Avi-Gobrin/plantinarium', external: true }],
-    detailLinks: [{ label: 'GitHub', href: 'https://github.com/Avi-Gobrin/plantinarium', external: true }]
+    cardLinks: [{ label: 'GitHub', href: 'https://github.com/barnaste/plantinarium', external: true }],
+    detailLinks: [{ label: 'GitHub', href: 'https://github.com/barnaste/plantinarium', external: true }]
   },
   {
     id: 'oulad',
@@ -57,9 +94,9 @@ const WORK = [
     date: 'Apr 2026',
     title: 'Engagement, Performance, and Student Outcomes at the Open University',
     kicker: 'Academic Paper · April 2026',
-    meta: 'STA437: Multivariate Statistics · Winter 2026',
+    meta: 'STA437: Methods for Multivariate Data · Winter 2026',
     tags: ['PCA', 'Factor Analysis', 'GMM', 'LDA', 'MVN Testing', 'Logistic Regression'],
-    desc: `The Open University Learning Analytics Dataset records six behavioral features across 25,820 student-course registrations, each carrying one of four outcome labels: Distinction, Fail, Pass, or Withdrawn. This paper runs a full multivariate analysis pipeline (EDA, Mahalanobis-distance MVN testing, PCA, varimax factor analysis, Gaussian mixture modeling, and LDA), asking whether unsupervised structure in assessment behavior can recover the known outcome taxonomy, and whether early-observable features (submission count and timing) are sufficient for withdrawal prediction before any grade is issued. The chain of methods is motivated: each result raises the next question.`,
+    desc: `The Open University Learning Analytics Dataset records six behavioral features across 25,820 student-course registrations, each carrying one of four outcome labels: Distinction, Fail, Pass, or Withdrawn. This paper runs a full multivariate analysis pipeline (EDA, Mahalanobis-distance MVN testing, PCA, varimax factor analysis, Gaussian mixture modeling, and LDA), asking whether unsupervised structure in assessment behavior can recover the known outcome taxonomy, and whether early-observable features (submission count and timing) are sufficient for withdrawal prediction before any grade is issued. Each method is motivated by the result before it.`,
     findingsLabel: 'Key Findings',
     findings: [
       `Three latent factors identified via parallel analysis and varimax rotation: <em>Engagement</em> (submission count &amp; timing, h²&nbsp;=&nbsp;0.84), <em>Consistent Performance</em> (mean score &amp; score SD, h²&nbsp;=&nbsp;0.72), and <em>Prior Commitment</em> (credits &amp; prior attempts)`,
@@ -72,7 +109,7 @@ const WORK = [
   {
     id: 'f1',
     type: 'Project',
-    featured: true,
+    featured: false,
     title: 'F1 Race Winner Predictor',
     kicker: 'Personal Project · 2024',
     meta: 'Python · Machine Learning · Feature Engineering',
@@ -96,7 +133,7 @@ const WORK = [
     kicker: 'Academic Paper · April 2026',
     meta: 'APM348: Applied Mathematics · Winter 2026',
     tags: ['Portfolio Theory', 'Monte Carlo', 'Optimization', 'Transaction Costs'],
-    desc: `A discrete-time, two-asset model comparing periodic and band rebalancing policies under proportional transaction costs via Monte Carlo grid search over 10,000 paths. The band policy achieves a 17.3% improvement in cost-penalised objective over the periodic policy, with a CRRA certainty-equivalent-wealth analysis confirming that the primary value of rebalancing is risk control, not return enhancement.`,
+    desc: `A discrete-time, two-asset model comparing periodic and band rebalancing policies under proportional transaction costs via Monte Carlo grid search over 10,000 paths. The band policy achieves a 17.3% improvement in cost-penalized objective over the periodic policy, with a CRRA certainty-equivalent-wealth analysis confirming that the primary value of rebalancing is risk control, not return enhancement.`,
     detailLinks: [{ label: 'Read Paper', href: 'assets/apm-project.pdf', external: true }]
   },
   {
@@ -105,7 +142,7 @@ const WORK = [
     date: 'Mar 2026',
     title: 'Discovering Latent Structure in the IPIP Big Five Personality Inventory',
     kicker: 'Academic Paper · March 2026',
-    meta: 'STA437: Multivariate Statistics · Winter 2026',
+    meta: 'STA437: Methods for Multivariate Data · Winter 2026',
     tags: ['Factor Analysis', 'ICA', 'Parallel Analysis', 'Personality Psychology'],
     desc: `Factor analysis and ICA applied to 19,718 personality questionnaire responses, confirming the canonical Big Five structure and probing whether additional dimensions emerge from parallel analysis.`,
     detailLinks: [{ label: 'Read Paper', href: 'assets/big-five-sta437.pdf', external: true }]
@@ -116,7 +153,7 @@ const WORK = [
     date: 'Feb 2026',
     title: 'What Makes a Wine Good? Chemical Structure and Quality in Portuguese Wines',
     kicker: 'Academic Paper · February 2026',
-    meta: 'STA437: Multivariate Statistics · Winter 2026',
+    meta: 'STA437: Methods for Multivariate Data · Winter 2026',
     tags: ['PCA', 'Mahalanobis Distance', 'Correlation Analysis', 'Chemometrics'],
     desc: `PCA, Mahalanobis distance testing, and correlation analysis on 6,497 Portuguese wines to identify the latent chemical dimensions that separate red from white wine and predict sensory quality.`,
     detailLinks: [{ label: 'Read Paper', href: 'assets/wine-quality-sta437.pdf', external: true }]

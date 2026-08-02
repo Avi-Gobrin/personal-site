@@ -1,7 +1,7 @@
 /* ============================================================
    Prerender: bakes nav + work.js content into the HTML files.
 
-   Why: projects.html, writing.html, featured.html, and the
+   Why: projects.html, research.html, featured.html, and the
    homepage Featured list are rendered by work.js at runtime.
    Without JavaScript (search engines, link previews, some
    recruiter tools) those pages are empty shells. This script
@@ -102,7 +102,7 @@ const NAV_LINKS = [
   { href: 'index.html',      label: 'Home' },
   { href: 'experience.html', label: 'Experience' },
   { href: 'projects.html',   label: 'Projects' },
-  { href: 'writing.html',    label: 'Writing' },
+  { href: 'research.html',   label: 'Research' },
   { href: 'coursework.html', label: 'Coursework' }
 ];
 
@@ -149,7 +149,7 @@ function escapeRe(s) {
 const PAGES = [
   { file: 'index.html',      targets: [['<div class="feat-list" id="js-featured-home">', renderFeaturedHome]] },
   { file: 'projects.html',   targets: [['<div class="projects" id="js-projects">', renderProjects]] },
-  { file: 'writing.html',    targets: [['<div id="js-writing">', renderWriting]] },
+  { file: 'research.html',   targets: [['<div id="js-writing">', renderWriting]] },
   { file: 'featured.html',   targets: [['<div class="feat-works" id="js-featured">', renderFeaturedDetail]] },
   { file: 'experience.html', targets: [] },
   { file: 'coursework.html', targets: [] }
