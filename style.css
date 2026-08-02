@@ -242,6 +242,7 @@ nav .wrap { display: flex; justify-content: space-between; align-items: center; 
 .page { padding: calc(62px + 72px) 0 90px; min-height: 80vh; }
 .page-label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
 .page-legend { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 22px; }
+.page-legend .w-star { font-size: 1em; margin-right: 3px; }
 .page-title {
   font-family: var(--serif); font-size: 2.7rem; font-weight: 400;
   position: relative; padding-bottom: 20px; margin-bottom: 44px;
@@ -251,84 +252,87 @@ nav .wrap { display: flex; justify-content: space-between; align-items: center; 
   width: 50px; height: 3px; border-radius: 2px; background: var(--accent);
 }
 
-/* --- Projects --- */
-.projects { display: flex; flex-direction: column; gap: 22px; }
-.proj {
+/* ============================================================
+   Cards
+   One card shape for projects, papers, experience, and coursework,
+   so every inner page reads as the same thing. Cards that link
+   somewhere lift on hover; .static ones are containers, not
+   affordances, so they stay put.
+   ============================================================ */
+.cards { display: flex; flex-direction: column; gap: 22px; }
+.card {
   background: var(--card); border: 1px solid var(--border);
   border-radius: 14px; padding: 30px;
   box-shadow: var(--shadow-sm);
   transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
 }
-.proj:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--border-strong); }
-.proj h3 { font-family: var(--serif); font-size: 1.4rem; margin-bottom: 8px; }
-.proj h3 a { color: var(--text); }
-.proj h3 a:hover { color: var(--accent); }
-.proj-desc { font-size: 0.92rem; color: var(--dim); font-weight: 300; line-height: 1.7; margin-bottom: 16px; }
+.card:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--border-strong); }
+.card.static:hover { transform: none; box-shadow: var(--shadow-sm); border-color: var(--border); }
+
+.card-kicker {
+  font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
+}
+.card-title {
+  font-family: var(--serif); font-size: 1.4rem; font-weight: 400;
+  color: var(--text); line-height: 1.25; margin-bottom: 10px;
+}
+.card-title a { color: var(--text); }
+.card-title a:hover { color: var(--accent); }
+.card-meta { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); margin-bottom: 4px; }
+.card-desc { font-size: 0.92rem; color: var(--dim); font-weight: 300; line-height: 1.7; margin-bottom: 16px; }
+
 .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 16px; }
 .tag {
   font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.04em;
   padding: 4px 13px; border: 1px solid var(--border-strong); border-radius: 999px;
   color: var(--accent); background: var(--card-2); text-transform: uppercase;
 }
-.proj-links { display: flex; gap: 20px; }
-.proj-links a { font-family: var(--mono); font-size: 0.72rem; color: var(--accent); }
-.proj-links a:hover { color: var(--text); }
+.card-links { display: flex; flex-wrap: wrap; gap: 20px; }
+.card-links a { font-family: var(--mono); font-size: 0.72rem; color: var(--accent); }
+.card-links a:hover { color: var(--text); }
 
-/* --- Writing --- */
-.yr {
-  font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.14em;
-  text-transform: uppercase; color: var(--accent);
-  margin-top: 42px; margin-bottom: 16px; padding-bottom: 10px;
-  border-bottom: 1px solid var(--border);
+/* Bullet list: inside a card on Experience, standalone on a work page. */
+.card-points { margin-top: 20px; padding-top: 22px; border-top: 1px solid var(--border); }
+.card-points-label {
+  font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 14px;
 }
-.yr:first-child { margin-top: 0; }
-.w-item {
-  display: grid; grid-template-columns: 90px 1fr; gap: 24px;
-  padding: 22px 0; border-bottom: 1px solid var(--border); align-items: baseline;
-}
-.w-item:last-child { border-bottom: none; }
-.w-date { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); padding-top: 3px; }
-.w-title { font-weight: 600; font-size: 1.02rem; display: flex; align-items: center; gap: 8px; }
-.w-title a { color: var(--text); }
-.w-title a:hover { color: var(--accent); }
-.w-desc { font-size: 0.86rem; color: var(--dim); font-weight: 300; margin-top: 4px; line-height: 1.6; }
-.w-star { color: var(--accent); font-size: 0.72rem; flex-shrink: 0; line-height: 1; }
+.card-points ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+.card-points li { font-size: 0.9rem; color: var(--dim); font-weight: 300; line-height: 1.7; padding-left: 20px; position: relative; }
+.card-points li::before { content: '·'; position: absolute; left: 0; color: var(--accent); }
+.card-points li em { color: var(--text); font-style: normal; font-weight: 500; }
 
-/* --- Featured works page --- */
-.feat-works { display: flex; flex-direction: column; gap: 30px; }
-.feat-work {
-  background: var(--card); border: 1px solid var(--border);
-  border-radius: 16px; padding: 38px; box-shadow: var(--shadow-sm);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.feat-work:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
-.feat-work-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; margin-bottom: 20px; }
-.feat-work-kicker { font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
-.feat-work-title { font-family: var(--serif); font-size: 1.75rem; font-weight: 400; color: var(--text); margin-bottom: 8px; line-height: 1.2; }
-.feat-work-meta { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); }
-.feat-work-desc { font-size: 0.94rem; color: var(--dim); font-weight: 300; line-height: 1.8; margin: 18px 0; }
-.feat-findings { margin-top: 20px; padding-top: 22px; border-top: 1px solid var(--border); }
-.feat-findings-label { font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
-.feat-findings ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
-.feat-findings li { font-size: 0.9rem; color: var(--dim); font-weight: 300; line-height: 1.7; padding-left: 20px; position: relative; }
-.feat-findings li::before { content: '·'; position: absolute; left: 0; color: var(--accent); }
-.feat-findings li em { color: var(--text); font-style: normal; font-weight: 500; }
-@media (max-width: 640px) {
-  .feat-work-top { flex-direction: column; gap: 16px; }
-  .feat-work { padding: 26px; }
-}
+/* Marks any item with featured: true. Sized in em so it scales with whatever
+   title it sits in, and spaced by its own margin rather than a parent gap. */
+.w-star { color: var(--accent); font-size: 0.7em; flex-shrink: 0; line-height: 1; margin-right: 8px; vertical-align: middle; }
 
-/* --- Coursework --- */
-.cw-section { margin-bottom: 46px; }
-.cw-list { display: flex; flex-direction: column; }
+/* --- One work item's own page --- */
+.back-link {
+  font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.04em;
+  color: var(--muted); display: inline-block; margin-bottom: 28px;
+}
+.back-link:hover { color: var(--accent); }
+.detail-title { margin-bottom: 16px; }
+.detail-meta { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); margin-bottom: 18px; }
+.detail-desc { font-size: 0.98rem; color: var(--dim); font-weight: 300; line-height: 1.85; margin: 22px 0 0; max-width: 68ch; }
+.detail-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; }
+
+/* --- Coursework: one bubble per subject --- */
+.cw-list { display: flex; flex-direction: column; margin-top: 20px; }
 .cw-item {
   display: grid; grid-template-columns: 120px 1fr; gap: 24px;
-  padding: 20px 0; border-bottom: 1px solid var(--border); align-items: baseline;
+  padding: 18px 0; border-bottom: 1px solid var(--border); align-items: baseline;
 }
-.cw-item:last-child { border-bottom: none; }
-.cw-code { font-family: var(--mono); font-size: 0.68rem; color: var(--accent); padding-top: 3px; }
+.cw-item:first-child { padding-top: 0; }
+.cw-item:last-child { border-bottom: none; padding-bottom: 0; }
+.cw-code { font-family: var(--mono); font-size: 0.68rem; color: var(--accent); }
 .cw-name { font-weight: 500; font-size: 0.97rem; color: var(--text); margin-bottom: 4px; }
 .cw-desc { font-size: 0.86rem; color: var(--dim); font-weight: 300; line-height: 1.6; }
+
+@media (max-width: 640px) {
+  .card { padding: 24px; }
+}
 
 
 /* ============================================================
@@ -395,7 +399,6 @@ footer p { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); le
   .nav-right { gap: 14px; }
   .nav-toggle, .nav-links { top: 56px; }
   .hero h1 { font-size: 2.4rem; }
-  .w-item { grid-template-columns: 1fr; gap: 3px; }
   .cw-item { grid-template-columns: 1fr; gap: 4px; }
 }
 @media print {

@@ -31,39 +31,45 @@
   <section class="page"><div class="wrap">
     <p class="page-label">Portfolio</p>
     <h1 class="page-title">Projects</h1>
+    <p class="page-legend"><span class="w-star">&#9733;</span> featured</p>
 
     <!-- Cards render from work.js (the WORK array is the single source of truth). -->
-    <div class="projects" id="js-projects"><!-- prerender:start -->
-    <div class="proj">
-      <h3><a href="featured.html#agents">Autonomous Planning &amp; Knowledge Agents</a></h3>
-      <p class="proj-desc">A pair of LLM agents built on Claude Code with an Obsidian vault as the knowledge store. Each evening a daily-planning agent reviews what I finished, writes structured notes on the day, then regenerates and time-blocks the next day's calendar from a parsed task file and a traffic-light priority scheme; each morning it surfaces that day's plan. A companion school-workflow agent auto-formats lecture and problem-set notes and cross-links them into a connected knowledge base.</p>
-      <div class="tags"><span class="tag">Claude Code</span><span class="tag">Obsidian</span><span class="tag">LLM Agents</span><span class="tag">Automation</span><span class="tag">Knowledge Management</span></div>
-      <div class="proj-links"><a href="featured.html#agents">Details &rarr;</a></div>
-    </div>
-    <div class="proj">
-      <h3><a href="featured.html#gpt">Tiny GPT From Scratch</a></h3>
-      <p class="proj-desc">A character-level GPT built end-to-end in pure NumPy, with no deep-learning frameworks. The project grows one codebase from a bigram baseline into a full Transformer: tokenization, multi-head self-attention, LayerNorm, the Adam optimizer, and sampling, with every forward and backward pass derived and implemented by hand.</p>
+    <div class="cards" id="js-projects"><!-- prerender:start -->
+    <article class="card">
+      <p class="card-kicker">Personal Project · In Progress · 2026</p>
+      <h3 class="card-title"><span class="w-star" title="Featured">★</span><a href="work-gpt.html">Tiny GPT From Scratch</a></h3>
+      <p class="card-desc">A character-level GPT built end-to-end in pure NumPy, with no deep-learning frameworks. The project grows one codebase from a bigram baseline into a full Transformer: tokenization, multi-head self-attention, LayerNorm, the Adam optimizer, and sampling, with every forward and backward pass derived and implemented by hand.</p>
       <div class="tags"><span class="tag">NumPy</span><span class="tag">Transformers</span><span class="tag">Self-Attention</span><span class="tag">Backpropagation</span><span class="tag">From Scratch</span></div>
-      <div class="proj-links"><a href="featured.html#gpt">Details &rarr;</a></div>
-    </div>
-    <div class="proj">
-      <h3><a href="featured.html#mnist">Neural Network from Scratch (MNIST)</a></h3>
-      <p class="proj-desc">A two-layer feedforward neural network for MNIST digit classification, written in pure NumPy. Every gradient and backpropagation update is derived and coded by hand, with no PyTorch or TensorFlow, to make the mechanics of training a network fully explicit.</p>
+      <div class="card-links"><a href="work-gpt.html">Details &rarr;</a><a href="https://github.com/Avi-Gobrin/tiny-gpt-from-scratch" target="_blank" rel="noopener noreferrer">GitHub &rarr;</a></div>
+    </article>
+    <article class="card">
+      <p class="card-kicker">Personal Project · 2026</p>
+      <h3 class="card-title"><a href="work-mnist.html">Neural Network from Scratch (MNIST)</a></h3>
+      <p class="card-desc">A two-layer feedforward neural network for MNIST digit classification, written in pure NumPy. Every gradient and backpropagation update is derived and coded by hand, with no PyTorch or TensorFlow, to make the mechanics of training a network fully explicit.</p>
       <div class="tags"><span class="tag">NumPy</span><span class="tag">Neural Networks</span><span class="tag">Backpropagation</span><span class="tag">MNIST</span><span class="tag">From Scratch</span></div>
-      <div class="proj-links"><a href="featured.html#mnist">Details &rarr;</a></div>
-    </div>
-    <div class="proj">
-      <h3><a href="https://github.com/barnaste/plantinarium">Plantinarium</a></h3>
-      <p class="proj-desc">A plant-identification desktop app built by a six-person team in Java and Maven. Upload a photo and the system identifies the species, then share your find with notes or fun facts through public and private galleries. I owned the account-management flow, including secure account deletion with a full wipe of the user's data.</p>
+      <div class="card-links"><a href="work-mnist.html">Details &rarr;</a></div>
+    </article>
+    <article class="card">
+      <p class="card-kicker">Personal Project · 2026</p>
+      <h3 class="card-title"><span class="w-star" title="Featured">★</span><a href="work-agents.html">Autonomous Planning &amp; Knowledge Agents</a></h3>
+      <p class="card-desc">A pair of LLM agents built on Claude Code with an Obsidian vault as the knowledge store. Each evening a daily-planning agent reviews what I finished, writes structured notes on the day, then regenerates and time-blocks the next day's calendar from a parsed task file and a traffic-light priority scheme; each morning it surfaces that day's plan. A companion school-workflow agent auto-formats lecture and problem-set notes and cross-links them into a connected knowledge base.</p>
+      <div class="tags"><span class="tag">Claude Code</span><span class="tag">Obsidian</span><span class="tag">LLM Agents</span><span class="tag">Automation</span><span class="tag">Knowledge Management</span></div>
+      <div class="card-links"><a href="work-agents.html">Details &rarr;</a></div>
+    </article>
+    <article class="card">
+      <p class="card-kicker">6-Person Team · 2024</p>
+      <h3 class="card-title"><a href="work-plantinarium.html">Plantinarium</a></h3>
+      <p class="card-desc">A plant-identification desktop app built by a six-person team in Java and Maven. Upload a photo and the system identifies the species, then share your find with notes or fun facts through public and private galleries. I owned the account-management flow, including secure account deletion with a full wipe of the user's data.</p>
       <div class="tags"><span class="tag">Java</span><span class="tag">Maven</span><span class="tag">Image Recognition</span><span class="tag">Social Features</span><span class="tag">Team Project</span></div>
-      <div class="proj-links"><a href="https://github.com/barnaste/plantinarium" target="_blank" rel="noopener noreferrer">GitHub &rarr;</a></div>
-    </div>
-    <div class="proj">
-      <h3><a href="featured.html#f1">F1 Race Winner Predictor</a></h3>
-      <p class="proj-desc">A supervised machine-learning pipeline that predicts Formula 1 race winners from driver and constructor rolling form, qualifying results, track characteristics, and weather. Features such as driver-track history and pit-stop reliability are engineered from historical race and weather data, and the model is evaluated with a walk-forward scheme: each season is predicted using only the seasons before it.</p>
+      <div class="card-links"><a href="work-plantinarium.html">Details &rarr;</a><a href="https://github.com/barnaste/plantinarium" target="_blank" rel="noopener noreferrer">GitHub &rarr;</a></div>
+    </article>
+    <article class="card">
+      <p class="card-kicker">Personal Project · 2024</p>
+      <h3 class="card-title"><a href="work-f1.html">F1 Race Winner Predictor</a></h3>
+      <p class="card-desc">A supervised machine-learning pipeline that predicts Formula 1 race winners from driver and constructor rolling form, qualifying results, track characteristics, and weather. Features such as driver-track history and pit-stop reliability are engineered from historical race and weather data, and the model is evaluated with a walk-forward scheme: each season is predicted using only the seasons before it.</p>
       <div class="tags"><span class="tag">Python</span><span class="tag">scikit-learn</span><span class="tag">Feature Engineering</span><span class="tag">Supervised Learning</span></div>
-      <div class="proj-links"><a href="featured.html#f1">Details &rarr;</a></div>
-    </div><!-- prerender:end --></div>
+      <div class="card-links"><a href="work-f1.html">Details &rarr;</a><a href="https://github.com/Avi-Gobrin/F1-Race-predictor" target="_blank" rel="noopener noreferrer">GitHub &rarr;</a></div>
+    </article><!-- prerender:end --></div>
   </div></section>
 
   <footer><div class="wrap"><p>&copy; 2026 Avi Gobrin</p></div></footer>

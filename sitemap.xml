@@ -2,26 +2,58 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://avi-gobrin.github.io/personal-site/</loc>
-    <lastmod>2026-08-01</lastmod>
+    <lastmod>2026-08-02</lastmod>
   </url>
   <url>
     <loc>https://avi-gobrin.github.io/personal-site/experience.html</loc>
-    <lastmod>2026-08-01</lastmod>
+    <lastmod>2026-08-02</lastmod>
   </url>
   <url>
     <loc>https://avi-gobrin.github.io/personal-site/projects.html</loc>
-    <lastmod>2026-08-01</lastmod>
+    <lastmod>2026-08-02</lastmod>
   </url>
   <url>
     <loc>https://avi-gobrin.github.io/personal-site/research.html</loc>
-    <lastmod>2026-08-01</lastmod>
+    <lastmod>2026-08-02</lastmod>
   </url>
   <url>
     <loc>https://avi-gobrin.github.io/personal-site/coursework.html</loc>
-    <lastmod>2026-08-01</lastmod>
+    <lastmod>2026-08-02</lastmod>
   </url>
   <url>
-    <loc>https://avi-gobrin.github.io/personal-site/featured.html</loc>
-    <lastmod>2026-08-01</lastmod>
+    <loc>https://avi-gobrin.github.io/personal-site/work-gpt.html</loc>
+    <lastmod>2026-08-02</lastmod>
+  </url>
+  <url>
+    <loc>https://avi-gobrin.github.io/personal-site/work-mnist.html</loc>
+    <lastmod>2026-08-02</lastmod>
+  </url>
+  <url>
+    <loc>https://avi-gobrin.github.io/personal-site/work-agents.html</loc>
+    <lastmod>2026-08-02</lastmod>
+  </url>
+  <url>
+    <loc>https://avi-gobrin.github.io/personal-site/work-plantinarium.html</loc>
+    <lastmod>2026-08-02</lastmod>
+  </url>
+  <url>
+    <loc>https://avi-gobrin.github.io/personal-site/work-f1.html</loc>
+    <lastmod>2026-08-02</lastmod>
+  </url>
+  <url>
+    <loc>https://avi-gobrin.github.io/personal-site/work-oulad.html</loc>
+    <lastmod>2026-08-02</lastmod>
+  </url>
+  <url>
+    <loc>https://avi-gobrin.github.io/personal-site/work-apm.html</loc>
+    <lastmod>2026-08-02</lastmod>
+  </url>
+  <url>
+    <loc>https://avi-gobrin.github.io/personal-site/work-big-five.html</loc>
+    <lastmod>2026-08-02</lastmod>
+  </url>
+  <url>
+    <loc>https://avi-gobrin.github.io/personal-site/work-wine.html</loc>
+    <lastmod>2026-08-02</lastmod>
   </url>
 </urlset>

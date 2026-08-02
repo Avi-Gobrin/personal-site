@@ -1,21 +1,22 @@
 /* ============================================================
-   Prerender: bakes nav + work.js content into the HTML files.
+   Bakes the dynamic parts of the site into the HTML files.
 
-   Why: projects.html, research.html, featured.html, and the
-   homepage Featured list are rendered by work.js at runtime.
-   Without JavaScript (search engines, link previews, some
-   recruiter tools) those pages are empty shells. This script
-   injects the same markup statically. work.js still re-renders
-   on load, so the runtime behaviour is unchanged and the two
-   never drift: this script reads the WORK array straight out
-   of work.js.
+   Why: projects.html, research.html, and the homepage Featured list
+   are rendered by work.js at runtime. Search engines and no-JS
+   visitors should still see the content, so the same markup is
+   written into the files between prerender markers.
 
-   Run after editing work.js:   node prerender.mjs
-   Idempotent: safe to run any number of times.
+   Also generates one page per WORK item (work-<id>.html) so every
+   project and paper has its own focused, linkable page.
+
+   Run after editing work.js:  node prerender.mjs
+   Safe to run repeatedly.
    ============================================================ */
 import { readFileSync, writeFileSync } from 'node:fs';
 
-/* ---------- load WORK from work.js (single source of truth) ---------- */
+const BASE = 'https://avi-gobrin.github.io/personal-site/';
+
+/* Pull the WORK array straight out of work.js so there is one source of truth. */
 const workSrc = readFileSync('work.js', 'utf8');
 const dataPart = workSrc.split('/* ---------- rendering ----------')[0];
 const WORK = new Function(`${dataPart}; return WORK;`)();
@@ -27,74 +28,46 @@ function esc(s) {
 function tagsHtml(tags) {
   return (tags || []).map(t => `<span class="tag">${esc(t)}</span>`).join('');
 }
+function starHtml(w) {
+  return w.featured ? '<span class="w-star" title="Featured">★</span>' : '';
+}
+function pageHref(w) {
+  return `work-${w.id}.html`;
+}
 function linkHtml(l, cls) {
   const target = l.external ? ' target="_blank" rel="noopener noreferrer"' : '';
   const klass = cls ? ` class="${cls}"` : '';
   return `<a href="${l.href}"${target}${klass}>${esc(l.label)} &rarr;</a>`;
 }
 
+function cardHtml(w) {
+  const links = [`<a href="${pageHref(w)}">Details &rarr;</a>`]
+    .concat((w.links || []).map(l => linkHtml(l)))
+    .join('');
+  return `
+    <article class="card">
+      <p class="card-kicker">${esc(w.kicker)}</p>
+      <h3 class="card-title">${starHtml(w)}<a href="${pageHref(w)}">${esc(w.title)}</a></h3>
+      <p class="card-desc">${esc(w.card || w.desc || '')}</p>
+      <div class="tags">${tagsHtml(w.tags)}</div>
+      <div class="card-links">${links}</div>
+    </article>`;
+}
+
 function renderFeaturedHome() {
   return WORK.filter(w => w.featured).map(w => `
-    <a href="featured.html#${w.id}" class="feat-item">
+    <a href="${pageHref(w)}" class="feat-item">
       <span class="feat-type">${esc(w.type)}</span>
       <span class="feat-title">${esc(w.title)}</span>
     </a>`).join('');
 }
 
-function renderWriting() {
-  let html = '', currentYear = '';
-  WORK.filter(w => w.type === 'Paper').forEach(w => {
-    const year = w.date.slice(-4);
-    if (year !== currentYear) { html += `<p class="yr">${esc(year)}</p>`; currentYear = year; }
-    const star = w.featured ? '<span class="w-star" title="Featured">★</span>' : '';
-    const link = w.detailLinks?.[0]?.href || '#';
-    html += `<div class="w-item">
-      <span class="w-date">${esc(w.date)}</span>
-      <div>
-        <div class="w-title">${star}<a href="${link}" target="_blank" rel="noopener noreferrer">${esc(w.title)}</a></div>
-        <div class="w-desc">${esc(w.desc || '')}</div>
-      </div>
-    </div>`;
-  });
-  return html;
-}
-
 function renderProjects() {
-  return WORK.filter(w => w.type === 'Project').map(w => {
-    const href = (w.cardLinks && w.cardLinks[0]) ? w.cardLinks[0].href : '#';
-    return `
-    <div class="proj">
-      <h3><a href="${href}">${esc(w.title)}</a></h3>
-      <p class="proj-desc">${esc(w.card || '')}</p>
-      <div class="tags">${tagsHtml(w.tags)}</div>
-      <div class="proj-links">${(w.cardLinks || []).map(l => linkHtml(l)).join('')}</div>
-    </div>`;
-  }).join('');
+  return WORK.filter(w => w.type === 'Project').map(cardHtml).join('');
 }
 
-function renderFeaturedDetail() {
-  return WORK.map(w => {
-    const links = (w.detailLinks || []).map(l => linkHtml(l, 'btn-ghost')).join('');
-    const findings = w.findings ? `
-      <div class="feat-findings">
-        <p class="feat-findings-label">${esc(w.findingsLabel || '')}</p>
-        <ul>${w.findings.map(f => `<li>${f}</li>`).join('')}</ul>
-      </div>` : '';
-    return `
-    <div class="feat-work" id="${w.id}">
-      <div class="feat-work-top">
-        <div>
-          <p class="feat-work-kicker">${esc(w.kicker)}</p>
-          <h2 class="feat-work-title">${esc(w.title)}</h2>
-          <p class="feat-work-meta">${esc(w.meta)}</p>
-        </div>
-        ${links}
-      </div>
-      <div class="tags">${tagsHtml(w.tags)}</div>
-      <p class="feat-work-desc">${esc(w.desc || '')}</p>
-      ${findings}
-    </div>`;
-  }).join('');
+function renderResearch() {
+  return WORK.filter(w => w.type === 'Paper').map(cardHtml).join('');
 }
 
 /* ---------- static nav (must mirror nav.js output exactly) ---------- */
@@ -124,6 +97,75 @@ function renderNav(page) {
     '</div>';
 }
 
+/* ---------- one page per work item ---------- */
+function metaDescription(w) {
+  const raw = (w.card || w.desc || '').replace(/\s+/g, ' ').trim();
+  return esc(raw.length > 155 ? raw.slice(0, 152).trimEnd() + '...' : raw);
+}
+
+function detailPage(w) {
+  const backHref = w.type === 'Paper' ? 'research.html' : 'projects.html';
+  const backLabel = w.type === 'Paper' ? 'Research' : 'Projects';
+  const title = esc(w.title);
+  const desc = metaDescription(w);
+  const url = BASE + pageHref(w);
+
+  const points = w.findings ? `
+      <div class="card-points">
+        <p class="card-points-label">${esc(w.findingsLabel || 'Key Details')}</p>
+        <ul>${w.findings.map(f => `<li>${f}</li>`).join('')}</ul>
+      </div>` : '';
+
+  const actions = (w.links || []).length ? `
+      <div class="detail-actions">${w.links.map(l => linkHtml(l, 'btn-ghost')).join('')}</div>` : '';
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${title} &middot; Avi Gobrin</title>
+  <meta name="description" content="${desc}">
+  <link rel="canonical" href="${url}">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Avi Gobrin">
+  <meta property="og:title" content="${title} &middot; Avi Gobrin">
+  <meta property="og:description" content="${desc}">
+  <meta property="og:url" content="${url}">
+  <meta property="og:image" content="${BASE}assets/og-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${title} &middot; Avi Gobrin">
+  <meta name="twitter:description" content="${desc}">
+  <meta name="twitter:image" content="${BASE}assets/og-card.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <script>(function(){try{var t=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav><div class="wrap"><!-- prerender:start -->${renderNav(backHref)}<!-- prerender:end --></div></nav>
+  <script src="nav.js"></script>
+
+  <section class="page"><div class="wrap">
+    <a class="back-link" href="${backHref}">&larr; ${backLabel}</a>
+    <p class="page-label">${esc(w.kicker)}</p>
+    <h1 class="page-title detail-title">${title}</h1>
+    <p class="detail-meta">${esc(w.meta)}</p>
+    <div class="tags">${tagsHtml(w.tags)}</div>
+    <p class="detail-desc">${esc(w.desc || '')}</p>${points}${actions}
+  </div></section>
+
+  <footer><div class="wrap"><p>&copy; 2026 Avi Gobrin</p></div></footer>
+
+  <script src="theme.js"></script>
+</body>
+</html>
+`;
+}
+
 /* ---------- marker-based injection (idempotent) ---------- */
 const S = '<!-- prerender:start -->';
 const E = '<!-- prerender:end -->';
@@ -148,21 +190,35 @@ function escapeRe(s) {
 
 const PAGES = [
   { file: 'index.html',      targets: [['<div class="feat-list" id="js-featured-home">', renderFeaturedHome]] },
-  { file: 'projects.html',   targets: [['<div class="projects" id="js-projects">', renderProjects]] },
-  { file: 'research.html',   targets: [['<div id="js-writing">', renderWriting]] },
-  { file: 'featured.html',   targets: [['<div class="feat-works" id="js-featured">', renderFeaturedDetail]] },
+  { file: 'projects.html',   targets: [['<div class="cards" id="js-projects">', renderProjects]] },
+  { file: 'research.html',   targets: [['<div class="cards" id="js-research">', renderResearch]] },
   { file: 'experience.html', targets: [] },
   { file: 'coursework.html', targets: [] }
 ];
 
 for (const { file, targets } of PAGES) {
   let html = readFileSync(file, 'utf8');
-  const navContent = renderNav(file);
-  html = inject(html, '<div class="wrap">', navContent, file, 'nav');
+  html = inject(html, '<div class="wrap">', renderNav(file), file, 'nav');
   for (const [openTag, renderer] of targets) {
     html = inject(html, openTag, renderer(), file, openTag);
   }
   writeFileSync(file, html);
   console.log(`  ✓ ${file}`);
 }
+
+for (const w of WORK) {
+  writeFileSync(pageHref(w), detailPage(w));
+  console.log(`  ✓ ${pageHref(w)}`);
+}
+
+/* ---------- sitemap ---------- */
+const today = new Date().toISOString().slice(0, 10);
+const urls = ['', 'experience.html', 'projects.html', 'research.html', 'coursework.html']
+  .concat(WORK.map(pageHref))
+  .map(p => `  <url>\n    <loc>${BASE}${p}</loc>\n    <lastmod>${today}</lastmod>\n  </url>`)
+  .join('\n');
+writeFileSync('sitemap.xml',
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`);
+console.log('  ✓ sitemap.xml');
+
 console.log('Prerender complete.');

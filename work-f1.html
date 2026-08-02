@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>F1 Race Winner Predictor &middot; Avi Gobrin</title>
+  <meta name="description" content="A supervised machine-learning pipeline that predicts Formula 1 race winners from driver and constructor rolling form, qualifying results, track characte...">
+  <link rel="canonical" href="https://avi-gobrin.github.io/personal-site/work-f1.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Avi Gobrin">
+  <meta property="og:title" content="F1 Race Winner Predictor &middot; Avi Gobrin">
+  <meta property="og:description" content="A supervised machine-learning pipeline that predicts Formula 1 race winners from driver and constructor rolling form, qualifying results, track characte...">
+  <meta property="og:url" content="https://avi-gobrin.github.io/personal-site/work-f1.html">
+  <meta property="og:image" content="https://avi-gobrin.github.io/personal-site/assets/og-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="F1 Race Winner Predictor &middot; Avi Gobrin">
+  <meta name="twitter:description" content="A supervised machine-learning pipeline that predicts Formula 1 race winners from driver and constructor rolling form, qualifying results, track characte...">
+  <meta name="twitter:image" content="https://avi-gobrin.github.io/personal-site/assets/og-card.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <script>(function(){try{var t=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();</script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav><div class="wrap"><!-- prerender:start --><a href="index.html" class="logo">Avi Gobrin</a><div class="nav-right"><ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="experience.html">Experience</a></li><li><a href="projects.html" class="on">Projects</a></li><li><a href="research.html">Research</a></li><li><a href="coursework.html">Coursework</a></li></ul><button class="nav-toggle" type="button" aria-label="Toggle navigation"><svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button><button class="theme-toggle" type="button" aria-label="Toggle dark mode"><svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></button></div><!-- prerender:end --></div></nav>
+  <script src="nav.js"></script>
+
+  <section class="page"><div class="wrap">
+    <a class="back-link" href="projects.html">&larr; Projects</a>
+    <p class="page-label">Personal Project · 2024</p>
+    <h1 class="page-title detail-title">F1 Race Winner Predictor</h1>
+    <p class="detail-meta">Python · Machine Learning · Feature Engineering</p>
+    <div class="tags"><span class="tag">Python</span><span class="tag">scikit-learn</span><span class="tag">Feature Engineering</span><span class="tag">Supervised Learning</span></div>
+    <p class="detail-desc">A supervised machine-learning pipeline that predicts Formula 1 race winners from driver and constructor rolling form, qualifying results, track characteristics, and weather. The model is trained on engineered features such as driver-track history and pit-stop reliability, drawn from historical race and weather data, and evaluated season by season with a walk-forward scheme so it never sees the future.</p>
+      <div class="card-points">
+        <p class="card-points-label">Key Details</p>
+        <ul><li>Engineered predictive features including driver-track history and pit-stop reliability from historical race and weather data</li><li>Reached 33 to 46% race-winner accuracy and 53 to 74% podium precision across walk-forward seasons, competitive with the strong pole-sitter baseline</li><li>LASSO keeps the model sparse and interpretable: recent driver form and grid/qualifying position carry nearly all the signal</li></ul>
+      </div>
+      <div class="detail-actions"><a href="https://github.com/Avi-Gobrin/F1-Race-predictor" target="_blank" rel="noopener noreferrer" class="btn-ghost">GitHub &rarr;</a></div>
+  </div></section>
+
+  <footer><div class="wrap"><p>&copy; 2026 Avi Gobrin</p></div></footer>
+
+  <script src="theme.js"></script>
+</body>
+</html>
