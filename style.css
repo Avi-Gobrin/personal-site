@@ -24,6 +24,7 @@
   --hero-faint: rgba(251,248,242,0.62);
   --hero-line: rgba(255,255,255,0.30);
   --hero-chip: rgba(255,255,255,0.95);
+  --live: #8fd19a;        /* "currently" status dot */
   --texture: rgba(255,255,255,0.05);
   --shadow: 0 18px 40px -20px rgba(74,58,33,0.30);
   --shadow-sm: 0 8px 22px -14px rgba(74,58,33,0.28);
@@ -54,6 +55,7 @@
   --hero-faint: rgba(241,235,221,0.55);
   --hero-line: rgba(205,168,110,0.16);
   --hero-chip: rgba(205,168,110,0.16);
+  --live: #7ec48c;
   --texture: rgba(255,255,255,0.025);
   --shadow: 0 18px 44px -20px rgba(0,0,0,0.6);
   --shadow-sm: 0 8px 24px -14px rgba(0,0,0,0.55);
@@ -164,10 +166,38 @@ nav .wrap { display: flex; justify-content: space-between; align-items: center; 
   width: 52px; height: 3px; border-radius: 2px;
   background: var(--hero-chip);
 }
+/* Status chip: what I am doing right now, so the site reads as alive.
+   The dot pulses once every few seconds, which is the only motion on
+   the page that is not a response to the visitor. */
+.hero-now {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.03em;
+  color: var(--hero-text);
+  background: rgba(255,255,255,0.12);
+  border: 1px solid var(--hero-line);
+  border-radius: 999px; padding: 7px 16px 7px 13px;
+  margin-bottom: 22px;
+}
+.now-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--live); position: relative; flex-shrink: 0; }
+.now-dot::after {
+  content: ''; position: absolute; inset: 0; border-radius: 50%;
+  background: var(--live); animation: now-pulse 2.6s ease-out infinite;
+}
+@keyframes now-pulse {
+  0%        { transform: scale(1); opacity: 0.65; }
+  70%, 100% { transform: scale(2.8); opacity: 0; }
+}
+
+/* The lead: who I am and what I want, before any supporting detail. */
+.hero-lead {
+  font-size: 1.02rem; font-weight: 300;
+  color: var(--hero-text); line-height: 1.75; margin-bottom: 16px;
+  max-width: 32rem;
+}
 .hero-bio {
-  font-size: 0.96rem; font-weight: 300;
-  color: var(--hero-dim); line-height: 1.75; margin-bottom: 14px;
-  max-width: 30rem;
+  font-size: 0.92rem; font-weight: 300;
+  color: var(--hero-faint); line-height: 1.75; margin-bottom: 14px;
+  max-width: 32rem;
 }
 
 /* Social icon badges: white circles on the taupe panel */
@@ -280,7 +310,11 @@ nav .wrap { display: flex; justify-content: space-between; align-items: center; 
 .card-title a { color: var(--text); }
 .card-title a:hover { color: var(--accent); }
 .card-meta { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); margin-bottom: 4px; }
-.card-desc { font-size: 0.92rem; color: var(--dim); font-weight: 300; line-height: 1.7; margin-bottom: 16px; }
+/* Capped at ~68 characters. Full-width body text on a 1060px page runs
+   past 130 characters a line, which is roughly twice a comfortable read. */
+.card-desc { font-size: 0.92rem; color: var(--dim); font-weight: 300; line-height: 1.7; margin-bottom: 16px; max-width: 68ch; }
+/* The one-sentence outcome that opens each role on Experience. */
+.card-lead { font-size: 0.95rem; color: var(--text); font-weight: 400; line-height: 1.7; margin-top: 14px; max-width: 68ch; }
 
 .tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 16px; }
 .tag {
@@ -326,7 +360,11 @@ nav .wrap { display: flex; justify-content: space-between; align-items: center; 
 }
 .cw-item:first-child { padding-top: 0; }
 .cw-item:last-child { border-bottom: none; padding-bottom: 0; }
+/* The code doubles as the link to the U of T calendar entry: it is already
+   a distinct element, so this adds information without adding chrome. */
 .cw-code { font-family: var(--mono); font-size: 0.68rem; color: var(--accent); }
+.cw-code a { color: var(--accent); border-bottom: 1px solid transparent; }
+.cw-code a:hover { color: var(--text); border-bottom-color: var(--border-strong); }
 .cw-name { font-weight: 500; font-size: 0.97rem; color: var(--text); margin-bottom: 4px; }
 .cw-desc { font-size: 0.86rem; color: var(--dim); font-weight: 300; line-height: 1.6; }
 
@@ -341,10 +379,17 @@ nav .wrap { display: flex; justify-content: space-between; align-items: center; 
 footer {
   border-top: 1px solid var(--border);
   background: var(--bg-alt);
-  padding: 28px 0; text-align: center;
+  padding: 30px 0; text-align: center;
   transition: background-color 0.35s ease, border-color 0.35s ease;
 }
+footer .wrap { display: flex; flex-direction: column; align-items: center; gap: 15px; }
 footer p { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); letter-spacing: 0.08em; }
+/* Icon only, no labels: every page should offer a way to get in touch
+   without the footer growing into a second nav. */
+.footer-icons { display: flex; gap: 20px; }
+.footer-icons a { color: var(--muted); display: flex; transition: color 0.2s, transform 0.2s; }
+.footer-icons a:hover { color: var(--accent); transform: translateY(-2px); }
+.footer-icons svg { width: 16px; height: 16px; }
 
 /* ============================================================
    Responsive
@@ -410,5 +455,5 @@ footer p { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); le
 
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  * { transition: none !important; scroll-behavior: auto !important; }
+  * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
 }

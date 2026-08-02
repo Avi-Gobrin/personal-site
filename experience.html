@@ -37,24 +37,20 @@
         <p class="card-kicker">Research &middot; Begins Fall 2026</p>
         <h2 class="card-title">University of Toronto, Department of Statistical Sciences</h2>
         <p class="card-meta">Incoming Undergraduate Researcher &nbsp;&middot;&nbsp; Advisor: Prof. Ricardo Baptista (Vector Institute)</p>
-        <div class="card-points">
-          <ul>
-            <li>Preparing research on the connection between in-context learning and fine-tuning, characterizing both as low-rank weight updates, extending "Transmuting prompts into weights".</li>
-          </ul>
-        </div>
+        <p class="card-lead">Researching the connection between in-context learning and fine-tuning, characterizing both as low-rank weight updates, extending "Transmuting prompts into weights".</p>
       </div>
 
       <div class="card static">
         <p class="card-kicker">May to Aug 2026</p>
         <h2 class="card-title">Nextdoor</h2>
-        <p class="card-meta">Machine Learning Software Engineering Intern &nbsp;&middot;&nbsp; San Francisco, CA</p>
+        <p class="card-meta">Software Engineering Intern, Machine Learning &nbsp;&middot;&nbsp; San Francisco, CA</p>
+        <p class="card-lead">Sole developer of Best Places for Families, an SEO ranking product covering roughly 300,000 US neighborhoods, built end to end from Census and ACS ingestion through Airflow pipelines to a Postgres, GraphQL, and React serving path.</p>
         <div class="card-points">
           <ul>
-            <li>Launched Best Places for Families, an SEO ranking product covering roughly 300,000 US neighborhoods, as the sole developer: built every layer from Census and ACS ingestion and Airflow pipelines through to a Postgres, GraphQL, and React serving path (65+ PRs across two repos).</li>
             <li>Designed the scoring methodology, predicting family-growth momentum rather than levels to prevent leakage, and screened roughly 33 candidate metrics down to 19 features under fair-housing constraints.</li>
-            <li>Validated the rankings with a preregistered 36-neighborhood adversarial test set and an LLM pairwise judge (Bradley-Terry), built specifically to catch models that just relabel wealth.</li>
+            <li>Validated the rankings against a preregistered 36-neighborhood adversarial test set and an LLM pairwise judge (Bradley-Terry), built specifically to catch models that just relabel wealth.</li>
             <li>Compared OLS, ridge, NNLS, and monotone GBM across 197,556 neighborhoods using SQL-computed moment matrices; near-identical results showed accuracy was feature-limited, not model-limited.</li>
-            <li>Traced why the score tracked wealth to a geographic join missing a county guard, which leaked out-of-state census data into 94.6% of neighborhoods; the fix removed 95% of bad links and moved a housing feature by 5+ points (on a 0 to 100 scale) across 44,908 neighborhoods.</li>
+            <li>Traced the score's correlation with wealth to a geographic join missing a county guard, which had leaked out-of-state census data into 94.6% of neighborhoods; the fix removed 95% of bad links and moved a housing feature by 5+ points across 44,908 neighborhoods.</li>
             <li>Owned post-launch reliability: fixed null-rank crashes across all 282,268 pages, moved writes to a streaming ORM with uniqueness guarantees, and added kill switches and CI fixes.</li>
           </ul>
         </div>
@@ -64,11 +60,12 @@
         <p class="card-kicker">May to Aug 2025</p>
         <h2 class="card-title">Shopify</h2>
         <p class="card-meta">Software Engineering Intern &nbsp;&middot;&nbsp; Toronto, ON</p>
+        <p class="card-lead">Shipped merchant-facing systems across onboarding and tax compliance.</p>
         <div class="card-points">
           <ul>
-            <li>Increased new-merchant activation and retention, routing roughly 100 merchants/day through guided onboarding, by launching a partner-attach system that automatically pairs each new merchant with a vetted onboarding advisor.</li>
-            <li>Brought German VAT submissions into compliance with updated tax regulations, unblocking hundreds of affected merchants and reducing compliance risk, by integrating the German tax-code API and aligning Shopify's existing tax flows with the new legal requirements.</li>
-            <li>Improved system reliability and reduced recurring issues by resolving cross-disciplinary technical debt assigned by adjacent teams, collaborating with engineering and product stakeholders to ship scalable fixes.</li>
+            <li>Launched a partner-attach system that pairs each new merchant with a vetted onboarding advisor, routing roughly 100 merchants/day through guided onboarding and lifting activation and retention.</li>
+            <li>Brought German VAT submissions into compliance with updated tax regulations by integrating the German tax-code API, unblocking hundreds of merchants and reducing compliance risk.</li>
+            <li>Resolved cross-disciplinary technical debt assigned by adjacent teams, working with engineering and product stakeholders to ship scalable fixes.</li>
           </ul>
         </div>
       </div>
@@ -76,7 +73,7 @@
     </div>
   </div></section>
 
-  <footer><div class="wrap"><p>&copy; 2026 Avi Gobrin</p></div></footer>
+  <footer><div class="wrap" id="js-footer"><!-- prerender:start --><div class="footer-icons"><a href="https://github.com/Avi-Gobrin" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a><a href="https://www.linkedin.com/in/avigobrin/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a><a href="https://x.com/AvichaiGobrin" target="_blank" rel="noopener noreferrer" aria-label="X"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a><a href="mailto:avichaigobrin@gmail.com" aria-label="Email"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a></div><p>&copy; 2026 Avi Gobrin</p><!-- prerender:end --></div></footer>
 
   <script src="theme.js"></script>
 </body>

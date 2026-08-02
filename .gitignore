@@ -6,3 +6,9 @@ plans/
 
 # Local resume sync helper (contains machine-specific paths)
 sync-resumes.ps1
+
+# Local notes (may reference unreleased work)
+TODO.md
+
+# Build output of make-redirects.mjs, copied into the old repo by hand
+redirects/

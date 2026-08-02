@@ -29,6 +29,39 @@ node prerender.mjs
 
 The script is idempotent. It also bakes in the nav (kept in sync with `nav.js`), writes one `work-<id>.html` per item, and regenerates `sitemap.xml`. Generated `work-*.html` files are committed, since GitHub Pages serves them as-is.
 
+## Moving the site
+
+Every absolute URL (canonical, OG, sitemap) is derived from the `BASE` constant
+at the top of `prerender.mjs`, so changing the site's address is a one-line edit
+plus a rerun.
+
+The catch: **GitHub Pages does not redirect project-site URLs when you rename a
+repository.** Per GitHub's docs, "all existing information, with the exception of
+project site URLs, is automatically redirected to the new name." A plain rename
+would 404 every link already printed on a resume.
+
+To move from `avi-gobrin.github.io/personal-site/` to `avi-gobrin.github.io/`
+without breaking anything, and for free:
+
+1. Create a new repo named exactly `Avi-Gobrin.github.io` and push this site to
+   it. A repo with that name is served at the domain root.
+2. Set `BASE` in `prerender.mjs` to `https://avi-gobrin.github.io/`, then run
+   `node prerender.mjs`.
+3. Generate the forwarding stubs for the old address:
+
+   ```
+   node make-redirects.mjs https://avi-gobrin.github.io/
+   ```
+
+4. Replace the contents of the old `personal-site` repo with everything in
+   `redirects/`, and leave its GitHub Pages enabled.
+
+Old links then forward to the matching new page indefinitely, so the resume can
+be updated whenever it is convenient rather than urgently. The stubs cover every
+known page plus a `404.html` catch-all that maps any other old path onto the new
+site. A paid custom domain later would point at the new repo and needs no change
+to the redirect repo.
+
 ## Resumes
 
 `assets/Resumes/` holds the four tailored resume variants (SWE, DS, ML, quant) plus the research CV. They are maintained in a separate resume project and copied in by a local, untracked helper script (`sync-resumes.ps1`), which points at that project's folder on the authoring machine.

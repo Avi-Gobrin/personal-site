@@ -7,7 +7,11 @@
    written into the files between prerender markers.
 
    Also generates one page per WORK item (work-<id>.html) so every
-   project and paper has its own focused, linkable page.
+   project and paper has its own focused, linkable page, and owns
+   the nav, the footer, every canonical/OG URL, and sitemap.xml.
+
+   Moving the site to a new URL is a one-line change: edit BASE,
+   run this, then run make-redirects.mjs for the old location.
 
    Run after editing work.js:  node prerender.mjs
    Safe to run repeatedly.
@@ -97,6 +101,29 @@ function renderNav(page) {
     '</div>';
 }
 
+/* ---------- footer (same on every page, so it lives here) ---------- */
+const ICON = 'xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"';
+const STROKE = 'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';
+
+const SOCIALS = [
+  { label: 'GitHub', href: 'https://github.com/Avi-Gobrin',
+    svg: `<svg ${ICON} ${STROKE}><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>` },
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/avigobrin/',
+    svg: `<svg ${ICON} ${STROKE}><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>` },
+  { label: 'X', href: 'https://x.com/AvichaiGobrin',
+    svg: `<svg ${ICON} fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>` },
+  { label: 'Email', href: 'mailto:avichaigobrin@gmail.com',
+    svg: `<svg ${ICON} ${STROKE}><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>` }
+];
+
+function renderFooter() {
+  const icons = SOCIALS.map(s => {
+    const ext = s.href.startsWith('mailto:') ? '' : ' target="_blank" rel="noopener noreferrer"';
+    return `<a href="${s.href}"${ext} aria-label="${s.label}">${s.svg}</a>`;
+  }).join('');
+  return `<div class="footer-icons">${icons}</div><p>&copy; 2026 Avi Gobrin</p>`;
+}
+
 /* ---------- one page per work item ---------- */
 function metaDescription(w) {
   const raw = (w.card || w.desc || '').replace(/\s+/g, ' ').trim();
@@ -158,7 +185,7 @@ function detailPage(w) {
     <p class="detail-desc">${esc(w.desc || '')}</p>${points}${actions}
   </div></section>
 
-  <footer><div class="wrap"><p>&copy; 2026 Avi Gobrin</p></div></footer>
+  <footer><div class="wrap" id="js-footer"><!-- prerender:start -->${renderFooter()}<!-- prerender:end --></div></footer>
 
   <script src="theme.js"></script>
 </body>
@@ -188,6 +215,18 @@ function escapeRe(s) {
   return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
+/* Every absolute URL in the head is derived from BASE, so moving the site
+   is a one-line change rather than a hunt through five files. */
+function rewriteUrls(html, file) {
+  const url = BASE + (file === 'index.html' ? '' : file);
+  const img = `${BASE}assets/og-card.png`;
+  return html
+    .replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${url}$2`)
+    .replace(/(<meta property="og:url" content=")[^"]*(")/, `$1${url}$2`)
+    .replace(/(<meta property="og:image" content=")[^"]*(")/, `$1${img}$2`)
+    .replace(/(<meta name="twitter:image" content=")[^"]*(")/, `$1${img}$2`);
+}
+
 const PAGES = [
   { file: 'index.html',      targets: [['<div class="feat-list" id="js-featured-home">', renderFeaturedHome]] },
   { file: 'projects.html',   targets: [['<div class="cards" id="js-projects">', renderProjects]] },
@@ -199,9 +238,11 @@ const PAGES = [
 for (const { file, targets } of PAGES) {
   let html = readFileSync(file, 'utf8');
   html = inject(html, '<div class="wrap">', renderNav(file), file, 'nav');
+  html = inject(html, '<div class="wrap" id="js-footer">', renderFooter(), file, 'footer');
   for (const [openTag, renderer] of targets) {
     html = inject(html, openTag, renderer(), file, openTag);
   }
+  html = rewriteUrls(html, file);
   writeFileSync(file, html);
   console.log(`  ✓ ${file}`);
 }
@@ -212,9 +253,11 @@ for (const w of WORK) {
 }
 
 /* ---------- sitemap ---------- */
+const SITE_PAGES = ['', 'experience.html', 'projects.html', 'research.html', 'coursework.html']
+  .concat(WORK.map(pageHref));
+
 const today = new Date().toISOString().slice(0, 10);
-const urls = ['', 'experience.html', 'projects.html', 'research.html', 'coursework.html']
-  .concat(WORK.map(pageHref))
+const urls = SITE_PAGES
   .map(p => `  <url>\n    <loc>${BASE}${p}</loc>\n    <lastmod>${today}</lastmod>\n  </url>`)
   .join('\n');
 writeFileSync('sitemap.xml',
