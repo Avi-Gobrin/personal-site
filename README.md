@@ -29,8 +29,4 @@ The script is idempotent and also bakes in the nav (kept in sync with `nav.js`).
 
 ## Resumes
 
-`assets/Resumes/` holds the four tailored resume variants (SWE, DS, ML, quant) plus the research CV. They are maintained in the separate resume project and copied in with:
-
-```
-./sync-resumes.ps1
-```
+`assets/Resumes/` holds the four tailored resume variants (SWE, DS, ML, quant) plus the research CV. They are maintained in a separate resume project and copied in by a local, untracked helper script (`sync-resumes.ps1`), which points at that project's folder on the authoring machine.

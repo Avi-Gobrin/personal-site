@@ -28,7 +28,7 @@ function tagsHtml(tags) {
   return (tags || []).map(t => `<span class="tag">${esc(t)}</span>`).join('');
 }
 function linkHtml(l, cls) {
-  const target = l.external ? ' target="_blank" rel="noopener"' : '';
+  const target = l.external ? ' target="_blank" rel="noopener noreferrer"' : '';
   const klass = cls ? ` class="${cls}"` : '';
   return `<a href="${l.href}"${target}${klass}>${esc(l.label)} &rarr;</a>`;
 }
@@ -51,7 +51,7 @@ function renderWriting() {
     html += `<div class="w-item">
       <span class="w-date">${esc(w.date)}</span>
       <div>
-        <div class="w-title">${star}<a href="${link}" target="_blank">${esc(w.title)}</a></div>
+        <div class="w-title">${star}<a href="${link}" target="_blank" rel="noopener noreferrer">${esc(w.title)}</a></div>
         <div class="w-desc">${esc(w.desc || '')}</div>
       </div>
     </div>`;

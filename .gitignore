@@ -3,3 +3,6 @@ plans/
 
 # Local Claude config (machine-specific, not for publishing)
 .claude/settings.local.json
+
+# Local resume sync helper (contains machine-specific paths)
+sync-resumes.ps1
