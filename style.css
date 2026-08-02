@@ -24,7 +24,6 @@
   --hero-faint: rgba(251,248,242,0.62);
   --hero-line: rgba(255,255,255,0.30);
   --hero-chip: rgba(255,255,255,0.95);
-  --live: #8fd19a;        /* "currently" status dot */
   --texture: rgba(255,255,255,0.05);
   --shadow: 0 18px 40px -20px rgba(74,58,33,0.30);
   --shadow-sm: 0 8px 22px -14px rgba(74,58,33,0.28);
@@ -55,7 +54,6 @@
   --hero-faint: rgba(241,235,221,0.55);
   --hero-line: rgba(205,168,110,0.16);
   --hero-chip: rgba(205,168,110,0.16);
-  --live: #7ec48c;
   --texture: rgba(255,255,255,0.025);
   --shadow: 0 18px 44px -20px rgba(0,0,0,0.6);
   --shadow-sm: 0 8px 24px -14px rgba(0,0,0,0.55);
@@ -157,38 +155,10 @@ nav .wrap { display: flex; justify-content: space-between; align-items: center; 
   font-family: var(--serif);
   font-size: 1.55rem;
   color: var(--hero-text);
-  margin-bottom: 14px;
-  position: relative;
-  padding-bottom: 18px;
-}
-.hero-sub::after {
-  content: ''; position: absolute; left: 0; bottom: 0;
-  width: 52px; height: 3px; border-radius: 2px;
-  background: var(--hero-chip);
-}
-/* Status chip: what I am doing right now, so the site reads as alive.
-   The dot pulses once every few seconds, which is the only motion on
-   the page that is not a response to the visitor. */
-.hero-now {
-  display: inline-flex; align-items: center; gap: 10px;
-  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.03em;
-  color: var(--hero-text);
-  background: rgba(255,255,255,0.12);
-  border: 1px solid var(--hero-line);
-  border-radius: 999px; padding: 7px 16px 7px 13px;
   margin-bottom: 22px;
 }
-.now-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--live); position: relative; flex-shrink: 0; }
-.now-dot::after {
-  content: ''; position: absolute; inset: 0; border-radius: 50%;
-  background: var(--live); animation: now-pulse 2.6s ease-out infinite;
-}
-@keyframes now-pulse {
-  0%        { transform: scale(1); opacity: 0.65; }
-  70%, 100% { transform: scale(2.8); opacity: 0; }
-}
-
-/* The lead: who I am and what I want, before any supporting detail. */
+/* The lead: who I am and what I want, before any supporting detail.
+   Both hero paragraphs share a colour; size alone carries the hierarchy. */
 .hero-lead {
   font-size: 1.02rem; font-weight: 300;
   color: var(--hero-text); line-height: 1.75; margin-bottom: 16px;
@@ -196,7 +166,7 @@ nav .wrap { display: flex; justify-content: space-between; align-items: center; 
 }
 .hero-bio {
   font-size: 0.92rem; font-weight: 300;
-  color: var(--hero-faint); line-height: 1.75; margin-bottom: 14px;
+  color: var(--hero-text); line-height: 1.75; margin-bottom: 14px;
   max-width: 32rem;
 }
 
@@ -271,15 +241,13 @@ nav .wrap { display: flex; justify-content: space-between; align-items: center; 
    ============================================================ */
 .page { padding: calc(62px + 72px) 0 90px; min-height: 80vh; }
 .page-label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
-.page-legend { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.05em; color: var(--muted); margin-bottom: 22px; }
+.page-legend { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.05em; color: var(--muted); }
 .page-legend .w-star { font-size: 1em; margin-right: 3px; }
+/* The gap before page content lives on .cards, not here, so pages with and
+   without a legend line under the title space out the same way. */
 .page-title {
   font-family: var(--serif); font-size: 2.7rem; font-weight: 400;
-  position: relative; padding-bottom: 20px; margin-bottom: 44px;
-}
-.page-title::after {
-  content: ''; position: absolute; left: 0; bottom: 0;
-  width: 50px; height: 3px; border-radius: 2px; background: var(--accent);
+  margin-bottom: 12px;
 }
 
 /* ============================================================
@@ -289,7 +257,7 @@ nav .wrap { display: flex; justify-content: space-between; align-items: center; 
    somewhere lift on hover; .static ones are containers, not
    affordances, so they stay put.
    ============================================================ */
-.cards { display: flex; flex-direction: column; gap: 22px; }
+.cards { display: flex; flex-direction: column; gap: 22px; margin-top: 30px; }
 .card {
   background: var(--card); border: 1px solid var(--border);
   border-radius: 14px; padding: 30px;
@@ -420,13 +388,14 @@ footer p { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); le
 
 @media (max-width: 640px) {
   .nav-toggle { display: flex; }
+  /* Fully opaque, not the translucent nav fill: page content scrolling
+     underneath was showing through and making the links hard to read. */
   .nav-links {
     position: fixed;
     top: 62px; left: 0; right: 0;
-    background: var(--nav-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    border-bottom: 1px solid var(--border-strong);
+    box-shadow: var(--shadow);
     flex-direction: column;
     gap: 0;
     padding: 8px 0;
