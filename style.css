@@ -171,7 +171,8 @@ nav .wrap { display: flex; justify-content: space-between; align-items: center; 
 }
 
 /* Social icon badges: white circles on the taupe panel */
-.hero-icons { display: flex; gap: 12px; margin: 28px 0; align-items: center; }
+.hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 18px; margin: 28px 0; }
+.hero-icons { display: flex; gap: 12px; align-items: center; }
 .hero-icons a {
   width: 42px; height: 42px; min-width: 42px; min-height: 42px;
   background: var(--hero-chip);
@@ -190,7 +191,6 @@ nav .wrap { display: flex; justify-content: space-between; align-items: center; 
   flex-shrink: 0; display: block;
 }
 
-.hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
 /* Pill buttons: generic */
 .btn-fill, .btn-ghost {
   padding: 12px 30px;
@@ -395,8 +395,6 @@ footer p { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); le
   .nav-right { gap: 14px; }
   .nav-toggle, .nav-links { top: 56px; }
   .hero h1 { font-size: 2.4rem; }
-  .hero-btns { flex-direction: column; }
-  .hero-btns .btn-fill, .hero-btns .btn-ghost { text-align: center; }
   .w-item { grid-template-columns: 1fr; gap: 3px; }
   .cw-item { grid-template-columns: 1fr; gap: 4px; }
 }
