@@ -1,0 +1,123 @@
+% Avi Gobrin - MASTER resume / CV (everything). Standalone; plain LaTeX, edit freely.
+\documentclass[letterpaper,10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=0.45in]{geometry}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, urlcolor=blue, linkcolor=blue}
+\urlstyle{same}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+
+% Contact icons appear only if fontawesome5 is installed (e.g. Overleaf); harmless otherwise.
+\IfFileExists{fontawesome5.sty}{%
+  \usepackage{fontawesome5}%
+  \newcommand{\I}[1]{\csname fa#1\endcsname\,}%
+}
+
+% ---- formatting helpers ----
+\newcommand{\Section}[1]{\vspace{4pt}{\large\bfseries #1}\vspace{1pt}\hrule\vspace{3pt}}
+\newcommand{\entry}[4]{%
+  \vspace{2pt}%
+  \begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}
+    \textbf{#1} & #2 \\
+    \textit{#3} & \textit{#4} \\
+  \end{tabular*}\vspace{-4pt}}
+\newcommand{\projentry}[2]{%
+  \vspace{2pt}%
+  \begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}
+    #1 & #2 \\
+  \end{tabular*}\vspace{-4pt}}
+\newenvironment{bullets}%
+  {\begin{list}{\textbullet}{%
+     \setlength{\leftmargin}{1.3em}\setlength{\labelsep}{0.5em}%
+     \setlength{\itemsep}{1.5pt}\setlength{\topsep}{2pt}%
+     \setlength{\parsep}{0pt}\setlength{\partopsep}{0pt}}}%
+  {\end{list}}
+
+\begin{document}
+
+\begin{center}
+  {\Huge\bfseries Avi Gobrin}\\[4pt]
+  \small
+  \mbox{\href{mailto:avichaigobrin@gmail.com}{\I{Envelope}avichaigobrin@gmail.com}} \,|\,
+  \mbox{\I{Phone}(416)~670-2948} \,|\,
+  \mbox{\href{https://www.linkedin.com/in/avigobrin/}{\I{Linkedin}linkedin.com/in/avigobrin}} \,|\,
+  \mbox{\href{https://github.com/Avi-Gobrin}{\I{Github}github.com/Avi-Gobrin}} \,|\,
+  \mbox{\href{https://avi-gobrin.github.io/personal-site/}{\I{LaptopCode}avi-gobrin.github.io}}
+\end{center}
+
+\Section{Education}
+\entry{University of Toronto}{2023 -- Apr 2027}{Honours BSc, Mathematics \& Its Applications Specialist, Statistics Major, Computer Science Minor}{Toronto, ON}
+\par\vspace{6pt}\noindent
+\textbf{Relevant Coursework:} Probability \& Statistics I/II, Methods of Data Analysis, Multivariate Data Analysis, Statistical Computation, Nonlinear Optimization, Mathematical Modelling, Algorithm Design \& Analysis, Data Structures, Software Design, Theory of Computation, Real Analysis, Advanced Calculus, Graph Theory, Combinatorics
+
+\Section{Research}
+\entry{University of Toronto, Department of Statistical Sciences}{Position begins Fall 2026}%
+      {Incoming Undergraduate Researcher, Advisor: Prof.\ Ricardo Baptista (Vector Institute)}{Toronto, ON}
+\begin{bullets}
+  \item Preparing research on the connection between in-context learning and fine-tuning, characterizing both as low-rank weight updates.
+\end{bullets}
+\vspace{3pt}
+\textbf{Technical Reports}
+\begin{bullets}
+  \item Engagement, Performance, and Student Outcomes at the Open University (n = 23{,}301)\quad\href{https://avi-gobrin.github.io/personal-site/assets/oulad-sta437.pdf}{[Report]}
+  \item Discovering Latent Structure in the IPIP Big Five Personality Inventory (n = 19{,}718)\quad\href{https://avi-gobrin.github.io/personal-site/assets/big-five-sta437.pdf}{[Report]}
+  \item What Makes a Wine Good? Chemical Structure and Quality in Portuguese Wines (n = 6{,}497)\quad\href{https://avi-gobrin.github.io/personal-site/assets/wine-quality-sta437.pdf}{[Report]}
+\end{bullets}
+
+\Section{Experience}
+\entry{Nextdoor}{May 2026 -- Present}{Machine Learning Intern}{San Francisco, CA}
+\begin{bullets}
+  \item Increased growth and weekly active users by launching Best Places for Families, an SEO ranking product covering ~300,000 US neighbourhoods, building every layer end to end: internal data and Census/ACS ingestion through Airflow pipelines to a Postgres/GraphQL/React serving path.
+  \item Compared 4 machine learning models OLS, ridge, NNLS, and monotone GBM across 197,556 neighbourhoods to design the scoring methodology, predicting family-friendlyness scores. Screened 33 candidate metrics down to 8 features. Validated rankings against a preregistered neighbourhood adversarial test set with pairwise Bradley-Terry judgments, cross-checked by both LLM and manual review.
+  \item Made the system self-sustaining with scheduled jobs, tests, and monitoring, and built Databricks tooling that lets non-technical stakeholders retune feature weights and see how any city ranks.
+
+\end{bullets}
+\entry{Shopify}{May -- Aug 2025}{Software Engineering Intern}{Toronto, ON}
+\begin{bullets}
+  \item Increased merchant activation and retention by building a full-stack partner-attach system (Ruby on Rails, Calendly API) that screens each new merchant and books qualifying ones into guided onboarding with a vetted advisor. Routing over 100 merchants per day into the partner attach flow.
+  \item Brought Shopify's entire German merchant base into VAT compliance in the 1.5 months from regulatory notice to launch. Reconciled what data Shopify already held against what merchants had to supply, integrated a difficult government tax API, and built a Rails intake form with an email flow that returns each merchant's compliance PDF.
+  \item Cleared reliability-impacting technical debt across adjacent teams and codebases, increasing engineering output and velocity.
+\end{bullets}
+
+\Section{Projects}
+\projentry{\textbf{Latent-Structure Modeling of Student Outcomes (OULAD)}\quad\textit{Research Project}\quad\href{https://avi-gobrin.github.io/personal-site/assets/oulad-sta437.pdf}{[Report]}}{2026}
+\begin{bullets}
+  \item Modelled latent engagement and performance structure across 23,301 complete student-course registrations (of 25,820) via a parallel-analysis-validated 3-factor varimax model and 3-component PCA (72.9\% variance); showed FA, GMM, and LDA converge on the same two latent dimensions.
+  \item Benchmarked classifiers under 5-fold CV (logistic regression 67.0\% vs.\ LDA 64.5\% vs.\ 53.0\% majority baseline) and showed LR lifts minority-class recall from 3.2\% to 39.3\%, diagnosing LDA's shared-covariance violation.
+\end{bullets}
+\projentry{\textbf{GPT from Scratch}\quad\textit{Personal Project (in progress)}\quad\href{https://github.com/Avi-Gobrin/tiny-gpt-from-scratch}{[Repo]}}{2026}
+\begin{bullets}
+  \item Building a character-level GPT in pure NumPy, growing one codebase from a bigram baseline into a full Transformer: tokenization, multi-head self-attention, Adam, and sampling.
+\end{bullets}
+\projentry{\textbf{Neural Network from Scratch (MNIST)}\quad\textit{Personal Project}}{2026}
+\begin{bullets}
+  \item Implemented a two-layer feedforward network for MNIST digit classification in pure NumPy, deriving and coding all gradient and backpropagation updates by hand. % Add the test-accuracy number back after retraining.
+\end{bullets}
+\projentry{\textbf{Autonomous Planning \& School Knowledge Agents}\quad\textit{Personal Project}}{2026}
+\begin{bullets}
+  \item Built an autonomous daily-planning agent (Claude Code, Obsidian) that regenerates a time-blocked calendar from a parsed task file and priority scheme, cutting daily planning from about 30 minutes to under 2.
+  \item Built a companion school-workflow agent that auto-formats lecture and problem-set notes into a cross-linked knowledge base of theorem references, cutting note-cleanup and lookup time an estimated 40\%.
+\end{bullets}
+\projentry{\textbf{F1 Race Winner Predictor}\quad\textit{Personal Project}\quad\href{https://github.com/Avi-Gobrin/F1-Race-predictor}{[Repo]}}{2024}
+\begin{bullets}
+  \item Built a supervised pipeline predicting Formula 1 race winners from driver and constructor rolling form, qualifying results, driver-track history, pit-stop reliability, and weather.
+  \item Reached 40\% race-winner and 60\% podium accuracy on held-out races, well above the roughly 5\% random and 30\% pole-position baselines.
+\end{bullets}
+\projentry{\textbf{Plantinarium}\quad\textit{6-person team, Java}\quad\href{https://github.com/barnaste/plantinarium}{[Repo]}}{2024}
+\begin{bullets}
+  \item Collaborated on an AI plant-identification desktop app (Java, Maven): photo upload to species identification, public/private galleries, likes, and notes; owned the account-management flow including secure account deletion with full data wipe.
+\end{bullets}
+
+\Section{Technical Skills}
+\textbf{Languages:} Python, R, SQL, Java, JavaScript, Bash, HTML, CSS \\
+\textbf{ML \& Data:} scikit-learn, NumPy, Pandas, SciPy, statsmodels, Matplotlib, Seaborn; neural nets and backprop implemented from scratch \\
+\textbf{Systems \& Web:} Airflow, Databricks, Postgres, GraphQL, React, Node.js, Flask, REST APIs, Maven, Linux/Unix \\
+\textbf{Tools:} Git, GitHub, Jupyter, Excel, \LaTeX \\
+\textbf{AI Tools:} Claude, Claude Code, Cursor, LLM agents
+
+\Section{Additional}
+StarCraft II Grandmaster (rank 100 NA, 5100 MMR); competitive Magic: The Gathering; Shotokan karate black belt.
+
+\end{document}

@@ -1,0 +1,105 @@
+% Avi Gobrin - MASTER resume / CV (everything). Standalone; plain LaTeX, edit freely.
+\documentclass[letterpaper,10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=0.45in]{geometry}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, urlcolor=blue, linkcolor=blue}
+\urlstyle{same}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+
+% Contact icons appear only if fontawesome5 is installed (e.g. Overleaf); harmless otherwise.
+\IfFileExists{fontawesome5.sty}{%
+  \usepackage{fontawesome5}%
+  \newcommand{\I}[1]{\csname fa#1\endcsname\,}%
+}
+
+% ---- formatting helpers ----
+\newcommand{\Section}[1]{\vspace{4pt}{\large\bfseries #1}\vspace{1pt}\hrule\vspace{3pt}}
+\newcommand{\entry}[4]{%
+  \vspace{2pt}%
+  \begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}
+    \textbf{#1} & #2 \\
+    \textit{#3} & \textit{#4} \\
+  \end{tabular*}\vspace{-4pt}}
+\newcommand{\projentry}[2]{%
+  \vspace{2pt}%
+  \begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}
+    #1 & #2 \\
+  \end{tabular*}\vspace{-4pt}}
+\newenvironment{bullets}%
+  {\begin{list}{\textbullet}{%
+     \setlength{\leftmargin}{1.3em}\setlength{\labelsep}{0.5em}%
+     \setlength{\itemsep}{1.5pt}\setlength{\topsep}{2pt}%
+     \setlength{\parsep}{0pt}\setlength{\partopsep}{0pt}}}%
+  {\end{list}}
+
+\begin{document}
+
+\begin{center}
+  {\Huge\bfseries Avi Gobrin}\\[4pt]
+  \small
+  \mbox{\href{mailto:avichaigobrin@gmail.com}{\I{Envelope}avichaigobrin@gmail.com}} \,|\,
+  \mbox{\I{Phone}(416)~670-2948} \,|\,
+  \mbox{\href{https://www.linkedin.com/in/avigobrin/}{\I{Linkedin}linkedin.com/in/avigobrin}} \,|\,
+  \mbox{\href{https://github.com/Avi-Gobrin}{\I{Github}github.com/Avi-Gobrin}} \,|\,
+  \mbox{\href{https://avi-gobrin.github.io/personal-site/}{\I{LaptopCode}avi-gobrin.github.io}}
+\end{center}
+
+\Section{Education}
+\entry{University of Toronto}{2023 -- Apr 2027}{Honours BSc, Mathematics \& Its Applications Specialist, Statistics Major, Computer Science Minor}{Toronto, ON}
+\par\vspace{6pt}\noindent
+\textbf{Relevant Coursework:} Algorithm Design \& Analysis, Data Structures, Software Design, Theory of Computation
+
+\Section{Experience}
+\entry{Nextdoor}{May 2026 -- Aug 2026}{Machine Learning Intern}{San Francisco, CA}
+\begin{bullets}
+  \item Increased growth and weekly active users by launching Best Places for Families, an SEO ranking product covering $\sim$300,000 US neighbourhoods, building every layer end to end: Airflow pipelines ingesting internal and Census/ACS data, a backend scoring service, and a Postgres/GraphQL serving path with a React frontend.
+  \item Designed the scoring methodology by comparing 4 models predicting family-friendliness scores for the 197,556 of $\sim$300,000 neighbourhoods with sufficient data; screened 33 metrics down to 8 features.
+  \item Validated ranking quality before launch through an evaluation harness: a preregistered neighbourhood adversarial test set with pairwise Bradley-Terry judgments, cross-checked by both LLM and manual review.
+  \item Made the system self-sustaining with scheduled jobs, tests, and monitoring, and built Databricks tooling that lets non-technical stakeholders retune feature weights and see how any city ranks.
+\end{bullets}
+\entry{Shopify}{May -- Aug 2025}{Software Engineering Intern}{Toronto, ON}
+\begin{bullets}
+   \item Increased merchant activation and retention by building a full-stack partner-attach system (Ruby on Rails, Calendly API) that screens each new merchant and books qualifying ones into guided onboarding with a vetted advisor. Routing over 100 merchants per day into the partner attach flow.
+  \item Brought Shopify's entire German merchant base into VAT compliance in the 1.5 months from regulatory notice to launch. Reconciled what data Shopify already held against what merchants had to supply, integrated a difficult government tax API, and built a Rails intake form with an email flow that returns each merchant's compliance PDF.
+  \item Cleared reliability-impacting technical debt across adjacent teams and codebases, increasing engineering output and velocity.
+\end{bullets}
+
+\Section{Research}
+\entry{University of Toronto, Department of Statistical Sciences}{Expected: Fall 2026}%
+      {Incoming Undergraduate Researcher, Advisor: Prof.\ Ricardo Baptista (Vector Institute)}{Toronto, ON}
+\begin{bullets}
+  \item Investigating a unifying rank-reduction framework linking in-context learning and fine-tuning as low-rank weight updates, connecting recent transformer interpretability work to classical multivariate statistics.
+\end{bullets}
+
+
+\Section{Projects}
+\projentry{\textbf{GPT from Scratch}\quad\textit{Personal Project (in progress)}\quad\href{https://github.com/Avi-Gobrin/tiny-gpt-from-scratch}{[Repo]}}{2026}
+\begin{bullets}
+  \item Building a character-level GPT in pure NumPy, growing one codebase from a bigram baseline into a full Transformer: tokenization, stable softmax, multi-head causal self-attention, LayerNorm, residual connections, Adam, and temperature/top-k sampling; every forward and backward pass derived on paper before being coded, no autograd.
+\end{bullets}
+\projentry{\textbf{Autonomous Planning \& School Knowledge Agents}\quad\textit{Personal Project}}{2026}
+\begin{bullets}
+  \item Cut daily planning from about 30 minutes to under 2 with an autonomous planning agent (Claude Code, Obsidian) that runs at the start and end of each day, reviewing what was completed, writing structured notes on the day, and regenerating a time-blocked calendar for the next day from a parsed task file and a traffic-light priority scheme.
+  \item Cut note-cleanup and lookup time an estimated 40\% with a companion school-workflow agent that auto-formats lecture and problem-set notes into a cross-linked knowledge base of theorem references, surfacing relevant prior material to accelerate homework and exam preparation.
+\end{bullets}
+% \projentry{\textbf{F1 Race Winner Predictor}\quad\textit{Personal Project}\quad\href{https://github.com/Avi-Gobrin/F1-Race-predictor}{[Repo]}}{2024}
+% \begin{bullets}
+%   \item Engineered a supervised pipeline predicting Formula 1 race winners with a LASSO-penalized logistic classifier over rolling driver/constructor form, qualifying and grid position, driver-track history, pit-stop reliability, and per-race weather, all ingested from the FastF1 API and computed causally from prior races only so no future data leaks into training.
+%   \item Reached 40\% race-winner and 60\% podium accuracy on held-out races under walk-forward expanding-window evaluation, well above the roughly 5\% random and 30\% pole-position baselines.
+% \end{bullets}
+\projentry{\textbf{Plantinarium}\quad\textit{6-person team, Java}\quad\href{https://github.com/barnaste/plantinarium}{[Repo]}}{2024}
+\begin{bullets}
+  \item Collaborated on an AI plant-identification desktop app (Java, Maven) covering photo upload to species identification, public/private galleries, likes, and notes.
+  \item Owned the account-management flow, including secure account deletion with full data wipe.
+\end{bullets}
+
+\Section{Technical Skills}
+\textbf{Languages:} Python, Java, JavaScript, SQL, Bash, HTML, CSS, R \\
+\textbf{Systems \& Web:} Ruby on Rails, Postgres, GraphQL, React, Node.js, Flask, REST APIs, Airflow, Databricks, Linux/Unix \\
+\textbf{ML \& Data:} PyTorch, scikit-learn, NumPy, Pandas, SciPy, statsmodels; neural nets and backprop implemented from scratch \\
+\textbf{Tools:} Git, GitHub, Claude Code, Cursor, Claude, LLM agents, Jupyter, Matplotlib, Seaborn, Maven, Excel, \LaTeX
+
+\end{document}
