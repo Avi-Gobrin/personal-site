@@ -23,16 +23,16 @@ const WORK = [
     type: 'Project',
     featured: true,
     title: 'Tiny GPT From Scratch',
-    kicker: 'Personal Project · In Progress · 2026',
+    kicker: 'Personal Project · 2026',
     meta: 'Python · NumPy · Transformers',
     tags: ['NumPy', 'Transformers', 'Self-Attention', 'Backpropagation', 'From Scratch'],
-    card: `A character-level GPT built end-to-end in pure NumPy, with no deep-learning frameworks. The project grows one codebase from a bigram baseline into a full Transformer: tokenization, multi-head self-attention, LayerNorm, the Adam optimizer, and sampling, with every forward and backward pass derived and implemented by hand.`,
+    card: `A character-level GPT built end-to-end in pure NumPy, with no deep-learning frameworks. The project grows one codebase from a bigram baseline into a full Transformer: tokenization, multi-head causal self-attention, LayerNorm, the Adam optimizer, and temperature and top-k sampling, with every forward and backward pass derived on paper before being coded.`,
     desc: `A character-level GPT built end-to-end in pure NumPy, with no deep-learning frameworks doing the heavy lifting. The project grows one codebase step by step from a bigram baseline into a working Transformer language model: character tokenization, stable softmax, multi-head causal self-attention, LayerNorm, residual connections, the Adam optimizer, and temperature and top-k sampling. Every gradient is derived on paper first and then implemented by hand, so the whole training loop stays transparent rather than delegated to autograd.`,
     findingsLabel: 'Key Details',
     findings: [
-      `Builds the full stack by hand: tokenization, stable softmax, multi-head causal self-attention, LayerNorm, residuals, Adam, and sampling`,
-      `Every forward and backward pass is derived on paper before being coded, with no PyTorch or TensorFlow autograd`,
-      `Structured as an incremental sequence of steps, each growing the same codebase from a bigram baseline toward a full Transformer`
+      `Builds the full stack by hand: tokenization, stable softmax, multi-head causal self-attention, LayerNorm, residuals, Adam, and temperature/top-k sampling`,
+      `Every forward and backward pass is derived on paper before being coded, with no autograd`,
+      `Structured as an incremental sequence of steps, each growing the same codebase from a bigram baseline into a full Transformer`
     ],
     links: [{ label: 'GitHub', href: 'https://github.com/Avi-Gobrin/tiny-gpt-from-scratch', external: true }]
   },
@@ -99,12 +99,12 @@ const WORK = [
     kicker: 'Personal Project · 2024',
     meta: 'Python · Machine Learning · Feature Engineering',
     tags: ['Python', 'scikit-learn', 'Feature Engineering', 'Supervised Learning'],
-    card: `A supervised machine-learning pipeline that predicts Formula 1 race winners from driver and constructor rolling form, qualifying results, track characteristics, and weather. Features such as driver-track history and pit-stop reliability are engineered from historical race and weather data, and the model is evaluated with a walk-forward scheme: each season is predicted using only the seasons before it.`,
-    desc: `A supervised machine-learning pipeline that predicts Formula 1 race winners from driver and constructor rolling form, qualifying results, track characteristics, and weather. The model is trained on engineered features such as driver-track history and pit-stop reliability, drawn from historical race and weather data, and evaluated season by season with a walk-forward scheme so it never sees the future.`,
+    card: `A supervised pipeline (LASSO-penalized logistic regression) that predicts Formula 1 race winners from rolling form, qualifying, driver-track history, pit-stop reliability, and weather. Evaluated with a walk-forward expanding window, it reaches 40% race-winner and 60% podium accuracy, well above the roughly 5% random and 30% pole-position baselines.`,
+    desc: `A supervised machine-learning pipeline built on LASSO-penalized logistic regression that predicts Formula 1 race winners from driver and constructor rolling form, qualifying results, driver-track history, pit-stop reliability, and weather. Features are engineered from historical race and weather data, and the model is evaluated season by season with a walk-forward expanding window, so it never sees the future.`,
     findingsLabel: 'Key Details',
     findings: [
-      `Engineered predictive features including driver-track history and pit-stop reliability from historical race and weather data`,
-      `Reached 33 to 46% race-winner accuracy and 53 to 74% podium precision across walk-forward seasons, competitive with the strong pole-sitter baseline`,
+      `Engineered predictive features including rolling form, qualifying, driver-track history, and pit-stop reliability from historical race and weather data`,
+      `Reached 40% race-winner and 60% podium accuracy under a walk-forward expanding-window evaluation, well above the roughly 5% random and 30% pole-position baselines`,
       `LASSO keeps the model sparse and interpretable: recent driver form and grid/qualifying position carry nearly all the signal`
     ],
     links: [{ label: 'GitHub', href: 'https://github.com/Avi-Gobrin/F1-Race-predictor', external: true }]

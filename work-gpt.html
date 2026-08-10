@@ -30,14 +30,14 @@
 
   <section class="page"><div class="wrap">
     <a class="back-link" href="projects.html">&larr; Projects</a>
-    <p class="page-label">Personal Project · In Progress · 2026</p>
+    <p class="page-label">Personal Project · 2026</p>
     <h1 class="page-title detail-title">Tiny GPT From Scratch</h1>
     <p class="detail-meta">Python · NumPy · Transformers</p>
     <div class="tags"><span class="tag">NumPy</span><span class="tag">Transformers</span><span class="tag">Self-Attention</span><span class="tag">Backpropagation</span><span class="tag">From Scratch</span></div>
     <p class="detail-desc">A character-level GPT built end-to-end in pure NumPy, with no deep-learning frameworks doing the heavy lifting. The project grows one codebase step by step from a bigram baseline into a working Transformer language model: character tokenization, stable softmax, multi-head causal self-attention, LayerNorm, residual connections, the Adam optimizer, and temperature and top-k sampling. Every gradient is derived on paper first and then implemented by hand, so the whole training loop stays transparent rather than delegated to autograd.</p>
       <div class="card-points">
         <p class="card-points-label">Key Details</p>
-        <ul><li>Builds the full stack by hand: tokenization, stable softmax, multi-head causal self-attention, LayerNorm, residuals, Adam, and sampling</li><li>Every forward and backward pass is derived on paper before being coded, with no PyTorch or TensorFlow autograd</li><li>Structured as an incremental sequence of steps, each growing the same codebase from a bigram baseline toward a full Transformer</li></ul>
+        <ul><li>Builds the full stack by hand: tokenization, stable softmax, multi-head causal self-attention, LayerNorm, residuals, Adam, and temperature/top-k sampling</li><li>Every forward and backward pass is derived on paper before being coded, with no autograd</li><li>Structured as an incremental sequence of steps, each growing the same codebase from a bigram baseline into a full Transformer</li></ul>
       </div>
       <div class="detail-actions"><a href="https://github.com/Avi-Gobrin/tiny-gpt-from-scratch" target="_blank" rel="noopener noreferrer" class="btn-ghost">GitHub &rarr;</a></div>
   </div></section>

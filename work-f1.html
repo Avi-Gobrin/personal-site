@@ -4,17 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>F1 Race Winner Predictor &middot; Avi Gobrin</title>
-  <meta name="description" content="A supervised machine-learning pipeline that predicts Formula 1 race winners from driver and constructor rolling form, qualifying results, track characte...">
+  <meta name="description" content="A supervised pipeline (LASSO-penalized logistic regression) that predicts Formula 1 race winners from rolling form, qualifying, driver-track history, pi...">
   <link rel="canonical" href="https://avi-gobrin.github.io/personal-site/work-f1.html">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Avi Gobrin">
   <meta property="og:title" content="F1 Race Winner Predictor &middot; Avi Gobrin">
-  <meta property="og:description" content="A supervised machine-learning pipeline that predicts Formula 1 race winners from driver and constructor rolling form, qualifying results, track characte...">
+  <meta property="og:description" content="A supervised pipeline (LASSO-penalized logistic regression) that predicts Formula 1 race winners from rolling form, qualifying, driver-track history, pi...">
   <meta property="og:url" content="https://avi-gobrin.github.io/personal-site/work-f1.html">
   <meta property="og:image" content="https://avi-gobrin.github.io/personal-site/assets/og-card.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="F1 Race Winner Predictor &middot; Avi Gobrin">
-  <meta name="twitter:description" content="A supervised machine-learning pipeline that predicts Formula 1 race winners from driver and constructor rolling form, qualifying results, track characte...">
+  <meta name="twitter:description" content="A supervised pipeline (LASSO-penalized logistic regression) that predicts Formula 1 race winners from rolling form, qualifying, driver-track history, pi...">
   <meta name="twitter:image" content="https://avi-gobrin.github.io/personal-site/assets/og-card.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,10 +34,10 @@
     <h1 class="page-title detail-title">F1 Race Winner Predictor</h1>
     <p class="detail-meta">Python · Machine Learning · Feature Engineering</p>
     <div class="tags"><span class="tag">Python</span><span class="tag">scikit-learn</span><span class="tag">Feature Engineering</span><span class="tag">Supervised Learning</span></div>
-    <p class="detail-desc">A supervised machine-learning pipeline that predicts Formula 1 race winners from driver and constructor rolling form, qualifying results, track characteristics, and weather. The model is trained on engineered features such as driver-track history and pit-stop reliability, drawn from historical race and weather data, and evaluated season by season with a walk-forward scheme so it never sees the future.</p>
+    <p class="detail-desc">A supervised machine-learning pipeline built on LASSO-penalized logistic regression that predicts Formula 1 race winners from driver and constructor rolling form, qualifying results, driver-track history, pit-stop reliability, and weather. Features are engineered from historical race and weather data, and the model is evaluated season by season with a walk-forward expanding window, so it never sees the future.</p>
       <div class="card-points">
         <p class="card-points-label">Key Details</p>
-        <ul><li>Engineered predictive features including driver-track history and pit-stop reliability from historical race and weather data</li><li>Reached 33 to 46% race-winner accuracy and 53 to 74% podium precision across walk-forward seasons, competitive with the strong pole-sitter baseline</li><li>LASSO keeps the model sparse and interpretable: recent driver form and grid/qualifying position carry nearly all the signal</li></ul>
+        <ul><li>Engineered predictive features including rolling form, qualifying, driver-track history, and pit-stop reliability from historical race and weather data</li><li>Reached 40% race-winner and 60% podium accuracy under a walk-forward expanding-window evaluation, well above the roughly 5% random and 30% pole-position baselines</li><li>LASSO keeps the model sparse and interpretable: recent driver form and grid/qualifying position carry nearly all the signal</li></ul>
       </div>
       <div class="detail-actions"><a href="https://github.com/Avi-Gobrin/F1-Race-predictor" target="_blank" rel="noopener noreferrer" class="btn-ghost">GitHub &rarr;</a></div>
   </div></section>

@@ -36,9 +36,9 @@
     <!-- Cards render from work.js (the WORK array is the single source of truth). -->
     <div class="cards" id="js-projects"><!-- prerender:start -->
     <article class="card">
-      <p class="card-kicker">Personal Project · In Progress · 2026</p>
+      <p class="card-kicker">Personal Project · 2026</p>
       <h3 class="card-title"><span class="w-star" title="Featured">★</span><a href="work-gpt.html">Tiny GPT From Scratch</a></h3>
-      <p class="card-desc">A character-level GPT built end-to-end in pure NumPy, with no deep-learning frameworks. The project grows one codebase from a bigram baseline into a full Transformer: tokenization, multi-head self-attention, LayerNorm, the Adam optimizer, and sampling, with every forward and backward pass derived and implemented by hand.</p>
+      <p class="card-desc">A character-level GPT built end-to-end in pure NumPy, with no deep-learning frameworks. The project grows one codebase from a bigram baseline into a full Transformer: tokenization, multi-head causal self-attention, LayerNorm, the Adam optimizer, and temperature and top-k sampling, with every forward and backward pass derived on paper before being coded.</p>
       <div class="tags"><span class="tag">NumPy</span><span class="tag">Transformers</span><span class="tag">Self-Attention</span><span class="tag">Backpropagation</span><span class="tag">From Scratch</span></div>
       <div class="card-links"><a href="work-gpt.html">Details &rarr;</a><a href="https://github.com/Avi-Gobrin/tiny-gpt-from-scratch" target="_blank" rel="noopener noreferrer">GitHub &rarr;</a></div>
     </article>
@@ -66,7 +66,7 @@
     <article class="card">
       <p class="card-kicker">Personal Project · 2024</p>
       <h3 class="card-title"><a href="work-f1.html">F1 Race Winner Predictor</a></h3>
-      <p class="card-desc">A supervised machine-learning pipeline that predicts Formula 1 race winners from driver and constructor rolling form, qualifying results, track characteristics, and weather. Features such as driver-track history and pit-stop reliability are engineered from historical race and weather data, and the model is evaluated with a walk-forward scheme: each season is predicted using only the seasons before it.</p>
+      <p class="card-desc">A supervised pipeline (LASSO-penalized logistic regression) that predicts Formula 1 race winners from rolling form, qualifying, driver-track history, pit-stop reliability, and weather. Evaluated with a walk-forward expanding window, it reaches 40% race-winner and 60% podium accuracy, well above the roughly 5% random and 30% pole-position baselines.</p>
       <div class="tags"><span class="tag">Python</span><span class="tag">scikit-learn</span><span class="tag">Feature Engineering</span><span class="tag">Supervised Learning</span></div>
       <div class="card-links"><a href="work-f1.html">Details &rarr;</a><a href="https://github.com/Avi-Gobrin/F1-Race-predictor" target="_blank" rel="noopener noreferrer">GitHub &rarr;</a></div>
     </article><!-- prerender:end --></div>

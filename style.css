@@ -242,6 +242,8 @@ nav .wrap { display: flex; justify-content: space-between; align-items: center; 
 .page { padding: calc(62px + 72px) 0 90px; min-height: 80vh; }
 .page-label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
 .page-legend { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.05em; color: var(--muted); }
+/* Second and later section labels on a page that holds more than one block. */
+.page-label.page-section { margin-top: 56px; }
 .page-legend .w-star { font-size: 1em; margin-right: 3px; }
 /* The gap before page content lives on .cards, not here, so pages with and
    without a legend line under the title space out the same way. */

@@ -4,17 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Experience &middot; Avi Gobrin</title>
-  <meta name="description" content="Avi Gobrin's experience: machine learning engineering at Nextdoor, software engineering at Shopify, and incoming research at the University of Toronto.">
+  <meta name="description" content="Avi Gobrin's experience: machine learning engineering at Nextdoor, software engineering at Shopify, and statistics research at the University of Toronto.">
   <link rel="canonical" href="https://avi-gobrin.github.io/personal-site/experience.html">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Avi Gobrin">
   <meta property="og:title" content="Experience &middot; Avi Gobrin">
-  <meta property="og:description" content="Machine learning engineering at Nextdoor, software engineering at Shopify, and incoming research at the University of Toronto.">
+  <meta property="og:description" content="Machine learning engineering at Nextdoor, software engineering at Shopify, and statistics research at the University of Toronto.">
   <meta property="og:url" content="https://avi-gobrin.github.io/personal-site/experience.html">
   <meta property="og:image" content="https://avi-gobrin.github.io/personal-site/assets/og-card.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Experience &middot; Avi Gobrin">
-  <meta name="twitter:description" content="Machine learning engineering at Nextdoor, software engineering at Shopify, and incoming research at the University of Toronto.">
+  <meta name="twitter:description" content="Machine learning engineering at Nextdoor, software engineering at Shopify, and statistics research at the University of Toronto.">
   <meta name="twitter:image" content="https://avi-gobrin.github.io/personal-site/assets/og-card.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,25 +33,25 @@
     <h1 class="page-title">Experience</h1>
     <div class="cards">
 
-      <!--<div class="card static">
-        <p class="card-kicker">Research &middot; Begins Fall 2026</p>
+      <div class="card static">
+        <p class="card-kicker">Research &middot; Aug 2026 to Present</p>
         <h2 class="card-title">University of Toronto, Department of Statistical Sciences</h2>
-        <p class="card-meta">Incoming Undergraduate Researcher &nbsp;&middot;&nbsp; Advisor: Prof. Ricardo Baptista (Vector Institute)</p>
-        <p class="card-lead">Researching the connection between in-context learning and fine-tuning, characterizing both as low-rank weight updates, extending "Transmuting prompts into weights".</p>
-      </div>-->
+        <p class="card-meta">Undergraduate Researcher &nbsp;&middot;&nbsp; Advisor: Prof. Ricardo Baptista (Vector Institute) &nbsp;&middot;&nbsp; Toronto, ON</p>
+        <p class="card-desc">Investigating a unifying rank-reduction framework linking in-context learning and fine-tuning as low-rank weight updates, connecting recent transformer interpretability work to classical multivariate statistics.</p>
+      </div>
 
       <div class="card static">
         <p class="card-kicker">May to Aug 2026</p>
         <h2 class="card-title">Nextdoor</h2>
         <p class="card-meta">Machine Learning Intern &nbsp;&middot;&nbsp; San Francisco, CA</p>
-        <p class="card-lead">Sole developer of Best Places for Families, an SEO ranking product covering roughly 300,000 US neighborhoods, built end to end from Census and ACS ingestion through Airflow pipelines to a Postgres, GraphQL, and React serving path.</p>
+        <p class="card-lead">Search Engine Optimization</p>
         <div class="card-points">
           <ul>
-            <li>Designed the scoring methodology, predicting family-growth momentum rather than levels to prevent leakage, and screened roughly 33 candidate metrics down to 19 features under fair-housing constraints.</li>
-            <li>Validated the rankings against a preregistered 36-neighborhood adversarial test set and an LLM pairwise judge (Bradley-Terry), built specifically to catch models that just relabel wealth.</li>
-            <li>Compared OLS, ridge, NNLS, and monotone GBM across 197,556 neighborhoods using SQL-computed moment matrices; near-identical results showed accuracy was feature-limited, not model-limited.</li>
-            <li>Traced the score's correlation with wealth to a geographic join missing a county guard, which had leaked out-of-state census data into 94.6% of neighborhoods; the fix removed 95% of bad links and moved a housing feature by 5+ points across 44,908 neighborhoods.</li>
-            <li>Owned post-launch reliability: fixed null-rank crashes across all 282,268 pages, moved writes to a streaming ORM with uniqueness guarantees, and added kill switches and CI fixes.</li>
+            <li>Increased growth and weekly active users by launching Best Places for Families, an SEO ranking product covering roughly 300,000 US neighborhoods, building every layer end to end: Airflow pipelines ingesting internal and Census/ACS data, a backend scoring service, and a Postgres and GraphQL serving path with a React frontend.</li>
+            <li>Designed the scoring methodology by comparing 4 models to predict family-friendliness scores for the roughly 300,000 neighborhoods with sufficient data, and screened 33 candidate metrics down to 8 final features.</li>
+            <li>Validated ranking quality before launch through an evaluation harness: a preregistered neighborhood adversarial test set with pairwise Bradley-Terry judgments, cross-checked by both LLM and manual review.</li>
+            <li>Traced an early correlation between the score and wealth to a geographic join missing a county guard, which had leaked out-of-state census data into 94.6% of neighborhoods; the fix removed 95% of bad links and moved a housing feature by 5+ points across 44,908 neighborhoods.</li>
+            <li>Made the system self-sustaining with scheduled jobs, automated tests, and monitoring, and built Databricks tooling that lets stakeholders retune feature weights and see how any city ranks.</li>
           </ul>
         </div>
       </div>
@@ -60,12 +60,12 @@
         <p class="card-kicker">May to Aug 2025</p>
         <h2 class="card-title">Shopify</h2>
         <p class="card-meta">Software Engineering Intern &nbsp;&middot;&nbsp; Toronto, ON</p>
-        <p class="card-lead">Shipped merchant-facing systems across onboarding and tax compliance.</p>
+        <p class="card-lead">Retail, Merchant Experience</p>
         <div class="card-points">
           <ul>
-            <li>Launched a partner-attach system that pairs each new merchant with a vetted onboarding advisor, routing roughly 100 merchants/day through guided onboarding and lifting activation and retention.</li>
-            <li>Brought German VAT submissions into compliance with updated tax regulations by integrating the German tax-code API, unblocking hundreds of merchants and reducing compliance risk.</li>
-            <li>Resolved cross-disciplinary technical debt assigned by adjacent teams, working with engineering and product stakeholders to ship scalable fixes.</li>
+            <li>Built a full-stack partner-attach system (Ruby on Rails, Calendly API) that screens each new merchant and books qualifying ones into guided onboarding with a vetted advisor, increasing merchant activation and retention by routing over 100 merchants per day into the flow.</li>
+            <li>Brought Shopify's entire German merchant base into VAT compliance within a month of the regulatory notice to launch: reconciled what data Shopify already held against what merchants had to supply, integrated a difficult government tax API, and built a Rails intake form with an email flow that returns each merchant's compliance PDF.</li>
+            <li>Tackled long-standing technical debt on the Run Team to minimize operational friction, alleviating cross-team dependencies and unlocking faster feature delivery.</li>
           </ul>
         </div>
       </div>
