@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projects | Avi Gobrin</title>
+  <meta name="description" content="Projects by Avi Gobrin: a GPT built from scratch in NumPy with a 56-test gradient-checking suite, autonomous planning agents on Claude Code, and Plantinarium.">
+  <link rel="canonical" href="https://avi-gobrin.github.io/personal-site/projects/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Avi Gobrin">
+  <meta property="og:title" content="Projects | Avi Gobrin">
+  <meta property="og:description" content="A GPT built from scratch in NumPy with a 56-test gradient-checking suite, autonomous planning agents on Claude Code, and Plantinarium.">
+  <meta property="og:url" content="https://avi-gobrin.github.io/personal-site/projects/">
+  <meta property="og:image" content="https://avi-gobrin.github.io/personal-site/assets/img/og-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Projects | Avi Gobrin">
+  <meta name="twitter:description" content="A GPT built from scratch in NumPy with a 56-test gradient-checking suite, autonomous planning agents on Claude Code, and Plantinarium.">
+  <meta name="twitter:image" content="https://avi-gobrin.github.io/personal-site/assets/img/og-card.png">
+  <!-- build:head -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:wght@500&family=Inter:wght@400;500;600&family=Silkscreen&display=swap">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='dark'&&t!=='light'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();</script>
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <!-- /build:head -->
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="masthead">
+    <!-- build:nav -->
+    <div class="bar">
+      <a class="name-link" href="../">Avi Gobrin</a>
+      <nav class="nav" aria-label="Main">
+        <a href="../experience/">Experience</a>
+        <a href="../projects/" aria-current="page">Projects</a>
+        <a href="../research/">Research</a>
+        <a href="../about/">About</a>
+      </nav>
+      <button class="theme-toggle" type="button"><span class="to-dark">Lights off<span class="sr-only"> (switch to dark theme)</span></span><span class="to-light">Lights on<span class="sr-only"> (switch to light theme)</span></span></button>
+    </div>
+    <!-- /build:nav -->
+  </header>
+  <main id="main" class="wrap">
+    <header class="page-head">
+      <span class="page-icon"><!-- build:icon-laptop size=4 --><svg class="px" aria-hidden="true" viewBox="0 0 20 15" width="80" height="60" shape-rendering="crispEdges"><rect x="2" y="0" width="16" height="1" class="p-line"/><rect x="2" y="1" width="1" height="1" class="p-line"/><rect x="3" y="1" width="14" height="1" class="p-bezel"/><rect x="17" y="1" width="1" height="1" class="p-line"/><rect x="2" y="2" width="1" height="1" class="p-line"/><rect x="3" y="2" width="1" height="1" class="p-bezel"/><rect x="4" y="2" width="12" height="1" class="p-screen"/><rect x="16" y="2" width="1" height="1" class="p-bezel"/><rect x="17" y="2" width="1" height="1" class="p-line"/><rect x="2" y="3" width="1" height="1" class="p-line"/><rect x="3" y="3" width="1" height="1" class="p-bezel"/><rect x="4" y="3" width="1" height="1" class="p-screen"/><rect x="5" y="3" width="3" height="1" class="p-kw"/><rect x="8" y="3" width="1" height="1" class="p-screen"/><rect x="9" y="3" width="4" height="1" class="p-fn"/><rect x="13" y="3" width="3" height="1" class="p-screen"/><rect x="16" y="3" width="1" height="1" class="p-bezel"/><rect x="17" y="3" width="1" height="1" class="p-line"/><rect x="2" y="4" width="1" height="1" class="p-line"/><rect x="3" y="4" width="1" height="1" class="p-bezel"/><rect x="4" y="4" width="12" height="1" class="p-screen"/><rect x="16" y="4" width="1" height="1" class="p-bezel"/><rect x="17" y="4" width="1" height="1" class="p-line"/><rect x="2" y="5" width="1" height="1" class="p-line"/><rect x="3" y="5" width="1" height="1" class="p-bezel"/><rect x="4" y="5" width="2" height="1" class="p-screen"/><rect x="6" y="5" width="5" height="1" class="p-str"/><rect x="11" y="5" width="1" height="1" class="p-screen"/><rect x="12" y="5" width="2" height="1" class="p-fn"/><rect x="14" y="5" width="2" height="1" class="p-screen"/><rect x="16" y="5" width="1" height="1" class="p-bezel"/><rect x="17" y="5" width="1" height="1" class="p-line"/><rect x="2" y="6" width="1" height="1" class="p-line"/><rect x="3" y="6" width="1" height="1" class="p-bezel"/><rect x="4" y="6" width="12" height="1" class="p-screen"/><rect x="16" y="6" width="1" height="1" class="p-bezel"/><rect x="17" y="6" width="1" height="1" class="p-line"/><rect x="2" y="7" width="1" height="1" class="p-line"/><rect x="3" y="7" width="1" height="1" class="p-bezel"/><rect x="4" y="7" width="2" height="1" class="p-screen"/><rect x="6" y="7" width="2" height="1" class="p-kw"/><rect x="8" y="7" width="1" height="1" class="p-screen"/><rect x="9" y="7" width="5" height="1" class="p-plain"/><rect x="14" y="7" width="2" height="1" class="p-screen"/><rect x="16" y="7" width="1" height="1" class="p-bezel"/><rect x="17" y="7" width="1" height="1" class="p-line"/><rect x="2" y="8" width="1" height="1" class="p-line"/><rect x="3" y="8" width="1" height="1" class="p-bezel"/><rect x="4" y="8" width="12" height="1" class="p-screen"/><rect x="16" y="8" width="1" height="1" class="p-bezel"/><rect x="17" y="8" width="1" height="1" class="p-line"/><rect x="2" y="9" width="1" height="1" class="p-line"/><rect x="3" y="9" width="1" height="1" class="p-bezel"/><rect x="4" y="9" width="12" height="1" class="p-screen"/><rect x="16" y="9" width="1" height="1" class="p-bezel"/><rect x="17" y="9" width="1" height="1" class="p-line"/><rect x="2" y="10" width="1" height="1" class="p-line"/><rect x="3" y="10" width="14" height="1" class="p-bezel"/><rect x="17" y="10" width="1" height="1" class="p-line"/><rect x="2" y="11" width="16" height="1" class="p-line"/><rect x="1" y="12" width="18" height="1" class="p-metal-light"/><rect x="0" y="13" width="8" height="1" class="p-metal"/><rect x="8" y="13" width="4" height="1" class="p-metal-dark"/><rect x="12" y="13" width="8" height="1" class="p-metal"/><rect x="0" y="14" width="20" height="1" class="p-metal-dark"/></svg><!-- /build:icon-laptop --></span>
+      <div>
+        <h1 class="title">Projects</h1>
+        <p class="intro">Personal and team projects, with the code.</p>
+      </div>
+    </header>
+
+    <!-- Built from content/work.js by tools/build.mjs. Edit work.js, not this block. -->
+    <!-- build:projects -->
+    <article class="card window" id="tiny-gpt">
+      <div class="card-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div class="card-head">
+        <h2 class="card-title"><a href="../projects/tiny-gpt/">Tiny GPT From Scratch</a></h2>
+        <p class="when">2026</p>
+      </div>
+      <p class="meta">Personal project</p>
+      <p class="hook">A GPT in pure NumPy with <strong>every gradient written by hand</strong>, checked by <strong>56 tests</strong>.</p>
+      <p class="stack">Python · NumPy · pytest · GitHub Actions</p>
+      <p class="links"><a href="../projects/tiny-gpt/">Read more</a><a href="https://github.com/Avi-Gobrin/tiny-gpt-from-scratch">Code on GitHub</a></p>
+    </article>
+    <article class="card window" id="agents">
+      <div class="card-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div class="card-head">
+        <h2 class="card-title"><a href="../projects/agents/">Autonomous Planning &amp; Knowledge Agents</a></h2>
+        <p class="when">2026</p>
+      </div>
+      <p class="meta">Personal project</p>
+      <p class="hook">Two LLM agents run my day and my coursework. Daily planning went from <strong>about 30 minutes to under 2</strong>.</p>
+      <p class="stack">Claude Code · Obsidian · LLM agents</p>
+      <p class="links"><a href="../projects/agents/">Read more</a></p>
+    </article>
+    <article class="card window" id="plantinarium">
+      <div class="card-bar" aria-hidden="true"><span></span><span></span><span></span></div>
+      <div class="card-head">
+        <h2 class="card-title"><a href="../projects/plantinarium/">Plantinarium</a></h2>
+        <p class="when">2024</p>
+      </div>
+      <p class="meta">Six-person team project</p>
+      <p class="hook">A plant-identification app built by a <strong>six-person team</strong>. I owned account management.</p>
+      <p class="stack">Java · Maven</p>
+      <p class="links"><a href="../projects/plantinarium/">Read more</a><a href="https://github.com/barnaste/plantinarium">Code on GitHub</a></p>
+    </article>
+    <!-- /build:projects -->
+  </main>
+  <footer class="footer">
+    <!-- build:footer -->
+    <p class="foot-links"><a href="mailto:avichaigobrin@gmail.com">Email</a><a href="https://github.com/Avi-Gobrin">GitHub</a><a href="https://www.linkedin.com/in/avigobrin/">LinkedIn</a><a href="https://x.com/AvichaiGobrin">X</a></p>
+    <p class="fine">Hand-built in plain HTML, CSS, and a little JavaScript. &copy; 2026 Avi Gobrin.</p>
+    <!-- /build:footer -->
+  </footer>
+  <script src="../assets/js/theme.js"></script>
+</body>
+</html>

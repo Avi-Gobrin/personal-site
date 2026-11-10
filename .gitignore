@@ -19,18 +19,18 @@ assets/Resumes/*
 *.xdv
 
 # Local resume copy helper
-sync-resumes.ps1
+tools/sync-resumes.ps1
 
 # Local-only notes and tooling, not part of the site
 plans/
-TODO.md
 .claude/
 CLAUDE.md
 
-# Build output of make-redirects.mjs, copied into the old repo by hand
+# Build output of tools/make-redirects.mjs, copied into the old repo by hand
 redirects/
 
 # Editor and OS clutter
 .DS_Store
 Thumbs.db
 .vscode/
+

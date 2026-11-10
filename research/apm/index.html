@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Transaction Costs and Rebalancing | Avi Gobrin</title>
+  <meta name="description" content="A discrete-time, two-asset model comparing periodic and band rebalancing under proportional transaction costs, tuned by Monte Carlo grid search over...">
+  <link rel="canonical" href="https://avi-gobrin.github.io/personal-site/research/apm/">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Avi Gobrin">
+  <meta property="og:title" content="Transaction Costs and Rebalancing | Avi Gobrin">
+  <meta property="og:description" content="A discrete-time, two-asset model comparing periodic and band rebalancing under proportional transaction costs, tuned by Monte Carlo grid search over...">
+  <meta property="og:url" content="https://avi-gobrin.github.io/personal-site/research/apm/">
+  <meta property="og:image" content="https://avi-gobrin.github.io/personal-site/assets/img/og-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Transaction Costs and Rebalancing | Avi Gobrin">
+  <meta name="twitter:description" content="A discrete-time, two-asset model comparing periodic and band rebalancing under proportional transaction costs, tuned by Monte Carlo grid search over...">
+  <meta name="twitter:image" content="https://avi-gobrin.github.io/personal-site/assets/img/og-card.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:wght@500&family=Inter:wght@400;500;600&family=Silkscreen&display=swap">
+  <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+  <script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='dark'&&t!=='light'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();</script>
+  <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="masthead">
+    <div class="bar">
+      <a class="name-link" href="../../">Avi Gobrin</a>
+      <nav class="nav" aria-label="Main">
+        <a href="../../experience/">Experience</a>
+        <a href="../../projects/">Projects</a>
+        <a href="../../research/" aria-current="true">Research</a>
+        <a href="../../about/">About</a>
+      </nav>
+      <button class="theme-toggle" type="button"><span class="to-dark">Lights off<span class="sr-only"> (switch to dark theme)</span></span><span class="to-light">Lights on<span class="sr-only"> (switch to light theme)</span></span></button>
+    </div>
+  </header>
+  <main id="main" class="wrap">
+    <header class="page-head text">
+      <p class="crumb"><a href="../../research/">Research</a></p>
+      <h1 class="title">The Effect of Transaction Costs on Optimal Rebalancing Frequency</h1>
+      <p class="meta">Apr 2026 · Course project, with Gabor Erdely · APM348, Mathematical Modelling</p>
+    </header>
+
+    <article class="card paper">
+      <p class="hook">The best band policy beats the best periodic one by <strong>17.3%</strong> on the cost-penalised objective, over <strong>10,000</strong> Monte Carlo paths.</p>
+      <p class="desc">A discrete-time, two-asset model (equity and a risk-free bond) comparing periodic and band rebalancing policies under proportional transaction costs, with optimal parameters found by Monte Carlo grid search over 10,000 paths. A CRRA certainty-equivalent-wealth analysis then asks whether rebalancing is worth it beyond the cost metric. Written with Gabor Erdely.</p>
+      <h2 class="kicker">Findings</h2>
+      <ul class="hits">
+        <li>The best band policy (b*&nbsp;=&nbsp;0.008) beats the best periodic policy (every k*&nbsp;=&nbsp;8 days) by 17.3% on the cost-penalised objective</li>
+        <li>Both policies keep about 99.97% of no-rebalancing terminal wealth</li>
+        <li>Their value is risk control: rebalancing cuts the standard deviation of the terminal equity weight from 0.036 to 0.005 or less</li>
+      </ul>
+      <h2 class="kicker">Methods</h2>
+      <p class="stack">Monte Carlo simulation · grid search · CRRA utility</p>
+      <p class="links"><a href="../../assets/reports/apm-project.pdf">Read the report (PDF)</a></p>
+    </article>
+  </main>
+  <footer class="footer">
+    <p class="foot-links"><a href="mailto:avichaigobrin@gmail.com">Email</a><a href="https://github.com/Avi-Gobrin">GitHub</a><a href="https://www.linkedin.com/in/avigobrin/">LinkedIn</a><a href="https://x.com/AvichaiGobrin">X</a></p>
+    <p class="fine">Hand-built in plain HTML, CSS, and a little JavaScript. &copy; 2026 Avi Gobrin.</p>
+  </footer>
+  <script src="../../assets/js/theme.js"></script>
+</body>
+</html>

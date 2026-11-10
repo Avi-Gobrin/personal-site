@@ -1,0 +1,350 @@
+/* ============================================================
+   The site is one room. The homepage is the room itself, a
+   pixel-art desk (assets/js/room.js); the inner pages borrow its
+   colours, its pixel borders, and its objects as icons.
+
+   Morning by day, dusk by night: the same two palettes the room
+   uses. Alegreya for names and titles, Inter for reading, and
+   Silkscreen (a pixel face) only for tiny labels.
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
+
+:root {
+  color-scheme: light;
+  /* Morning */
+  --paper: #f0e7d6;        /* the wall */
+  --card: #fbf6ec;         /* paper pinned to it */
+  --ink: #1f2638;
+  --graphite: #575c6d;     /* 5.6:1 on the wall */
+  --link: #2a52a0;
+  --edge: #3a3346;         /* pixel borders and their shadows */
+  --accent: #c4505d;       /* pins and bullets; decorative only */
+  --wood: #a97c55;
+
+  --display: 'Alegreya', 'Iowan Old Style', Georgia, serif;
+  --sans: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --pixel: 'Silkscreen', ui-monospace, monospace;
+
+  --measure: 46rem;
+  --edge-pad: 2rem;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  /* Dusk */
+  --paper: #3a2d4b;
+  --card: #45365a;
+  --ink: #fff1e4;
+  --graphite: #e2c9d0;
+  --link: #ffd08a;
+  --edge: #1b1222;
+  --accent: #ffcf7a;
+  --wood: #9a6a48;
+}
+
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--link);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; }
+img, svg { display: block; max-width: 100%; }
+strong { font-weight: 600; }
+p, li { text-wrap: pretty; }
+h1, h2, h3 { text-wrap: balance; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+}
+.skip {
+  position: absolute; z-index: 10; left: 1rem; top: 1rem;
+  transform: translateY(-300%);
+  background: var(--ink); color: var(--paper);
+  padding: 0.4rem 0.8rem;
+}
+.skip:focus { transform: none; }
+
+/* ---------- the bar at the top ---------- */
+.masthead { max-width: 72rem; margin: 0 auto; padding: 1.4rem var(--edge-pad) 0; position: relative; z-index: 2; }
+.bar { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 1.75rem; row-gap: 0.4rem; }
+.name-link { font-family: var(--display); font-weight: 500; font-size: 1.3rem; color: var(--ink); text-decoration: none; }
+.name-link:hover { text-decoration: underline; }
+.nav { display: flex; flex-wrap: wrap; column-gap: 1.4rem; row-gap: 0.25rem; font-size: 0.975rem; }
+.nav a { color: var(--graphite); text-decoration: none; padding: 0.2rem 0; }
+.nav a:hover { color: var(--ink); }
+.nav a[aria-current] { color: var(--ink); font-weight: 500; box-shadow: inset 0 -3px 0 var(--accent); }
+.theme-toggle {
+  margin-left: auto;
+  font: inherit;
+  font-size: 0.975rem;
+  color: var(--graphite);
+  background: none;
+  border: 0;
+  padding: 0.2rem 0;
+  cursor: pointer;
+}
+.theme-toggle:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 0.25em; }
+.theme-toggle .to-light { display: none; }
+[data-theme="dark"] .theme-toggle .to-dark { display: none; }
+[data-theme="dark"] .theme-toggle .to-light { display: inline; }
+
+/* ---------- inner pages ---------- */
+.wrap { max-width: calc(var(--measure) + 2 * var(--edge-pad)); margin: 0 auto; padding: 3.5rem var(--edge-pad) 4rem; }
+.page-head { display: flex; align-items: center; gap: 1.4rem; margin-bottom: 2.5rem; }
+.page-head .px { width: 5rem; height: auto; }
+.page-head.text { display: block; }
+.title { font-family: var(--display); font-weight: 500; font-size: clamp(2.4rem, 5vw, 3.25rem); line-height: 1.05; letter-spacing: -0.01em; }
+.intro { margin-top: 0.4rem; color: var(--graphite); font-size: 1.125rem; }
+.crumb { font-family: var(--pixel); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.4rem; }
+.crumb a { color: var(--graphite); text-decoration: none; }
+.crumb a::before { content: "< "; }
+.crumb a:hover { color: var(--ink); }
+.kicker { font-family: var(--pixel); font-weight: 400; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--graphite); margin: 1.6rem 0 0.4rem; }
+.section-title { font-family: var(--display); font-weight: 500; font-size: 1.9rem; margin: 3.5rem 0 0; }
+.aside { margin-top: 2.5rem; color: var(--graphite); }
+
+/* A card is paper with a pixel border and a hard shadow. */
+.card {
+  position: relative;
+  background: var(--card);
+  border: 2px solid var(--edge);
+  box-shadow: 5px 5px 0 var(--edge);
+  padding: 1.5rem 1.6rem 1.4rem;
+  margin-top: 2rem;
+}
+/* Experience: pinned to the corkboard. */
+.card.note::before {
+  content: "";
+  position: absolute;
+  top: -7px;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  margin-left: -6px;
+  background: var(--accent);
+  box-shadow: inset -3px -3px 0 rgba(0, 0, 0, 0.25), inset 3px 3px 0 rgba(255, 255, 255, 0.35);
+}
+/* Projects: a little window, like the laptop's editor. */
+.card.window { padding-top: 0; }
+.card-bar { display: flex; gap: 6px; margin: 0 -1.6rem 1.2rem; padding: 0.55rem 0.8rem; border-bottom: 2px solid var(--edge); }
+.card-bar span { width: 9px; height: 9px; background: var(--accent); }
+.card-bar span:nth-child(2) { background: #e9c45a; }
+.card-bar span:nth-child(3) { background: #6fbf86; }
+/* Reports: a sheet with a folded corner. */
+.card.paper::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  border-style: solid;
+  border-width: 0 18px 18px 0;
+  border-color: var(--paper) var(--paper) var(--edge) var(--edge);
+}
+
+.card-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; column-gap: 1rem; }
+.card-title { font-family: var(--display); font-weight: 500; font-size: 1.75rem; line-height: 1.2; }
+.card-title a { color: var(--ink); text-decoration-color: var(--accent); text-decoration-thickness: 2px; }
+.when { font-family: var(--pixel); font-size: 0.8rem; color: var(--graphite); white-space: nowrap; }
+.meta { color: var(--graphite); font-size: 0.975rem; }
+.page-head .meta { margin-top: 0.6rem; }
+.hook { margin-top: 0.9rem; font-size: 1.2rem; line-height: 1.45; }
+.hook strong { color: var(--ink); background: linear-gradient(transparent 62%, color-mix(in srgb, var(--accent) 35%, transparent) 62%); }
+.desc { margin-top: 0.9rem; }
+.hits { list-style: none; margin-top: 1rem; }
+.hits li { position: relative; padding-left: 1.4rem; }
+.hits li + li { margin-top: 0.6rem; }
+.hits li::before { content: ""; position: absolute; left: 0.1rem; top: 0.6em; width: 7px; height: 7px; background: var(--accent); }
+.hits em { font-style: normal; font-weight: 600; }
+.stack { margin-top: 1rem; font-size: 0.9rem; color: var(--graphite); }
+.links { margin-top: 0.9rem; display: flex; flex-wrap: wrap; column-gap: 1.25rem; row-gap: 0.3rem; font-weight: 500; }
+details { margin-top: 1rem; }
+summary {
+  display: inline-block;
+  cursor: pointer;
+  font-family: var(--pixel);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: var(--link);
+  list-style: none;
+}
+summary::-webkit-details-marker { display: none; }
+summary::after { content: " +"; }
+details[open] summary::after { content: " -"; }
+details .hits { margin-top: 0.6rem; }
+
+/* About */
+.status { font-size: 1.1rem; }
+.dot { display: inline-block; vertical-align: 0.05em; margin-right: 0.6rem; width: 10px; height: 10px; background: #4f9a5a; box-shadow: 0 0 0 3px color-mix(in srgb, #4f9a5a 30%, transparent); }
+.tiles { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.6rem; margin-top: 1rem; }
+.tile { display: flex; gap: 1.1rem; align-items: flex-start; margin-top: 1rem; scroll-margin-top: 2rem; }
+.tile:target { box-shadow: 5px 5px 0 var(--accent); }
+.tile-icon { flex: none; width: 4rem; }
+.tile-icon .px { width: 100%; height: auto; }
+.tile-title { font-family: var(--display); font-weight: 500; font-size: 1.35rem; line-height: 1.2; margin-bottom: 0.25rem; }
+
+/* Pixel icons (tools/icons.mjs): the room's colours. */
+.px { image-rendering: pixelated; }
+.p-line { fill: #2b2533; }
+.p-wood { fill: #a97c55; } .p-wood-dark { fill: #7a5638; }
+.p-cork { fill: #c99a6a; } .p-cork-dark { fill: #b0835a; }
+.p-note-a { fill: #f3d77e; } .p-note-b { fill: #f0a0aa; } .p-note-c { fill: #a3cfe9; }
+.p-scribble { fill: #8a7a6a; } .p-pin { fill: #d8485a; }
+.p-bezel { fill: #3a3d4c; } .p-screen { fill: #1d1530; }
+.p-kw { fill: #ef93a0; } .p-fn { fill: #9cc9e6; } .p-str { fill: #f3d27e; } .p-plain { fill: #cfc5dc; }
+.p-metal { fill: #b8bccb; } .p-metal-light { fill: #d9dce5; } .p-metal-dark { fill: #7d8296; }
+.p-book-a { fill: #c45a5a; } .p-book-b { fill: #4f7fb0; } .p-book-c { fill: #e2b44f; } .p-pages { fill: #fffdf7; }
+.p-board { fill: #34404a; } .p-chalk { fill: #f4f1e8; }
+.p-gold { fill: #e3b34a; } .p-gold-dark { fill: #b07f2a; } .p-shine { fill: #fff6d8; }
+.p-mana-w { fill: #f3ead0; } .p-mana-u { fill: #4f8fd6; } .p-mana-b { fill: #4a3f58; } .p-mana-r { fill: #d8574a; } .p-mana-g { fill: #4f9a5a; } .p-art { fill: #d9c49a; }
+.p-belt { fill: #16151c; } .p-belt-shine { fill: #55525e; }
+.p-frame { fill: #fbf8f1; } .p-frame-dark { fill: #cdbfa6; } .p-sky { fill: #b4d4ee; } .p-city { fill: #8eaacb; } .p-snow { fill: #ffffff; }
+.p-paper { fill: #fffdf7; } .p-paper-dark { fill: #cfc3ad; }
+[data-theme="dark"] .p-line { fill: #120c18; }
+
+/* ---------- footer ---------- */
+.footer { max-width: calc(var(--measure) + 2 * var(--edge-pad)); margin: 0 auto; padding: 1.5rem var(--edge-pad) 2.5rem; color: var(--graphite); }
+.foot-links { display: flex; flex-wrap: wrap; column-gap: 1.25rem; }
+.fine { margin-top: 0.4rem; font-size: 0.85rem; }
+
+/* ---------- homepage ---------- */
+/* One screen: the room, with the name on the wall. room.js sets
+   --ink, --graphite, --link, --panel, and --edge-ink on .hero to
+   match its palette. Things in the room are links; their labels
+   are the .tip boxes. */
+.home-page { overflow-x: hidden; }
+.hero {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  min-height: 30rem;
+  overflow: hidden;
+  color: var(--ink);
+  background: var(--paper);
+  --panel: var(--card);
+}
+.hero canvas {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  image-rendering: pixelated;
+  touch-action: manipulation;
+}
+.hero-text {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 37%;
+  transform: translate(-50%, -50%);
+  width: max-content;
+  max-width: calc(100% - 2 * var(--edge-pad));
+  text-align: center;
+}
+.name {
+  font-family: var(--display);
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.015em;
+}
+.tagline { margin-top: 0.7rem; font-size: clamp(1rem, 1.5vw, 1.2rem); color: var(--graphite); }
+.hero-links { margin-top: 1rem; display: flex; flex-wrap: wrap; justify-content: center; column-gap: 1.4rem; row-gap: 0.4rem; }
+.hero-links a { color: var(--ink); text-decoration-color: var(--graphite); }
+.hero-links a:hover { text-decoration-color: var(--ink); }
+
+.spots { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.spot {
+  position: absolute;
+  display: block;
+  pointer-events: auto;
+  cursor: pointer;
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+}
+.tip {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 0.7rem);
+  transform: translateX(-50%);
+  display: none;
+  white-space: nowrap;
+  padding: 0.35rem 0.65rem 0.4rem;
+  background: var(--panel);
+  color: var(--graphite);
+  border: 2px solid var(--edge-ink, var(--ink));
+  box-shadow: 3px 3px 0 var(--edge-ink, var(--ink));
+  font-size: 0.85rem;
+  line-height: 1.35;
+  text-align: left;
+}
+.tip b { display: block; color: var(--ink); font-weight: 600; font-size: 0.925rem; }
+.tip i { display: block; margin-top: 0.15rem; font-style: normal; font-family: var(--pixel); font-size: 0.7rem; color: var(--link); text-transform: uppercase; }
+.tip.below { bottom: auto; top: calc(100% + 0.7rem); }
+.spot:hover .tip { display: block; }
+
+.hero-note {
+  position: absolute;
+  right: var(--edge-pad);
+  bottom: 1rem;
+  z-index: 2;
+  padding: 0.15rem 0.6rem;
+  background: var(--panel);
+  font-size: 0.85rem;
+  color: var(--graphite);
+}
+.pause {
+  font: inherit;
+  color: var(--link);
+  background: none;
+  border: 0;
+  padding: 0 0 0 0.5rem;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+.pause:hover { text-decoration-thickness: 2px; }
+
+/* ---------- narrower screens ---------- */
+@media (max-width: 719px) {
+  :root { --edge-pad: 1.15rem; }
+  body { font-size: 1rem; }
+  .wrap { padding-top: 2.25rem; }
+  .page-head { gap: 1rem; margin-bottom: 1.75rem; }
+  .page-head .px { width: 3.75rem; }
+  .card { padding: 1.2rem 1.2rem 1.1rem; box-shadow: 4px 4px 0 var(--edge); }
+  .card-bar { margin: 0 -1.2rem 1rem; }
+  .card-title { font-size: 1.5rem; }
+  .hook { font-size: 1.1rem; }
+  .tiles { grid-template-columns: minmax(0, 1fr); gap: 0.4rem; }
+  .theme-toggle { margin-left: 0; }
+  .hero-text { top: 44%; }
+  .hero-note { left: var(--edge-pad); right: auto; }
+}
+
+@media print {
+  :root, [data-theme="dark"] {
+    color-scheme: light;
+    --paper: #fff; --card: #fff; --ink: #000; --graphite: #444; --link: #234e8c; --edge: #000;
+  }
+  .masthead, .theme-toggle, .skip, .hero canvas, .hero-note, .spots, details summary { display: none; }
+  details > * { display: block; }
+  .card { box-shadow: none; break-inside: avoid; }
+  .hero { height: auto; min-height: 0; background: none !important; --ink: #000 !important; --graphite: #444 !important; }
+  .hero-text { position: static; transform: none; margin: 2rem auto; }
+  body { background: #fff; color: #000; }
+}

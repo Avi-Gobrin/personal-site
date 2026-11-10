@@ -12,26 +12,31 @@
    free. Resume links keep working whether or not you update them.
 
    Usage:
-     node make-redirects.mjs https://avi-gobrin.github.io/
+     node tools/make-redirects.mjs https://avi-gobrin.github.io/
 
    Output goes to redirects/ (gitignored). Copy its contents into the
    old repo, replacing everything, and leave GitHub Pages enabled.
    ============================================================ */
 import { readFileSync, writeFileSync, mkdirSync, rmSync } from 'node:fs';
+import { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+process.chdir(fileURLToPath(new URL('..', import.meta.url)));
 
 const target = process.argv[2];
 if (!target || !/^https?:\/\//.test(target)) {
-  console.error('Usage: node make-redirects.mjs <new-base-url>');
-  console.error('   eg: node make-redirects.mjs https://avi-gobrin.github.io/');
+  console.error('Usage: node tools/make-redirects.mjs <new-base-url>');
+  console.error('   eg: node tools/make-redirects.mjs https://avi-gobrin.github.io/');
   process.exit(1);
 }
 const NEW_BASE = target.endsWith('/') ? target : target + '/';
 
-/* Same WORK source as prerender.mjs, so the page list can never drift. */
-const WORK = new Function(`${readFileSync('work.js', 'utf8')}\nreturn WORK;`)();
+/* Same WORK source as tools/build.mjs, so the page list can never drift. */
+const WORK = new Function(`${readFileSync('content/work.js', 'utf8')}\nreturn WORK;`)();
 
-const PAGES = ['index.html', 'experience.html', 'projects.html', 'research.html', 'coursework.html']
-  .concat(WORK.map(w => `work-${w.id}.html`));
+/* Every page is a folder; '' is the homepage. */
+const PAGES = ['', 'about/', 'experience/', 'projects/', 'research/']
+  .concat(WORK.map(w => `${w.type === 'Report' ? 'research' : 'projects'}/${w.id}/`));
 
 /* A stub is a real 200 response, so search engines follow the canonical
    and humans never see a broken page. */
@@ -81,7 +86,8 @@ rmSync('redirects', { recursive: true, force: true });
 mkdirSync('redirects');
 
 for (const p of PAGES) {
-  writeFileSync(`redirects/${p}`, stub(NEW_BASE + (p === 'index.html' ? '' : p)));
+  mkdirSync(dirname(`redirects/${p}index.html`), { recursive: true });
+  writeFileSync(`redirects/${p}index.html`, stub(NEW_BASE + p));
 }
 writeFileSync('redirects/404.html', catchAll);
 

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Student Outcomes at the Open University | Avi Gobrin</title>
+  <meta name="description" content="A full multivariate pipeline (PCA, factor analysis, Gaussian mixture clustering, LDA) over 23,301 complete Open University student-course registrations...">
+  <link rel="canonical" href="https://avi-gobrin.github.io/personal-site/research/oulad/">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Avi Gobrin">
+  <meta property="og:title" content="Student Outcomes at the Open University | Avi Gobrin">
+  <meta property="og:description" content="A full multivariate pipeline (PCA, factor analysis, Gaussian mixture clustering, LDA) over 23,301 complete Open University student-course registrations...">
+  <meta property="og:url" content="https://avi-gobrin.github.io/personal-site/research/oulad/">
+  <meta property="og:image" content="https://avi-gobrin.github.io/personal-site/assets/img/og-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Student Outcomes at the Open University | Avi Gobrin">
+  <meta name="twitter:description" content="A full multivariate pipeline (PCA, factor analysis, Gaussian mixture clustering, LDA) over 23,301 complete Open University student-course registrations...">
+  <meta name="twitter:image" content="https://avi-gobrin.github.io/personal-site/assets/img/og-card.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:wght@500&family=Inter:wght@400;500;600&family=Silkscreen&display=swap">
+  <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml">
+  <script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='dark'&&t!=='light'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();</script>
+  <link rel="stylesheet" href="../../assets/css/style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="masthead">
+    <div class="bar">
+      <a class="name-link" href="../../">Avi Gobrin</a>
+      <nav class="nav" aria-label="Main">
+        <a href="../../experience/">Experience</a>
+        <a href="../../projects/">Projects</a>
+        <a href="../../research/" aria-current="true">Research</a>
+        <a href="../../about/">About</a>
+      </nav>
+      <button class="theme-toggle" type="button"><span class="to-dark">Lights off<span class="sr-only"> (switch to dark theme)</span></span><span class="to-light">Lights on<span class="sr-only"> (switch to light theme)</span></span></button>
+    </div>
+  </header>
+  <main id="main" class="wrap">
+    <header class="page-head text">
+      <p class="crumb"><a href="../../research/">Research</a></p>
+      <h1 class="title">Engagement, Performance, and Student Outcomes at the Open University</h1>
+      <p class="meta">Apr 2026 · Course project · STA437, Methods for Multivariate Data</p>
+    </header>
+
+    <article class="card paper">
+      <p class="hook">Over <strong>23,301</strong> student registrations, logistic regression lifts Distinction recall from <strong>3.2% to 39.3%</strong>.</p>
+      <p class="desc">The Open University Learning Analytics Dataset records six behavioral features for 25,820 student-course registrations, 23,301 of them complete, each labeled Distinction, Fail, Pass, or Withdrawn. This report runs a full multivariate pipeline (EDA, Mahalanobis-distance normality testing, PCA, varimax factor analysis, Gaussian mixture modeling, and LDA) to ask whether unsupervised structure in assessment behavior recovers the known outcomes, and whether features observable before any grade is issued (submission count and timing) are enough to flag withdrawal early. Each method is motivated by the result before it.</p>
+      <h2 class="kicker">Findings</h2>
+      <ul class="hits">
+        <li>Parallel analysis and varimax rotation give three factors: <em>Engagement</em> (submission count and timing; top communality h²&nbsp;=&nbsp;0.84), <em>Consistent Performance</em> (mean score and score SD; top communality h²&nbsp;=&nbsp;0.72), and <em>Prior Commitment</em> (credits and prior attempts)</li>
+        <li>FA, GMM, and LDA converge on the same two dimensions; Prior Commitment describes academic history but barely moves LDA or the clusters</li>
+        <li>GMM at K&nbsp;=&nbsp;4 reaches an adjusted Rand index of 0.137: assessment behavior partly recovers the four outcomes, and Distinction and Pass students share the high-engagement cluster</li>
+        <li>Under 5-fold CV, LDA reaches 64.5% against a 53.0% baseline with 63.2% Withdrawn recall but 3.2% Distinction recall; logistic regression reaches 67.0% and lifts Distinction recall to 39.3% by dropping the shared-covariance assumption</li>
+      </ul>
+      <h2 class="kicker">Methods</h2>
+      <p class="stack">PCA · factor analysis · Gaussian mixture models · LDA · logistic regression</p>
+      <p class="links"><a href="../../assets/reports/oulad-sta437.pdf">Read the report (PDF)</a></p>
+    </article>
+  </main>
+  <footer class="footer">
+    <p class="foot-links"><a href="mailto:avichaigobrin@gmail.com">Email</a><a href="https://github.com/Avi-Gobrin">GitHub</a><a href="https://www.linkedin.com/in/avigobrin/">LinkedIn</a><a href="https://x.com/AvichaiGobrin">X</a></p>
+    <p class="fine">Hand-built in plain HTML, CSS, and a little JavaScript. &copy; 2026 Avi Gobrin.</p>
+  </footer>
+  <script src="../../assets/js/theme.js"></script>
+</body>
+</html>

@@ -6,54 +6,71 @@ Live at https://avi-gobrin.github.io/personal-site/
 
 ## The design
 
-A working notebook. A rose margin rule runs down every page: the margin, left of the rule, holds context (dates, places, course codes, labels), and the page, right of it, holds the work. The light theme is notebook paper; the dark theme is a chalkboard, switched by the "Chalkboard" and "Notebook" toggle in the corner. Type is Alegreya for text and Alegreya Sans for small interface text. There are no cards, chips, or icons, and one solid button ("Email me").
+The homepage is one screen: a pixel-art room with the name on the wall. Everything in the room is a link (selection corners and a label appear on hover, and an arrow wanders between things until you find one):
 
-All colors and layout sizes are CSS variables at the top of `style.css`. Every text color passes WCAG AA in both themes.
+| In the room | Goes to |
+|---|---|
+| laptop | Projects |
+| corkboard | Experience |
+| books | Research |
+| chalkboard | About |
+| trophy, cards, belt, window | their part of About |
+| letter, mug | email |
+| lamp | switches the theme |
 
-## The fireflies
+The inner pages borrow the room: its two palettes (morning by day, dusk by night), pixel borders with hard shadows, and its objects as icons. Experience entries are notes pinned to the corkboard, projects are little editor windows, and reports are sheets of paper. Type is Alegreya for names and titles, Inter for reading, and Silkscreen (a pixel face) for tiny labels.
 
-The homepage portrait sits in a small field of fireflies, drawn like a doodle in the margin: ink bodies and highlighter-yellow flashes on paper, chalk glows on the chalkboard. Each firefly is a pulse-coupled oscillator (Mirollo and Strogatz, 1990): when it sees a neighbour flash, its own clock jumps ahead a little. Nobody leads, and from random clocks the swarm usually falls into step within about 15 seconds. The note under the field shows how in sync they are, a tap or click on a firefly knocks it out of step, and Pause stops them (remembered per browser).
-
-Everything lives in `fireflies.js`; the constants at its top (count, period, nudge, sight, speed) set the swarm's character. It draws nothing until it can, stops when the field is off screen or the tab is hidden, shows a still frame under `prefers-reduced-motion`, and leaves only the portrait when JavaScript is off. To remove the fireflies, delete the `fireflies` wrapper and the note in `index.html` (keep the portrait block) and the `fireflies.js` script tag.
-
-## Pages
-
-- `index.html`: the profile. The margin holds who I am, the fireflies, and how to reach me; the page holds experience, research, projects, GitHub activity, skills, and education, under first-person labels ("Where I've worked", "Things I've built").
-- `experience.html`, `research.html`, `coursework.html`: hand-written pages built from rows (a margin note and a page cell).
-- `projects.html` and the course reports on `research.html`: built from `work.js`.
-- `work-<id>.html`: one generated page per project or report.
-- `404.html`: generated; served by GitHub Pages for any missing URL.
-
-The resumes are the source of truth. When a fact changes there (a number, a title, a date), change it here too.
-
-## How the build works
-
-Most of the site is hand-written HTML; edit it directly. The parts that come from data sit between markers like `<!-- build:nav -->` and `<!-- /build:nav -->`, and one command fills them:
+## Where things are
 
 ```
-node prerender.mjs
+index.html                 the homepage (the room)
+about/ experience/         hand-written pages, one index.html each
+projects/ research/        hand-written list pages; projects/<id>/ and
+                           research/<id>/ are generated from content/work.js
+404.html sitemap.xml robots.txt   generated; GitHub Pages wants them at the root
+
+content/work.js            every project and report (data only)
+assets/css/style.css       all the styles
+assets/js/hero.js          the homepage canvas harness
+assets/js/room.js          the room itself: palettes, layout, drawing, links
+assets/js/theme.js         the light switch
+assets/img/                favicon and link-preview card
+assets/reports/            course report PDFs
+assets/Resumes/            the two public resumes (path kept stable: it is linked from outside)
+tools/build.mjs            fills shared parts and writes generated pages
+tools/icons.mjs            pixel icons for the inner pages
+tools/serve.mjs            local preview server
+tools/make-redirects.mjs   only needed if the site ever moves
 ```
 
-It needs Node 18 or newer. It:
+## Working on it
 
-1. Refreshes the GitHub activity graph. It reads the public contribution calendar for `Avi-Gobrin` and saves it to `assets/contributions.json`. If GitHub cannot be reached, it keeps the saved copy. Use `node prerender.mjs --offline` to skip the network.
-2. Fills the shared head, nav, and footer on every page, plus the homepage portrait, project list, and activity graph, and the project and report lists.
-3. Writes the `work-<id>.html` pages, `404.html`, `sitemap.xml`, and `robots.txt`.
+Preview locally (folders need a server to open their `index.html`):
 
-It is safe to run repeatedly. Commit everything it writes, since GitHub Pages serves the files as they are. Run it whenever you edit `work.js`, the nav, or the footer, and before you share the site, so the graph is current.
+```
+node tools/serve.mjs
+```
 
-To add a project or report, add one object to the `WORK` array in `work.js` (the comment at the top lists the fields), then run the build. `featured: true` puts it on the homepage.
+then open http://localhost:8000/personal-site/.
 
-## The photo
+After editing `content/work.js`, the nav, the footer, or the icons, rebuild:
 
-Put a square photo (400 by 400 pixels or larger) at `assets/photo.jpg` and run `node prerender.mjs`. Until then the homepage shows an "AG" monogram in its place. Either way it sits in the firefly field, and the fireflies fly around it.
+```
+node tools/build.mjs
+```
+
+It needs Node 18 or newer. It fills every `<!-- build:NAME -->` block (head, nav, footer, the project and report lists, and `<!-- build:icon-NAME -->` pixel icons), writes `projects/<id>/` and `research/<id>/`, and regenerates `404.html`, `sitemap.xml`, and `robots.txt`. It is safe to run repeatedly. Commit everything it writes, since GitHub Pages serves the files as they are.
+
+To add a project or report, add one object to `WORK` in `content/work.js` (the comment at the top lists the fields), then rebuild.
+
+The room lives in `assets/js/room.js`: `PALETTES` and `PAIRS` at the top pick the colours, `layout()` places things, and `DOORS` holds the labels and links. The resumes are the source of truth: when a fact changes there (a number, a title, a date), change it in the pages, in `content/work.js`, and in the room's labels.
 
 ## Resumes
 
 `assets/Resumes/` holds exactly two public PDFs, built without the phone number:
 
-- `Avi_Gobrin_Resume_2026.pdf`: the SWE resume (the homepage "Resume" link)
-- `Avi_Gobrin_Resume_2026_ML.pdf`: the ML resume
+- `Avi_Gobrin_Resume_2026.pdf`: the SWE resume
+- `Avi_Gobrin_Resume_2026_ML.pdf`: the ML resume (the homepage "resume" link)
 
 The LaTeX sources live in the separate resume folder, never here. Build the public copies with the switch at the top of each `.tex` file, which drops the phone number:
 
@@ -62,17 +79,17 @@ pdflatex -jobname=Avi_Gobrin_Resume_SWE_public "\def\makepublic{}\input{Avi_Gobr
 pdflatex -jobname=Avi_Gobrin_Resume_ML_public "\def\makepublic{}\input{Avi_Gobrin_Resume_ML}"
 ```
 
-Then copy them in with `.\sync-resumes.ps1 -From "<your resume folder>"`, which copies only those two files under the names above. `.gitignore` also refuses every other file in `assets/Resumes/`, every `.tex` file, and LaTeX build files, so a private resume cannot be committed by accident. Anything committed here is public, including through git history.
+Then copy them in with `.	ools\sync-resumes.ps1 -From "<your resume folder>"` (a local file, not in git), which copies only those two files under the names above. `.gitignore` also refuses every other file in `assets/Resumes/`, every `.tex` file, and LaTeX build files, so a private resume cannot be committed by accident. Anything committed here is public, including through git history.
 
 ## Moving the site
 
-Every absolute URL (canonical, link previews, structured data, sitemap, robots.txt, 404 page) derives from the `BASE` constant at the top of `prerender.mjs`, so changing the site's address is a one-line edit plus a rerun.
+Every absolute URL (canonical, link previews, structured data, sitemap, robots.txt, 404 page) derives from the `BASE` constant at the top of `tools/build.mjs`, so changing the site's address is a one-line edit plus a rerun.
 
 GitHub Pages does not redirect project-site URLs when a repository is renamed, so a plain rename would break every link already printed on a resume. To move from `avi-gobrin.github.io/personal-site/` to `avi-gobrin.github.io/` without breaking anything:
 
 1. Create a repository named exactly `Avi-Gobrin.github.io` and push this site to it. A repository with that name is served at the domain root.
-2. Set `BASE` in `prerender.mjs` to `https://avi-gobrin.github.io/` and run `node prerender.mjs`.
-3. Generate forwarding pages for the old address with `node make-redirects.mjs https://avi-gobrin.github.io/`.
+2. Set `BASE` in `tools/build.mjs` to `https://avi-gobrin.github.io/` and run `node tools/build.mjs`.
+3. Generate forwarding pages for the old address with `node tools/make-redirects.mjs https://avi-gobrin.github.io/`.
 4. Replace the contents of the old `personal-site` repository with everything in `redirects/`, and leave its GitHub Pages enabled.
 
 Old links then forward to the matching new page indefinitely.
