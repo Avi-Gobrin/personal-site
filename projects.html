@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projects | Avi Gobrin</title>
+  <meta name="description" content="Projects by Avi Gobrin: a GPT built from scratch in NumPy with a 56-test gradient-checking suite, autonomous planning agents on Claude Code, and Plantinarium.">
+  <link rel="canonical" href="https://avi-gobrin.github.io/personal-site/projects.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Avi Gobrin">
+  <meta property="og:title" content="Projects | Avi Gobrin">
+  <meta property="og:description" content="A GPT built from scratch in NumPy with a 56-test gradient-checking suite, autonomous planning agents on Claude Code, and Plantinarium.">
+  <meta property="og:url" content="https://avi-gobrin.github.io/personal-site/projects.html">
+  <meta property="og:image" content="https://avi-gobrin.github.io/personal-site/assets/og-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Projects | Avi Gobrin">
+  <meta name="twitter:description" content="A GPT built from scratch in NumPy with a 56-test gradient-checking suite, autonomous planning agents on Claude Code, and Plantinarium.">
+  <meta name="twitter:image" content="https://avi-gobrin.github.io/personal-site/assets/og-card.png">
+  <!-- build:head -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Alegreya+Sans:wght@400;500&display=swap">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='dark'&&t!=='light'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();</script>
+  <link rel="stylesheet" href="style.css">
+  <!-- /build:head -->
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="notebook">
+    <header class="masthead"><!-- build:nav -->
+      <div class="row">
+        <p class="margin"><a class="name-link" href="./">Avi Gobrin</a></p>
+        <div class="page bar">
+          <nav class="nav" aria-label="Main">
+            <a href="experience.html">Experience</a>
+            <a href="projects.html" aria-current="page">Projects</a>
+            <a href="research.html">Research</a>
+            <a href="coursework.html">Coursework</a>
+          </nav>
+          <button class="theme-toggle" type="button"><span class="to-dark">Chalkboard<span class="sr-only"> (switch to dark theme)</span></span><span class="to-light">Notebook<span class="sr-only"> (switch to light theme)</span></span></button>
+        </div>
+      </div>
+      <!-- /build:nav --></header>
+
+    <main id="main">
+      <div class="row">
+        <div class="margin"></div>
+        <div class="page"><h1 class="title">Projects</h1></div>
+      </div>
+
+      <!-- Built from work.js by prerender.mjs. Edit work.js, not this block. -->
+      <!-- build:projects -->
+      <article class="row" id="gpt">
+        <div class="margin"><p>2026</p><p>Personal project</p></div>
+        <div class="page">
+          <h2 class="entry-title"><a href="work-gpt.html">Tiny GPT From Scratch</a></h2>
+          <p class="entry-text">A character-level GPT in pure NumPy with no autograd: multi-head causal attention, pre-LN Transformer blocks, Adam, and top-k sampling, with a hand-written backward pass for every layer. A 56-test pytest suite checks every parameter's gradient against finite differences and runs in CI on every push.</p>
+          <p class="tools">Built with Python, NumPy, pytest, and GitHub Actions.</p>
+          <p class="links"><a href="https://github.com/Avi-Gobrin/tiny-gpt-from-scratch">Code on GitHub</a></p>
+        </div>
+      </article>
+      <article class="row" id="agents">
+        <div class="margin"><p>2026</p><p>Personal project</p></div>
+        <div class="page">
+          <h2 class="entry-title"><a href="work-agents.html">Autonomous Planning &amp; Knowledge Agents</a></h2>
+          <p class="entry-text">Two LLM agents built on Claude Code, with an Obsidian vault as the knowledge store. The planning agent runs at the start and end of each day, reviews what got done, and regenerates a time-blocked calendar for tomorrow; it cut daily planning from about 30 minutes to under 2. A companion agent turns lecture and problem-set notes into a cross-linked knowledge base of theorem references.</p>
+          <p class="tools">Built with Claude Code, Obsidian, and LLM agents.</p>
+        </div>
+      </article>
+      <article class="row" id="plantinarium">
+        <div class="margin"><p>2024</p><p>Six-person team project</p></div>
+        <div class="page">
+          <h2 class="entry-title"><a href="work-plantinarium.html">Plantinarium</a></h2>
+          <p class="entry-text">A plant-identification desktop app built by a six-person team in Java and Maven. Upload a photo and the system identifies the species, then share your find with notes through public and private galleries. I owned the account-management flow, including secure account deletion with a full wipe of the user's data.</p>
+          <p class="tools">Built with Java and Maven.</p>
+          <p class="links"><a href="https://github.com/barnaste/plantinarium">Code on GitHub</a></p>
+        </div>
+      </article>
+      <!-- /build:projects -->
+
+      <div class="row">
+        <div class="margin"></div>
+        <p class="page note">Course reports are on the <a href="research.html">Research</a> page.</p>
+      </div>
+    </main>
+
+    <footer class="footer"><!-- build:footer -->
+      <div class="row">
+        <p class="margin">Say hi</p>
+        <div class="page">
+          <p class="footer-links"><a href="mailto:avichaigobrin@gmail.com">avichaigobrin@gmail.com</a><span class="profiles"><a href="https://github.com/Avi-Gobrin">GitHub</a><a href="https://www.linkedin.com/in/avigobrin/">LinkedIn</a><a href="https://x.com/AvichaiGobrin">X</a></span></p>
+          <p class="fine">Hand-built in plain HTML, CSS, and a little JavaScript. &copy; 2026 Avi Gobrin.</p>
+        </div>
+      </div>
+      <!-- /build:footer --></footer>
+  </div>
+  <script src="theme.js"></script>
+</body>
+</html>

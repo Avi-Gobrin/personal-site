@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tiny GPT From Scratch | Avi Gobrin</title>
+  <meta name="description" content="A character-level GPT in pure NumPy with no autograd: multi-head causal attention, pre-LN Transformer blocks, Adam, and top-k sampling, with a...">
+  <link rel="canonical" href="https://avi-gobrin.github.io/personal-site/work-gpt.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Avi Gobrin">
+  <meta property="og:title" content="Tiny GPT From Scratch | Avi Gobrin">
+  <meta property="og:description" content="A character-level GPT in pure NumPy with no autograd: multi-head causal attention, pre-LN Transformer blocks, Adam, and top-k sampling, with a...">
+  <meta property="og:url" content="https://avi-gobrin.github.io/personal-site/work-gpt.html">
+  <meta property="og:image" content="https://avi-gobrin.github.io/personal-site/assets/og-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tiny GPT From Scratch | Avi Gobrin">
+  <meta name="twitter:description" content="A character-level GPT in pure NumPy with no autograd: multi-head causal attention, pre-LN Transformer blocks, Adam, and top-k sampling, with a...">
+  <meta name="twitter:image" content="https://avi-gobrin.github.io/personal-site/assets/og-card.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Alegreya+Sans:wght@400;500&display=swap">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='dark'&&t!=='light'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();</script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="notebook">
+    <header class="masthead">
+      <div class="row">
+        <p class="margin"><a class="name-link" href="./">Avi Gobrin</a></p>
+        <div class="page bar">
+          <nav class="nav" aria-label="Main">
+            <a href="experience.html">Experience</a>
+            <a href="projects.html" aria-current="true">Projects</a>
+            <a href="research.html">Research</a>
+            <a href="coursework.html">Coursework</a>
+          </nav>
+          <button class="theme-toggle" type="button"><span class="to-dark">Chalkboard<span class="sr-only"> (switch to dark theme)</span></span><span class="to-light">Notebook<span class="sr-only"> (switch to light theme)</span></span></button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <div class="row">
+        <p class="margin"><a href="projects.html">Projects</a></p>
+        <div class="page"><h1 class="title">Tiny GPT From Scratch</h1></div>
+      </div>
+
+      <div class="row tight">
+        <div class="margin"><p>2026</p><p>Personal project</p></div>
+        <p class="page desc">A character-level GPT built in pure NumPy, with no PyTorch and no autograd. One codebase grows from a counting bigram model into a full Transformer: tokenizer, numerically stable softmax, multi-head causal self-attention, pre-LN Transformer blocks, Adam, and temperature and top-k sampling. Every backward pass is written by hand. The steps started as exercises on Deep-ML; the repository assembles them into one runnable model and adds a test suite that checks each gradient against finite differences.</p>
+      </div>
+
+      <div class="row">
+        <h2 class="margin">Details</h2>
+        <div class="page">
+          <ul class="points">
+            <li>Hand-written forward and backward passes for embeddings, multi-head causal attention, LayerNorm, feed-forward blocks, and the language-model head</li>
+            <li>56 pytest tests, including a finite-difference gradient check on every model parameter and an end-to-end causality test</li>
+            <li>GitHub Actions runs the test suite and a train-and-sample demo on every push</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row">
+        <h2 class="margin">Built with</h2>
+        <p class="page">Python, NumPy, pytest, and GitHub Actions</p>
+      </div>
+
+      <div class="row">
+        <div class="margin"></div>
+        <p class="page links"><a href="https://github.com/Avi-Gobrin/tiny-gpt-from-scratch">Code on GitHub</a></p>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="row">
+        <p class="margin">Say hi</p>
+        <div class="page">
+          <p class="footer-links"><a href="mailto:avichaigobrin@gmail.com">avichaigobrin@gmail.com</a><span class="profiles"><a href="https://github.com/Avi-Gobrin">GitHub</a><a href="https://www.linkedin.com/in/avigobrin/">LinkedIn</a><a href="https://x.com/AvichaiGobrin">X</a></span></p>
+          <p class="fine">Hand-built in plain HTML, CSS, and a little JavaScript. &copy; 2026 Avi Gobrin.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <script src="theme.js"></script>
+</body>
+</html>

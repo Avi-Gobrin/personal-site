@@ -1,0 +1,36 @@
+# Resumes: only the two public PDFs may ever be committed. Sources and
+# private builds carry the phone number, and git history is public.
+assets/Resumes/*
+!assets/Resumes/Avi_Gobrin_Resume_2026.pdf
+!assets/Resumes/Avi_Gobrin_Resume_2026_ML.pdf
+*.tex
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.toc
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+*.dvi
+*.xdv
+
+# Local resume copy helper
+sync-resumes.ps1
+
+# Local-only notes and tooling, not part of the site
+plans/
+TODO.md
+.claude/
+CLAUDE.md
+
+# Build output of make-redirects.mjs, copied into the old repo by hand
+redirects/
+
+# Editor and OS clutter
+.DS_Store
+Thumbs.db
+.vscode/

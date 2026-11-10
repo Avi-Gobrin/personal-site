@@ -1,0 +1,443 @@
+/* ============================================================
+   A working notebook.
+
+   Paper by day, chalkboard by night. One rose margin rule runs
+   down every page: the margin, left of it, holds context (who,
+   when, where, what kind); the page, right of it, holds the work.
+   No cards, no chips, no icons. One solid button.
+
+   Layout tokens live in :root. Every block on an inner page is a
+   .row: a .margin cell and a .page cell. The homepage is the one
+   exception: its margin holds the whole profile.
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; padding: 0; }
+
+:root {
+  color-scheme: light;
+  --paper: #f9f9f6;
+  --ink: #1f2633;
+  --graphite: #566072;     /* 6.0:1 on paper */
+  --link: #234e8c;         /* 7.8:1 on paper */
+  --rule: #dd8a92;         /* the margin line; decorative only */
+  --open: #3e7b4e;
+  --on-ink: #f9f9f6;
+  --heat-0: #e7eaee;
+  --heat-1: #c4d2e6;
+  --heat-2: #8fa9d0;
+  --heat-3: #5378b2;
+  --heat-4: #234e8c;
+  --firefly: #f2c14e;      /* highlighter yellow; decorative only */
+
+  --serif: 'Alegreya', 'Iowan Old Style', Georgia, serif;
+  --sans: 'Alegreya Sans', 'Segoe UI', system-ui, sans-serif;
+
+  --margin: 16rem;         /* the margin column */
+  --gap: 2rem;             /* from either column to the rule */
+  --measure: 38rem;        /* the page column, about 70 characters */
+  --edge: 2.5rem;          /* outer padding */
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #22302a;        /* chalkboard */
+  --ink: #eceae3;          /* chalk, 11.5:1 */
+  --graphite: #a5afaa;     /* 6.1:1 on the board */
+  --link: #e6d28c;         /* yellow chalk, 9.2:1 */
+  --rule: #b8737d;
+  --open: #8fc29a;
+  --on-ink: #22302a;
+  --heat-0: #2f3e37;
+  --heat-1: #4a5b53;
+  --heat-2: #71837a;
+  --heat-3: #a6b3ac;
+  --heat-4: #e2e7df;
+  --firefly: #e6d28c;      /* yellow chalk */
+}
+
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1.1875rem;
+  line-height: 1.55;
+  font-kerning: normal;
+  font-variant-numeric: oldstyle-nums proportional-nums;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--link);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; border-radius: 2px; }
+img, svg { display: block; max-width: 100%; }
+strong { font-weight: 700; }
+em { font-style: italic; }
+p, li, dd { text-wrap: pretty; }
+h1, h2, h3 { text-wrap: balance; }
+
+.sans { font-family: var(--sans); font-variant-numeric: lining-nums; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+}
+
+.skip {
+  position: absolute; z-index: 10; left: 1rem; top: 1rem;
+  transform: translateY(-300%);
+  font-family: var(--sans); font-size: 1rem;
+  background: var(--ink); color: var(--on-ink);
+  padding: 0.4rem 0.8rem; border-radius: 4px;
+}
+.skip:focus { transform: none; }
+
+/* ---------- the sheet and its rule ---------- */
+.notebook {
+  position: relative;
+  max-width: calc(var(--margin) + 2 * var(--gap) + var(--measure) + 2 * var(--edge));
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 0 var(--edge);
+  display: flex;
+  flex-direction: column;
+}
+.notebook::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(var(--edge) + var(--margin) + var(--gap) - 0.75px);
+  width: 1.5px;
+  background: var(--rule);
+  pointer-events: none;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: var(--margin) minmax(0, var(--measure));
+  column-gap: calc(2 * var(--gap));
+  align-items: baseline;
+}
+
+/* Margin notes: italic, quiet, and set on the same baseline as the
+   first line of the page cell beside them. */
+.margin {
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--graphite);
+}
+.row > .margin { text-align: right; }
+.masthead .row > .margin { text-align: left; }
+.margin p + p { margin-top: 0.1rem; }
+.margin a { color: inherit; }
+.margin a:hover { color: var(--ink); }
+.page > :first-child { margin-top: 0; }
+
+main { flex: 1; padding: 3.5rem 0 5.5rem; }
+main.home { padding-top: 2.75rem; }
+main > .row + .row { margin-top: 2.75rem; }
+main > .row.tight { margin-top: 1.25rem; }
+main > .row.section-row { margin-top: 3.5rem; }
+main > .row.section-row + .row { margin-top: 1.1rem; }
+main > .row.course + .row.course { margin-top: 1.15rem; }
+
+/* ---------- masthead ---------- */
+.masthead { padding-top: 1.75rem; }
+.name-link {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.0625rem;
+  color: var(--ink);
+  text-decoration: none;
+}
+.name-link:hover { text-decoration: underline; text-decoration-color: var(--rule); }
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 1.5rem;
+  row-gap: 0.3rem;
+}
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 1.5rem;
+  row-gap: 0.25rem;
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+}
+.nav a { color: var(--graphite); text-decoration: none; }
+.nav a:hover { color: var(--ink); }
+.nav a[aria-current] {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--rule);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.4em;
+}
+.theme-toggle {
+  margin-left: auto;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--graphite);
+  background: none;
+  border: 0;
+  padding: 0.1rem 0;
+  cursor: pointer;
+}
+.theme-toggle:hover { color: var(--ink); text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 0.25em; }
+.theme-toggle .to-light { display: none; }
+[data-theme="dark"] .theme-toggle .to-dark { display: none; }
+[data-theme="dark"] .theme-toggle .to-light { display: inline; }
+
+/* ---------- homepage: the profile lives in the margin ---------- */
+.home {
+  display: grid;
+  grid-template-columns: var(--margin) minmax(0, var(--measure));
+  column-gap: calc(2 * var(--gap));
+  align-items: start;
+}
+
+.portrait { display: block; width: 5.75rem; height: 5.75rem; border-radius: 50%; }
+img.portrait { object-fit: cover; }
+.monogram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--ink);
+  background: var(--paper);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 2.05rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.name {
+  margin-top: 1.1rem;
+  font-size: 3.25rem;
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -0.01em;
+}
+.pitch {
+  margin-top: 0.8rem;
+  font-size: 1.3125rem;
+  font-style: italic;
+  line-height: 1.38;
+}
+.status {
+  margin-top: 1.4rem;
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  line-height: 1.4;
+}
+.status .dot {
+  display: inline-block;
+  width: 0.55rem;
+  height: 0.55rem;
+  margin-right: 0.45rem;
+  border-radius: 50%;
+  background: var(--open);
+  vertical-align: 0.06em;
+}
+.facts {
+  margin-top: 0.5rem;
+  font-size: 1.0625rem;
+  line-height: 1.45;
+  color: var(--graphite);
+}
+.contact { margin-top: 1.6rem; font-family: var(--sans); font-size: 1.0625rem; }
+.contact-links {
+  margin-top: 0.9rem;
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  column-gap: 1.6rem;
+  row-gap: 0.3rem;
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+}
+.button {
+  display: inline-block;
+  padding: 0.5rem 1.05rem;
+  border-radius: 4px;
+  background: var(--ink);
+  color: var(--on-ink);
+  font-weight: 500;
+  text-decoration: none;
+}
+.button:hover { text-decoration: underline; text-decoration-thickness: 1px; }
+/* The fireflies: a living doodle in the margin around the portrait
+   (see fireflies.js). */
+.fireflies { position: relative; height: 7.75rem; }
+.fireflies canvas { position: absolute; inset: 0; width: 100%; height: 100%; touch-action: manipulation; }
+.fireflies .portrait { position: absolute; left: 0; top: 50%; transform: translateY(calc(-50% - 0.35rem)); z-index: 1; }
+.fireflies-note { margin-top: 0.35rem; font-size: 0.9375rem; line-height: 1.45; font-style: italic; color: var(--graphite); }
+.fireflies-note .sync { font-style: normal; font-family: var(--sans); font-variant-numeric: lining-nums tabular-nums; color: var(--ink); }
+.pause {
+  font: inherit;
+  color: var(--link);
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+.pause:hover { text-decoration-thickness: 2px; }
+
+.offclock {
+  margin-top: 1.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--graphite);
+}
+.offclock em { color: var(--ink); }
+
+.evidence > section + section { margin-top: 2.75rem; }
+.label {
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--graphite);
+}
+.label + * { margin-top: 0.5rem; }
+.item + .item { margin-top: 1.2rem; }
+.item-head { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 0.6rem; }
+.item-title { font-size: 1.1875rem; font-weight: 700; line-height: 1.4; }
+.item-title a { color: var(--ink); text-decoration-color: var(--rule); }
+.item-title a:hover { text-decoration-color: var(--ink); }
+.item-meta { font-style: italic; color: var(--graphite); font-size: 1.0625rem; }
+.item p + p, .item-head + p { margin-top: 0.2rem; }
+.more { margin-top: 1rem; font-size: 1.0625rem; color: var(--graphite); }
+
+/* GitHub activity: a year of graph paper */
+.heat { margin-top: 0.6rem; }
+.heat svg { width: 100%; height: auto; }
+.heat-label { font-family: var(--sans); font-size: 12px; fill: var(--graphite); }
+.h0 { fill: var(--heat-0); }
+.h1 { fill: var(--heat-1); }
+.h2 { fill: var(--heat-2); }
+.h3 { fill: var(--heat-3); }
+.h4 { fill: var(--heat-4); }
+.heat-half, .half-note { display: none; }
+.caption { margin-top: 0.5rem; font-size: 1.0625rem; color: var(--graphite); }
+
+.skills { display: grid; grid-template-columns: max-content minmax(0, 1fr); column-gap: 1.1rem; row-gap: 0.45rem; }
+.skills dt { font-style: italic; color: var(--graphite); font-size: 1.0625rem; }
+.skills dd { line-height: 1.5; }
+
+/* ---------- inner pages ---------- */
+.title { font-size: 2.75rem; font-weight: 500; line-height: 1.1; letter-spacing: -0.005em; }
+.intro { margin-top: 0.8rem; color: var(--graphite); }
+.section-title { font-size: 1.75rem; font-weight: 500; line-height: 1.2; }
+.entry-title { font-size: 1.5rem; font-weight: 700; line-height: 1.25; }
+.entry-title a { color: var(--ink); text-decoration-color: var(--rule); }
+.entry-title a:hover { text-decoration-color: var(--ink); }
+.entry-sub { margin-top: 0.15rem; font-style: italic; }
+.lead { margin-top: 0.75rem; }
+.entry-text { margin-top: 0.6rem; }
+.points { list-style: none; margin-top: 0.85rem; }
+.points li { position: relative; padding-left: 1.3rem; }
+.points li + li { margin-top: 0.55rem; }
+.points li::before {
+  content: "";
+  position: absolute;
+  left: 0.05rem;
+  top: 0.78em;
+  width: 0.6rem;
+  height: 2px;
+  background: var(--rule);
+}
+.points em { font-style: normal; font-weight: 700; }
+.tools { margin-top: 0.6rem; font-size: 1.0625rem; color: var(--graphite); }
+.links {
+  margin-top: 0.7rem;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 1.25rem;
+  row-gap: 0.25rem;
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+}
+.desc { font-size: 1.25rem; line-height: 1.55; }
+.note { color: var(--graphite); font-size: 1.0625rem; }
+
+/* Coursework: the code is the margin note; courses sit close together. */
+.course .margin { font-style: normal; font-family: var(--sans); font-size: 0.9375rem; letter-spacing: 0.01em; font-variant-numeric: lining-nums; }
+.course .margin .when { font-family: var(--serif); font-style: italic; font-size: 1rem; letter-spacing: 0; }
+.course-name { font-weight: 500; }
+.course-desc { margin-top: 0.1rem; font-size: 1.0625rem; line-height: 1.5; color: var(--graphite); }
+
+/* ---------- footer ---------- */
+.footer { padding: 2rem 0 2.75rem; }
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 1.25rem;
+  row-gap: 0.3rem;
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+}
+.profiles { display: inline-flex; column-gap: 1.25rem; }
+.fine { margin-top: 0.5rem; font-family: var(--sans); font-size: 0.9375rem; color: var(--graphite); }
+
+/* ---------- narrower screens: the rule moves to the left edge ---------- */
+@media (max-width: 999px) {
+  :root { --edge: 1.5rem; --gap: 1.25rem; }
+  .notebook { max-width: calc(var(--measure) + var(--gap) + 2 * var(--edge)); }
+  .notebook::before { left: calc(var(--edge) - 0.75px); }
+  .row, .home { grid-template-columns: minmax(0, 1fr); padding-left: var(--gap); }
+  .row > .margin { text-align: left; margin-bottom: 0.2rem; }
+  .contact-links { display: flex; flex-wrap: wrap; column-gap: 1.25rem; }
+  .margin p { display: inline; }
+  .margin p + p::before { content: ", "; }
+  .masthead .row { row-gap: 0.4rem; }
+  .margin:empty { display: none; }
+  .home .evidence { margin-top: 3.25rem; }
+  main { padding-top: 2.5rem; }
+}
+
+@media (max-width: 559px) {
+  :root { --edge: 1.1rem; --gap: 1rem; }
+  body { font-size: 1.125rem; }
+  .name { font-size: 2.6rem; }
+  .pitch { font-size: 1.25rem; }
+  .title { font-size: 2.25rem; }
+  .entry-title { font-size: 1.35rem; }
+  .portrait { width: 5rem; height: 5rem; }
+  .monogram { font-size: 1.8rem; }
+  .nav { column-gap: 1.1rem; }
+  .heat-year { display: none; }
+  .heat-half { display: block; }
+  .half-note { display: inline; }
+  .skills { grid-template-columns: minmax(0, 1fr); row-gap: 0; }
+  .skills dd + dt { margin-top: 0.6rem; }
+}
+
+@media print {
+  /* Print the notebook colours whatever the theme on screen. */
+  :root, [data-theme="dark"] {
+    color-scheme: light;
+    --paper: #fff;
+    --ink: #000;
+    --graphite: #444;
+    --link: #234e8c;
+    --on-ink: #fff;
+  }
+  .masthead, .theme-toggle, .skip, .fireflies canvas, .fireflies-note { display: none; }
+  .notebook::before { display: none; }
+  body { background: #fff; color: #000; }
+}
