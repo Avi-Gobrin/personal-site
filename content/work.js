@@ -55,6 +55,24 @@ const WORK = [
     links: []
   },
   {
+    id: 'f1',
+    type: 'Project',
+    title: 'F1 Race Winner Predictor',
+    when: '2026',
+    kind: 'Personal project',
+    card: `Predicts Formula 1 race winners from recent form, qualifying, track history, reliability, and weather, using LASSO-penalized logistic regression on official timing data. Tested walk-forward, each season predicted only from the ones before it, it reaches 40 to 46% winner accuracy: competitive with, though not clearly ahead of, the strong rule that the pole-sitter wins.`,
+    desc: `A supervised pipeline that frames each race as a classification problem: who wins? It pulls results, qualifying, and weather from the official F1 timing feed via FastF1, engineers causal features (rolling driver and constructor form, grid and qualifying position, driver-track history, a reliability proxy, and weather), and fits a LASSO-penalized logistic regression, with linear regression and factor analysis alongside for interpretation. Evaluation is walk-forward: train on 2023 and predict 2024, then grow the window, so the model never sees the future.`,
+    findingsLabel: 'Details',
+    findings: [
+      `40 to 46% race-winner accuracy and 53 to 74% podium precision across the 2024, 2025, and partial 2026 seasons`,
+      `The pole-sitter baseline wins half to four-fifths of these races, so the model is competitive with it rather than dominant, as expected for modern F1`,
+      `LASSO keeps a sparse model: recent driver form and grid or qualifying position carry nearly all the signal`,
+      `Factor analysis recovers four interpretable factors (form, temperature, wind, reliability); the first four principal components explain about 74% of the variance`
+    ],
+    tools: ['Python', 'FastF1', 'scikit-learn', 'LASSO', 'factor analysis'],
+    links: [{ label: 'Code', href: 'https://github.com/Avi-Gobrin/F1-Race-predictor' }]
+  },
+  {
     id: 'plantinarium',
     type: 'Project',
     title: 'Plantinarium',

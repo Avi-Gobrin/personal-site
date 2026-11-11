@@ -55,7 +55,7 @@ const ICONS = {
   },
   /* StarCraft II: the Grandmaster emblem, as in the room. */
   trophy() {
-    const g = grid(17, 19), keys = { L: 'line', O: 'gm-top', G: 'gold', D: 'gm-edge', K: 'gm-dark', S: 'gm-wing', W: 'gm-hi', R: 'gm-core' };
+    const g = grid(17, 19), keys = { L: 'line', O: 'gm-top', G: 'gold', D: 'gm-edge', K: 'gm-dark', S: 'gm-wing', W: 'gm-hi' };
     [
       '........L........',
       '......LLOLL......',
@@ -65,9 +65,9 @@ const ICONS = {
       'LOOOOODWGGDOOOOOL',
       'LOOOOODWGGDOOOOOL',
       'LDWWWWWWGGGGGGGDL',
-      'LODWWWWRRRGGGGDOL',
-      'LSSDWWWRRRGGGDSSL',
-      'LKKKDDWRRRGDDKKKL',
+      'LODWWWWWGGGGGGDOL',
+      'LSSDWWWWGGGGGDSSL',
+      'LKKKDDWWGGGDDKKKL',
       'LSSSDWWWGGGGDSSSL',
       'LKKKDWWWGGGGDKKKL',
       'LSSSDWWDDDGGDSSSL',
@@ -96,6 +96,15 @@ const ICONS = {
         g.px(x, y, k);
       }
     });
+    return g;
+  },
+  /* Karate: a black belt, tied. */
+  belt() {
+    const g = grid(18, 13);
+    g.r(2, 0, 14, 2, 'belt'); g.r(0, 1, 2, 3, 'belt'); g.r(16, 1, 2, 3, 'belt'); g.r(2, 4, 14, 2, 'belt');
+    g.r(7, 3, 4, 4, 'belt'); g.r(8, 4, 2, 1, 'belt-shine');
+    g.r(6, 7, 2, 4, 'belt'); g.r(5, 10, 2, 3, 'belt');
+    g.r(10, 7, 2, 4, 'belt'); g.r(11, 10, 2, 3, 'belt');
     return g;
   },
   /* Toronto: the window, with the CN Tower. */

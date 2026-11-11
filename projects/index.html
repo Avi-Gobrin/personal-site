@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Projects | Avi Gobrin</title>
-  <meta name="description" content="Projects by Avi Gobrin: a GPT built from scratch in NumPy with a 56-test gradient-checking suite, autonomous planning agents on Claude Code, and Plantinarium.">
+  <meta name="description" content="Projects by Avi Gobrin: a GPT built from scratch in NumPy with a 56-test gradient-checking suite, autonomous planning agents on Claude Code, an F1 race-winner predictor, and Plantinarium.">
   <link rel="canonical" href="https://avi-gobrin.github.io/personal-site/projects/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Avi Gobrin">
   <meta property="og:title" content="Projects | Avi Gobrin">
-  <meta property="og:description" content="A GPT built from scratch in NumPy with a 56-test gradient-checking suite, autonomous planning agents on Claude Code, and Plantinarium.">
+  <meta property="og:description" content="A GPT built from scratch in NumPy with a 56-test gradient-checking suite, autonomous planning agents on Claude Code, an F1 race-winner predictor, and Plantinarium.">
   <meta property="og:url" content="https://avi-gobrin.github.io/personal-site/projects/">
   <meta property="og:image" content="https://avi-gobrin.github.io/personal-site/assets/img/og-card.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Projects | Avi Gobrin">
-  <meta name="twitter:description" content="A GPT built from scratch in NumPy with a 56-test gradient-checking suite, autonomous planning agents on Claude Code, and Plantinarium.">
+  <meta name="twitter:description" content="A GPT built from scratch in NumPy with a 56-test gradient-checking suite, autonomous planning agents on Claude Code, an F1 race-winner predictor, and Plantinarium.">
   <meta name="twitter:image" content="https://avi-gobrin.github.io/personal-site/assets/img/og-card.png">
   <!-- build:head -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alegreya:wght@500&family=Inter:wght@400;500;600&family=Silkscreen&display=swap">
   <link rel="icon" href="../assets/img/favicon.svg?v=c77a12f6" type="image/svg+xml">
   <script>(function(){var t;try{t=localStorage.getItem('theme')}catch(e){}if(t!=='dark'&&t!=='light'){t=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.setAttribute('data-theme',t)})();</script>
-  <link rel="stylesheet" href="../assets/css/style.css?v=868206a1">
+  <link rel="stylesheet" href="../assets/css/style.css?v=96c78e60">
   <!-- /build:head -->
 </head>
 <body>
@@ -69,6 +69,16 @@
         <p class="meta">Personal project</p>
         <p>Two LLM agents that run my day and my coursework, and cut daily planning from about 30 minutes to under 2. Built on Claude Code with an Obsidian vault as the knowledge store: one reviews each day and regenerates tomorrow's time-blocked calendar, the other turns lecture and problem-set notes into a cross-linked base of theorem references.</p>
         <p class="stack">Claude Code · Obsidian · LLM agents</p>
+      </div>
+    </article>
+    <article class="entry" id="f1">
+      <p class="when">2026</p>
+      <div>
+        <h2 class="entry-title"><a href="../projects/f1/">F1 Race Winner Predictor</a></h2>
+        <p class="meta">Personal project</p>
+        <p>Predicts Formula 1 race winners from recent form, qualifying, track history, reliability, and weather, using LASSO-penalized logistic regression on official timing data. Tested walk-forward, each season predicted only from the ones before it, it reaches 40 to 46% winner accuracy: competitive with, though not clearly ahead of, the strong rule that the pole-sitter wins.</p>
+        <p class="stack">Python · FastF1 · scikit-learn · LASSO · factor analysis</p>
+        <p class="links"><a href="https://github.com/Avi-Gobrin/F1-Race-predictor">Code</a></p>
       </div>
     </article>
     <article class="entry" id="plantinarium">

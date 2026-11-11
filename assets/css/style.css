@@ -135,6 +135,7 @@ h1, h2, h3 { text-wrap: balance; }
 
 /* A project or paper's own page. */
 .lede { font-size: 1.125rem; }
+.lede + .status { margin-top: 0.9rem; }
 .points { list-style: none; }
 .points li { position: relative; padding-left: 1.3rem; }
 .points li + li { margin-top: 0.55rem; }
@@ -163,8 +164,9 @@ h1, h2, h3 { text-wrap: balance; }
 .p-book-a { fill: #c45a5a; } .p-book-b { fill: #4f7fb0; } .p-book-c { fill: #e2b44f; } .p-pages { fill: #fffdf7; }
 .p-board { fill: #34404a; } .p-chalk { fill: #f4f1e8; }
 .p-gold { fill: #f0c46a; }
-.p-gm-top { fill: #c46c24; } .p-gm-edge { fill: #6e3010; } .p-gm-dark { fill: #4a2410; } .p-gm-wing { fill: #c8964a; } .p-gm-hi { fill: #fff3c4; } .p-gm-core { fill: #e04828; }
+.p-gm-top { fill: #c46c24; } .p-gm-edge { fill: #6e3010; } .p-gm-dark { fill: #4a2410; } .p-gm-wing { fill: #c8964a; } .p-gm-hi { fill: #fff3c4; }
 .p-mana-w { fill: #f3ead0; } .p-mana-u { fill: #4f8fd6; } .p-mana-b { fill: #4a3f58; } .p-mana-r { fill: #d8574a; } .p-mana-g { fill: #4f9a5a; } .p-art { fill: #d9c49a; }
+.p-belt { fill: #16151c; } .p-belt-shine { fill: #55525e; }
 .p-frame { fill: #fbf8f1; } .p-frame-dark { fill: #cdbfa6; } .p-sky { fill: #b4d4ee; } .p-city { fill: #8eaacb; } .p-snow { fill: #ffffff; }
 [data-theme="dark"] .p-line { fill: #120c18; }
 

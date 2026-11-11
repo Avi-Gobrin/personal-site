@@ -5,9 +5,9 @@
    mug steams, and it snows on Toronto outside. Things in the room
    are doors to the rest of the site: the laptop is Projects, the
    corkboard is Experience, the books are Research, the chalkboard
-   is About, the letter and the mug are email, the trophy, cards,
-   and window open their part of About, and the lamp is the light
-   switch (it flips the theme).
+   is About, the mug is email, the trophy and the window open their
+   part of About, and the lamp is the light switch (it flips the
+   theme).
 
    Everything is painted at a low resolution with plain rectangles,
    then scaled up by a whole number of device pixels, so every pixel
@@ -20,9 +20,8 @@ Hero(function (api) {
   /* Morning by day, dusk by night: one look for the whole room, and the page text on top of it. */
   var SHARED = {
     chalk: '#f4f1e8', chalkDim: '#b9bfc4',
-    manaW: '#f3ead0', manaU: '#4f8fd6', manaB: '#3d3448', manaR: '#d8574a', manaG: '#4f9a5a',
     kw: '#ef93a0', fn: '#9cc9e6', str: '#f3d27e', com: '#5d5a7a', plain: '#cfc5dc',
-    gmTop: '#c46c24', gmEdge: '#6e3010', gmDark: '#4a2410', gmWing: '#c8964a', gmHi: '#fff3c4', gmCore: '#e04828'
+    gmTop: '#c46c24', gmEdge: '#6e3010', gmDark: '#4a2410', gmWing: '#c8964a', gmHi: '#fff3c4'
   };
   var PALETTES = {
     dusk: {
@@ -32,13 +31,13 @@ Hero(function (api) {
       deskEdge: '#6e4650', deskLip: '#35222e', deskFace: '#2f1e2a', shadow: '#3a2534',
       line: '#1b1222', sky: ['#7c4f8a', '#d0707c', '#f4a37f'], star: '#ffe3d1', starDim: '#b98aa8',
       moon: '#ffd28a', moonDark: '#f4b06a', sun: true, city: '#2b1d3d', cityWin: '#ffcf7a', cityWin2: '#c98bb0', snow: '#ffe9e0',
-      frame: '#5c4670', frameDark: '#332641', cork: '#9a6a48', corkDark: '#7a5238', corkFrame: '#4e3430', board: '#241c2e',
+      frame: '#5c4670', frameDark: '#332641', cork: '#9a6a48', corkDark: '#7a5238', corkFrame: '#4e3430', board: '#241c2e', chalkLine: '#544c5e',
       note1: '#f3d27e', note2: '#ef93a0', note3: '#9cc9e6', paper: '#f6e9dc', paperDark: '#c4ab9c', scribble: '#7a5a5a', pin: '#e05468',
       lamp: '#f0b45a', lampDark: '#a9703a', bulb: '#fff2c2', metal: '#a59ab4', metalLight: '#cfc5dc', metalDark: '#6a5d7c', bezel: '#22182e',
       screen: '#1d1530', dotA: '#ef93a0', dotB: '#f3d27e', dotC: '#9ad6a8',
       mug: '#f6e9dc', mugDark: '#bba69a', coffee: '#5a3a2a', steam: '#b892b0',
-      book1: '#e0716a', book2: '#6c88c4', book3: '#f0c46a', pages: '#f6e9dc', leaf: '#7fb87a',
-      cardBorder: '#1b1222', cardFace: '#d7bf95', trophy: '#f0c46a', seal: '#e05468',
+      book1: '#e0716a', book2: '#6c88c4', book3: '#f0c46a', book4: '#9a84c8', book5: '#f0a070', pages: '#f6e9dc', leaf: '#7fb87a',
+      trophy: '#f0c46a',
       accent: '#ffcf7a',
       text: '#fff1e4', muted: '#e2c9d0', link: '#ffd08a', panel: '#2a1f38'
     },
@@ -49,13 +48,13 @@ Hero(function (api) {
       deskEdge: '#e6c49d', deskLip: '#a97c55', deskFace: '#b8875e', shadow: '#b08660',
       line: '#3a3346', sky: ['#9cc5e6', '#b4d4ee', '#cfe4f4'], star: false, starDim: false,
       moon: '#fff1b8', moonDark: '#ffe08a', sun: true, city: '#8eaacb', cityWin: '#c7d8ea', cityWin2: '#a9c0dc', snow: '#ffffff',
-      frame: '#fbf8f1', frameDark: '#cdbfa6', cork: '#c99a6a', corkDark: '#b0835a', corkFrame: '#8a6446', board: '#34404a',
+      frame: '#fbf8f1', frameDark: '#cdbfa6', cork: '#c99a6a', corkDark: '#b0835a', corkFrame: '#8a6446', board: '#34404a', chalkLine: '#5d6a74',
       note1: '#f3d77e', note2: '#f0a0aa', note3: '#a3cfe9', paper: '#fffdf7', paperDark: '#cfc3ad', scribble: '#8a7a6a', pin: '#d8485a',
       lamp: '#d06a5a', lampDark: '#9a4a40', bulb: '#efe3c8', metal: '#b8bccb', metalLight: '#d9dce5', metalDark: '#7d8296', bezel: '#3a3d4c',
       screen: '#fdfaf3', dotA: '#e58f9a', dotB: '#e9c45a', dotC: '#6fbf86',
       mug: '#ffffff', mugDark: '#cfc6b6', coffee: '#6a4632', steam: '#ffffff',
-      book1: '#c45a5a', book2: '#4f7fb0', book3: '#e2b44f', pages: '#fffdf7', leaf: '#6fae6a',
-      cardBorder: '#2b2a3a', cardFace: '#d9c49a', trophy: '#e3b34a', seal: '#d8485a',
+      book1: '#c45a5a', book2: '#4f7fb0', book3: '#e2b44f', book4: '#7e6aa8', book5: '#d98a4e', pages: '#fffdf7', leaf: '#6fae6a',
+      trophy: '#e3b34a',
       accent: '#d8485a',
       text: '#1f2638', muted: '#5a5f70', link: '#2f5aa8', panel: '#fffdf7',
       kw: '#c4505d', fn: '#2f5aa8', str: '#b07f2a', com: '#d3ccbd', plain: '#6a6f80'
@@ -100,7 +99,7 @@ Hero(function (api) {
   }
 
   /* ---------- where everything goes ---------- */
-  var SIZES = { chalk: [64, 50], cork: [54, 38], win: [64, 54], shelf: [30, 26] };
+  var SIZES = { chalk: [84, 57], cork: [54, 38], win: [64, 54] };
 
   function layout() {
     var deskH = clamp(Math.round(vh * 0.2), 30, 70);
@@ -131,43 +130,36 @@ Hero(function (api) {
         y += h + 12;
       });
     }
-    if (body.length && tl - edge - 8 >= 64 && vw - edge - tr - 8 >= 64) {
+    if (body.length && tl - edge - 8 >= 84 && vw - edge - tr - 8 >= 64) {
       column(['chalk', 'cork'], edge, tl - 8);
-      column(['win', 'shelf'], tr + 8, vw - edge);
+      column(['win'], tr + 8, vw - edge);
     } else if (body.length) {
-      var y = Math.round(tt - 10 - 54), gap = 10;
-      if (y > ceiling + 4 && vw >= 64 * 2 + gap + 8) {
-        var x = Math.round((vw - 64 * 2 - gap) / 2);
-        wall.chalk = { x: x, y: y + 4, w: 64, h: 50 };
-        wall.win = { x: x + 64 + gap, y: y, w: 64, h: 54 };
+      var y = Math.round(tt - 10 - 57), gap = 10;
+      if (y > ceiling + 4 && vw >= 84 + 64 + gap + 8) {
+        var x = Math.round((vw - 84 - 64 - gap) / 2);
+        wall.chalk = { x: x, y: y, w: 84, h: 57 };
+        wall.win = { x: x + 84 + gap, y: y + 3, w: 64, h: 54 };
       }
     }
-    var shelf = wall.shelf || null;
     L = {
-      deskY: deskY, top: top, by: by, cx: cx, ceiling: ceiling,
+      deskY: deskY, top: top, by: by, cx: cx, ceiling: ceiling, wide: !!wall.cork,
       laptop: { x: cx - 24, y: by - 36, w: 48, h: 36 },
-      trophy: shelf ? { x: shelf.x + 6, y: shelf.y, w: 17, h: 21 } : null,
-      shelf: shelf, cork: wall.cork || null, chalk: wall.chalk || null,
+      cork: wall.cork || null, chalk: wall.chalk || null,
       win: wall.win ? { x: wall.win.x, y: wall.win.y, w: 64, h: 50 } : null
     };
     desk(cx, by);
   }
 
-  /* The desk, from the laptop outward: the gaps grow with the screen,
-     so a wide desk is spread out and a narrow one stays tidy. */
+  /* The desk, set up like a real one: the lamp leans over the laptop,
+     the mug sits at its elbow, and the books and the trophy keep to
+     the ends, a little further out on a wider desk. */
   function desk(cx, by) {
-    var half = Math.min(vw / 2 - 4, 168);
-    var left = [['cards', 25, 15], ['lamp', 30, 46]];
-    var right = [['mug', 11, 9], ['books', 26, 14], ['envelope', 20, 15]];
-    function side(items) {
-      var room = half - 28, used = items.reduce(function (s, it) { return s + it[1]; }, 0);
-      return clamp(Math.floor((room - used) / items.length), 0, 30);
-    }
-    if (side(left) < 4) left.shift();   // no room for the cards on a small phone
-    var gl = side(left), gr = side(right), x = cx - 28;
-    left.forEach(function (it) { x -= gl + it[1]; L[it[0]] = { x: x, y: by - it[2], w: it[1], h: it[2] }; });
-    x = cx + 28;
-    right.forEach(function (it) { x += gr; L[it[0]] = { x: x, y: by - it[2], w: it[1], h: it[2] }; x += it[1]; });
+    var half = Math.min(vw / 2 - 4, 150);
+    L.lamp = { x: cx - 58, y: by - 46, w: 30, h: 46 };
+    L.mug = { x: cx + 33, y: by - 9, w: 11, h: 9 };
+    var out = clamp(Math.round(half * 0.72), 62, 110);
+    L.books = { x: cx - out - 28, y: by - 22, w: 28, h: 22 };
+    L.trophy = { x: cx + out, y: by - 23, w: 17, h: 23 };
     var lamp = L.lamp;
     lamp.bx = lamp.x + 8; lamp.hx = lamp.bx + 12; lamp.hy = by - 46;
   }
@@ -186,7 +178,7 @@ Hero(function (api) {
       return Math.min(v * v * clamp(0.3 + dy / 24, 0.3, 1.2), dy < 0 ? 0.4 : 1);
     }
     /* Daylight: the window throws one slanted patch down the wall and onto the desk. */
-    if (!L.win || !L.shelf) return 0;
+    if (!L.win || !L.wide) return 0;
     var sill = L.win.y + L.win.h + 4;
     if (y < sill) return 0;
     var shift = (y - sill) * 0.75;
@@ -219,15 +211,12 @@ Hero(function (api) {
     seed = 11;
     if (L.win) paintWindow(L.win);
     if (L.chalk) paintChalk(L.chalk);
-    if (L.shelf) paintShelf(L.shelf);
     if (L.cork) paintCork(L.cork);
     paintLamp(L.lamp);
-    if (L.cards) paintCards(L.cards);
     paintLaptop(L.laptop);
     paintMug(L.mug);
     paintBooks(L.books);
-    if (L.trophy) paintTrophy(L.trophy);
-    paintEnvelope(L.envelope);
+    paintTrophy(L.trophy);
   }
 
   function hex(h) { return [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)]; }
@@ -272,11 +261,16 @@ Hero(function (api) {
   var FONT = {
     A: ['.#.', '#.#', '###', '#.#', '#.#'], B: ['##.', '#.#', '##.', '#.#', '##.'], C: ['.##', '#..', '#..', '#..', '.##'],
     E: ['###', '#..', '##.', '#..', '###'], F: ['###', '#..', '##.', '#..', '#..'], G: ['.##', '#..', '#.#', '#.#', '.##'],
-    L: ['#..', '#..', '#..', '#..', '###'], M: ['#...#', '##.##', '#.#.#', '#...#', '#...#'],
+    H: ['#.#', '#.#', '###', '#.#', '#.#'], L: ['#..', '#..', '#..', '#..', '###'], P: ['##.', '#.#', '##.', '#..', '#..'], M: ['#...#', '##.##', '#.#.#', '#...#', '#...#'],
     O: ['.#.', '#.#', '#.#', '#.#', '.#.'], S: ['.##', '#..', '.#.', '..#', '##.'], T: ['###', '.#.', '.#.', '.#.', '.#.'],
     U: ['#.#', '#.#', '#.#', '#.#', '###'], W: ['#...#', '#...#', '#.#.#', '##.##', '#...#'], 2: ['##.', '..#', '.#.', '#..', '###'],
-    7: ['###', '..#', '.#.', '.#.', '.#.'], "'": ['#', '#', '.', '.', '.'], ' ': ['..', '..', '..', '..', '..']
+    7: ['###', '..#', '.#.', '.#.', '.#.'], "'": ['#', '#', '.', '.', '.'], ' ': ['..', '..', '..', '..', '..'], _: ['.', '.', '.', '.', '.']
   };
+  function textWidth(text) {
+    var w = 0;
+    for (var n = 0; n < text.length; n++) w += (FONT[text[n]] || FONT[' '])[0].length + 1;
+    return w - 1;
+  }
   function write(text, x, y, k, size) {
     var z = size || 1;
     for (var n = 0; n < text.length; n++) {
@@ -288,35 +282,34 @@ Hero(function (api) {
   }
 
   function paintChalk(b) {
-    /* A wooden frame, a board with old chalk dust on it, and a tray. */
-    var x = b.x, y = b.y;
-    r(x, y, 64, 46, 'line');
-    r(x + 1, y + 1, 62, 44, 'corkFrame');
-    r(x + 1, y + 1, 62, 1, 'cork');
-    r(x + 3, y + 3, 58, 40, 'board');
+    /* A wooden frame, a board with old chalk dust on it, and a tray.
+       Everything on the board is centred on its middle, mx. */
+    var x = b.x, y = b.y, W = 84, mx = x + W / 2;
+    r(x, y, W, 54, 'line');
+    r(x + 1, y + 1, W - 2, 52, 'corkFrame');
+    r(x + 1, y + 1, W - 2, 1, 'cork');
+    r(x + 3, y + 3, W - 6, 48, 'board');
     ctx.globalAlpha = 0.18;
-    for (var i = 0; i < 60; i++) px(x + 4 + Math.floor(rand() * 56), y + 4 + Math.floor(rand() * 38), 'chalkDim');
-    r(x + 30, y + 40, 24, 1, 'chalkDim'); r(x + 34, y + 39, 16, 1, 'chalkDim');   // a half-wiped line
+    for (var i = 0; i < 80; i++) px(x + 4 + Math.floor(rand() * (W - 8)), y + 4 + Math.floor(rand() * 46), 'chalkDim');
     ctx.globalAlpha = 1;
-    var end = write('ABOUT', x + 7, y + 6, 'chalk', 2);
-    r(x + 7, y + 17, end - x - 9, 1, 'chalkDim'); px(end - 3, y + 16, 'chalkDim');
-    end = write('SC2 GM', x + 7, y + 21, 'chalk');
-    sprite(['..#..', '.###.', '#####', '.###.', '.#.#.'], end + 1, y + 21, { '#': 'trophy' });
-    end = write('MTG', x + 7, y + 28, 'chalk');
-    sprite(['##.##', '#####', '.###.', '..#..'], end + 1, y + 28, { '#': 'manaR' });
-    write("U OF T '27", x + 7, y + 35, 'chalkDim');
-    /* A chalk smiley in the corner. */
-    sprite(['..#####..', '.#.....#.', '#..#.#..#', '#.......#', '#.#...#.#', '#..###..#', '.#.....#.', '..#####..'], x + 49, y + 24, { '#': 'chalk' });
+    var t = 'ABOUT ME', tx = Math.round(mx - textWidth(t) / 2);
+    write(t, tx, y + 7, 'chalk');
+    r(tx, y + 13, textWidth(t), 1, 'chalkDim');
+    /* A neural network in coloured chalk, layer by layer. */
+    var layers = [[3, 'note3'], [3, 'note2'], [2, 'note1']], nodes = [];
+    layers.forEach(function (l, i) {
+      var n = l[0], col = [];
+      for (var j = 0; j < n; j++) col.push([Math.round(mx) + (i - 1) * 18, Math.round(y + 26 - (n - 1) * 3 + j * 6), l[1]]);
+      nodes.push(col);
+    });
+    for (i = 0; i + 1 < nodes.length; i++) nodes[i].forEach(function (p) { nodes[i + 1].forEach(function (q) { line(p[0] + 2, p[1], q[0] - 2, q[1], 'chalkLine'); }); });
+    nodes.forEach(function (col) { col.forEach(function (p) { sprite(['.#.', '###', '.#.'], p[0] - 1, p[1] - 1, { '#': p[2] }); }); });
+    t = "MATH_SPEC_U_OF_T_'27";   // '_' is a narrow space, so it fits on one line
+    write(t, Math.round(mx - textWidth(t) / 2), y + 40, 'chalk');
     /* The tray: two sticks of chalk and an eraser. */
-    r(x - 2, y + 45, 68, 3, 'corkFrame'); r(x - 2, y + 45, 68, 1, 'cork'); r(x - 2, y + 48, 68, 1, 'line');
-    r(x + 8, y + 44, 6, 1, 'chalk'); r(x + 16, y + 44, 4, 1, 'note2');
-    r(x + 44, y + 42, 10, 3, 'note3'); r(x + 44, y + 44, 10, 1, 'line');
-  }
-
-  function paintShelf(b) {
-    var y = b.y + 21;
-    r(b.x, y, b.w, 2, 'corkFrame'); r(b.x, y, b.w, 1, 'cork'); r(b.x, y + 2, b.w, 1, 'frameDark');
-    r(b.x + 3, y + 3, 2, 3, 'corkFrame'); r(b.x + b.w - 5, y + 3, 2, 3, 'corkFrame');
+    r(x - 2, y + 53, W + 4, 3, 'corkFrame'); r(x - 2, y + 53, W + 4, 1, 'cork'); r(x - 2, y + 56, W + 4, 1, 'line');
+    r(x + 9, y + 52, 6, 1, 'chalk'); r(x + 17, y + 52, 4, 1, 'note2');
+    r(x + W - 22, y + 50, 10, 3, 'note3'); r(x + W - 22, y + 52, 10, 1, 'line');
   }
 
   function paintCork(b) {
@@ -348,7 +341,7 @@ Hero(function (api) {
     note(b.x + 30, b.y + 21, 'note1', 15, 11);
   }
 
-  /* The StarCraft II Grandmaster emblem: a winged hexagon with a star, on a little stand. */
+  /* The StarCraft II Grandmaster emblem: a winged hexagon with a star, on a little wooden stand. */
   var EMBLEM = [
     '........L........',
     '......LLOLL......',
@@ -358,9 +351,9 @@ Hero(function (api) {
     'LOOOOODWGGDOOOOOL',
     'LOOOOODWGGDOOOOOL',
     'LDWWWWWWGGGGGGGDL',
-    'LODWWWWRRRGGGGDOL',
-    'LSSDWWWRRRGGGDSSL',
-    'LKKKDDWRRRGDDKKKL',
+    'LODWWWWWGGGGGGDOL',
+    'LSSDWWWWGGGGGDSSL',
+    'LKKKDDWWGGGDDKKKL',
     'LSSSDWWWGGGGDSSSL',
     'LKKKDWWWGGGGDKKKL',
     'LSSSDWWDDDGGDSSSL',
@@ -371,8 +364,10 @@ Hero(function (api) {
     '........L........'
   ];
   function paintTrophy(b) {
-    sprite(EMBLEM, b.x, b.y, { L: 'line', O: 'gmTop', G: 'trophy', D: 'gmEdge', K: 'gmDark', S: 'gmWing', W: 'gmHi', R: 'gmCore' });
-    r(b.x + 6, b.y + 19, 5, 2, 'line');
+    shadow(b.x, 17);
+    sprite(EMBLEM, b.x, b.y, { L: 'line', O: 'gmTop', G: 'trophy', D: 'gmEdge', K: 'gmDark', S: 'gmWing', W: 'gmHi' });
+    r(b.x + 7, b.y + 19, 3, 2, 'line');
+    r(b.x + 2, b.y + 21, 13, 2, 'corkFrame'); r(b.x + 2, b.y + 21, 13, 1, 'cork');
   }
 
   function paintLamp(b) {
@@ -388,28 +383,6 @@ Hero(function (api) {
     r(hx - 1, hy + 3, 10, 1, 'lamp');
     r(hx - 1, hy + 4, 10, 1, 'lampDark');
     r(hx + 2, hy + 5, 4, 1, 'bulb');
-  }
-
-  function paintCards(b) {
-    /* A fanned hand of five, one per colour of mana. Each card is
-       rotated about a point below the hand, then sampled pixel by
-       pixel, so the fan stays crisp. */
-    shadow(b.x + 2, 22);
-    var colours = ['manaW', 'manaU', 'manaB', 'manaR', 'manaG'], angles = [-32, -16, 0, 16, 32];
-    var ox = b.x + 12.5, oy = b.y + 21, CW = 9, CH = 13, DROP = 8;
-    for (var n = 0; n < 5; n++) {
-      var a = angles[n] * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a);
-      for (var y = b.y - 2; y < oy; y++) for (var x = b.x - 4; x < b.x + 30; x++) {
-        var dx = x + 0.5 - ox, dy = y + 0.5 - oy;
-        var u = dx * ca + dy * sa + CW / 2, v = -dx * sa + dy * ca + CH + DROP;
-        if (u < 0 || u >= CW || v < 0 || v >= CH) continue;
-        var k = colours[n];
-        if (u < 1 || u >= CW - 1 || v < 1 || v >= CH - 1) k = 'cardBorder';
-        else if (u >= 2 && u < CW - 2 && v >= 2 && v < 6) k = 'cardFace';
-        else if (u >= 2 && u < CW - 2 && v >= 7 && v < CH - 2) k = 'paper';
-        px(x, y, k);
-      }
-    }
   }
 
   function paintLaptop(b) {
@@ -432,31 +405,18 @@ Hero(function (api) {
   }
 
   function paintBooks(b) {
-    shadow(b.x, 27);
+    shadow(b.x, 29);
     function book(x, y, w, h, k) {
       r(x, y, w, h, 'line');
       r(x + 1, y + 1, w - 2, h - 2, k);
       r(x + w - 3, y + 1, 2, h - 2, 'pages');
       r(x + 2, y + 1, 1, h - 2, 'pages');
     }
-    book(b.x, L.by - 5, 26, 5, 'book1');
-    book(b.x + 3, L.by - 9, 21, 4, 'book2');
-    book(b.x + 1, L.by - 14, 24, 5, 'book3');
-  }
-
-  function paintEnvelope(b) {
-    /* A sealed letter, standing in a little wooden rack: the flap is
-       a shaded V, closed with a heart. */
-    shadow(b.x, 20);
-    var x = b.x + 1, y = b.y;
-    r(x, y, 18, 12, 'line');
-    r(x + 1, y + 1, 16, 10, 'paper');
-    for (var j = 0; j < 6; j++) {
-      r(x + 1 + j, y + 1 + j, 16 - 2 * j, 1, 'paperDark');
-      px(x + 1 + j, y + 1 + j, 'line'); px(x + 16 - j, y + 1 + j, 'line');
-    }
-    sprite(['##.##', '#####', '.###.', '..#..'], x + 7, y + 5, { '#': 'seal' });
-    r(b.x, L.by - 4, 20, 4, 'corkFrame'); r(b.x, L.by - 4, 20, 1, 'cork'); r(b.x + 1, L.by - 2, 18, 1, 'corkDark');
+    book(b.x, L.by - 5, 28, 5, 'book1');
+    book(b.x + 2, L.by - 9, 24, 4, 'book2');
+    book(b.x + 1, L.by - 14, 26, 5, 'book3');
+    book(b.x + 3, L.by - 18, 22, 4, 'book4');
+    book(b.x + 2, L.by - 22, 24, 4, 'book5');
   }
 
   /* ---------- the moving parts ---------- */
@@ -590,15 +550,13 @@ Hero(function (api) {
     { key: 'laptop', href: 'projects/', title: 'Projects', hint: 'a GPT in pure NumPy, and more' },
     { key: 'cork', href: 'experience/', title: 'Experience', hint: 'ML at Nextdoor, SWE at Shopify' },
     { key: 'books', href: 'research/', title: 'Research', hint: 'prompts as weight updates, and papers' },
-    { key: 'chalk', href: 'about/', title: 'About me', hint: 'school, StarCraft, and Magic' },
-    { key: 'envelope', href: 'mailto:avichaigobrin@gmail.com', title: 'Email me', hint: 'avichaigobrin@gmail.com', act: 'click to write' },
+    { key: 'chalk', href: 'about/', title: 'About me', hint: 'ML at U of T, and the rest' },
     { key: 'mug', href: 'mailto:avichaigobrin@gmail.com', title: 'Coffee chat?', hint: 'happy to talk', act: 'click to write' },
     { key: 'lamp', lamp: true, title: 'The lamp', hint: 'lights on, lights off', act: 'click to switch' },
     { key: 'win', href: 'about/#school', title: 'Toronto', hint: 'U of T, graduating 2027' },
-    { key: 'trophy', href: 'about/#starcraft', title: 'StarCraft II', hint: 'Grandmaster, top 100 NA' },
-    { key: 'cards', href: 'about/#magic', title: 'Magic: The Gathering', hint: 'competitive' }
+    { key: 'trophy', href: 'about/#starcraft', title: 'StarCraft II', hint: 'Grandmaster, top 100 NA' }
   ];
-  var HINT_ORDER = ['laptop', 'cork', 'chalk', 'books', 'trophy', 'envelope', 'lamp', 'win', 'cards', 'mug'];
+  var HINT_ORDER = ['laptop', 'cork', 'chalk', 'books', 'trophy', 'mug', 'lamp', 'win'];
   var hinting = true;
   var TIP_H = 92, TIP_HALF = 130;   // a label's height and half its widest, in CSS pixels
 
