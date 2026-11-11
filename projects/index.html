@@ -52,44 +52,45 @@
 
     <!-- Built from content/work.js by tools/build.mjs. Edit work.js, not this block. -->
     <!-- build:projects -->
-    <article class="card window" id="tiny-gpt">
-      <div class="card-bar" aria-hidden="true"><span></span><span></span><span></span></div>
-      <div class="card-head">
-        <h2 class="card-title"><a href="../projects/tiny-gpt/">Tiny GPT From Scratch</a></h2>
-        <p class="when">2026</p>
+    <article class="entry" id="tiny-gpt">
+      <p class="when">2026</p>
+      <div>
+        <h2 class="entry-title"><a href="../projects/tiny-gpt/">Tiny GPT From Scratch</a></h2>
+        <p class="meta">Personal project</p>
+        <p>A character-level GPT in pure NumPy, with no PyTorch and no autograd: multi-head causal attention, pre-LN Transformer blocks, Adam, and top-k sampling, each with a backward pass written by hand. A 56-test suite checks every parameter's gradient against finite differences, and CI runs it on every push.</p>
+        <p class="stack">Python · NumPy · pytest · GitHub Actions</p>
+        <p class="links"><a href="https://github.com/Avi-Gobrin/tiny-gpt-from-scratch">Code</a></p>
       </div>
-      <p class="meta">Personal project</p>
-      <p class="hook">A GPT in pure NumPy with <strong>every gradient written by hand</strong>, checked by <strong>56 tests</strong>.</p>
-      <p class="stack">Python · NumPy · pytest · GitHub Actions</p>
-      <p class="links"><a href="../projects/tiny-gpt/">Read more</a><a href="https://github.com/Avi-Gobrin/tiny-gpt-from-scratch">Code on GitHub</a></p>
     </article>
-    <article class="card window" id="agents">
-      <div class="card-bar" aria-hidden="true"><span></span><span></span><span></span></div>
-      <div class="card-head">
-        <h2 class="card-title"><a href="../projects/agents/">Autonomous Planning &amp; Knowledge Agents</a></h2>
-        <p class="when">2026</p>
+    <article class="entry" id="agents">
+      <p class="when">2026</p>
+      <div>
+        <h2 class="entry-title"><a href="../projects/agents/">Autonomous Planning &amp; Knowledge Agents</a></h2>
+        <p class="meta">Personal project</p>
+        <p>Two LLM agents that run my day and my coursework, and cut daily planning from about 30 minutes to under 2. Built on Claude Code with an Obsidian vault as the knowledge store: one reviews each day and regenerates tomorrow's time-blocked calendar, the other turns lecture and problem-set notes into a cross-linked base of theorem references.</p>
+        <p class="stack">Claude Code · Obsidian · LLM agents</p>
       </div>
-      <p class="meta">Personal project</p>
-      <p class="hook">Two LLM agents run my day and my coursework. Daily planning went from <strong>about 30 minutes to under 2</strong>.</p>
-      <p class="stack">Claude Code · Obsidian · LLM agents</p>
-      <p class="links"><a href="../projects/agents/">Read more</a></p>
     </article>
-    <article class="card window" id="plantinarium">
-      <div class="card-bar" aria-hidden="true"><span></span><span></span><span></span></div>
-      <div class="card-head">
-        <h2 class="card-title"><a href="../projects/plantinarium/">Plantinarium</a></h2>
-        <p class="when">2024</p>
+    <article class="entry" id="plantinarium">
+      <p class="when">2024</p>
+      <div>
+        <h2 class="entry-title"><a href="../projects/plantinarium/">Plantinarium</a></h2>
+        <p class="meta">Six-person team project</p>
+        <p>A plant-identification desktop app: upload a photo, get the species, and share the find with notes in public or private galleries. Built in Java and Maven by a six-person team; I owned account management, including secure deletion that wipes all of a user's data.</p>
+        <p class="stack">Java · Maven</p>
+        <p class="links"><a href="https://github.com/barnaste/plantinarium">Code</a></p>
       </div>
-      <p class="meta">Six-person team project</p>
-      <p class="hook">A plant-identification app built by a <strong>six-person team</strong>. I owned account management.</p>
-      <p class="stack">Java · Maven</p>
-      <p class="links"><a href="../projects/plantinarium/">Read more</a><a href="https://github.com/barnaste/plantinarium">Code on GitHub</a></p>
     </article>
     <!-- /build:projects -->
   </main>
   <footer class="footer">
     <!-- build:footer -->
-    <p class="foot-links"><a href="mailto:avichaigobrin@gmail.com">Email</a><a href="https://github.com/Avi-Gobrin">GitHub</a><a href="https://www.linkedin.com/in/avigobrin/">LinkedIn</a><a href="https://x.com/AvichaiGobrin">X</a></p>
+    <p class="logos">
+    <a class="logo" href="mailto:avichaigobrin@gmail.com" data-label="Email"><svg aria-hidden="true" viewBox="0 0 16 16" width="20" height="20" fill="currentColor"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" d="M1.75 3.25h12.5v9.5H1.75zM1.75 3.75 8 8.75l6.25-5"/></svg><span class="sr-only">Email</span></a>
+    <a class="logo" href="https://github.com/Avi-Gobrin" data-label="GitHub"><svg aria-hidden="true" viewBox="0 0 16 16" width="20" height="20" fill="currentColor"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span class="sr-only">GitHub</span></a>
+    <a class="logo" href="https://www.linkedin.com/in/avigobrin/" data-label="LinkedIn"><svg aria-hidden="true" viewBox="0 0 16 16" width="20" height="20" fill="currentColor"><path fill-rule="evenodd" d="M2.6 1h10.8c.9 0 1.6.7 1.6 1.6v10.8c0 .9-.7 1.6-1.6 1.6H2.6c-.9 0-1.6-.7-1.6-1.6V2.6C1 1.7 1.7 1 2.6 1zM4.5 3.2a1.2 1.2 0 1 0 0 2.4a1.2 1.2 0 1 0 0-2.4zM3.5 6.5h2v6.3h-2zM7 6.5h1.9v.9c.3-.5 1-1.1 2.1-1.1 1.9 0 2.5 1.2 2.5 3v3.5h-2V9.7c0-.8-.1-1.6-1.1-1.6s-1.4.8-1.4 1.6v3.1H7z"/></svg><span class="sr-only">LinkedIn</span></a>
+    <a class="logo" href="https://x.com/AvichaiGobrin" data-label="X"><svg aria-hidden="true" viewBox="0 0 16 16" width="20" height="20" fill="currentColor"><path fill-rule="evenodd" d="M1 1.5h4.6l9.4 13h-4.6zM3 2.5l7.9 11h1.9L4.9 2.5z"/><path d="M13.4 1.5h1.5L9.3 7.8l-.8-1.1zM6.7 8.4l.8 1.1-4.8 5H1.2z"/></svg><span class="sr-only">X</span></a>
+    </p>
     <p class="fine">Hand-built in plain HTML, CSS, and a little JavaScript. &copy; 2026 Avi Gobrin.</p>
     <!-- /build:footer -->
   </footer>

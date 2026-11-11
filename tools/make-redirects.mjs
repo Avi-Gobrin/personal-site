@@ -17,11 +17,9 @@
    Output goes to redirects/ (gitignored). Copy its contents into the
    old repo, replacing everything, and leave GitHub Pages enabled.
    ============================================================ */
-import { readFileSync, writeFileSync, mkdirSync, rmSync } from 'node:fs';
+import { writeFileSync, mkdirSync, rmSync } from 'node:fs';
 import { dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
-
-process.chdir(fileURLToPath(new URL('..', import.meta.url)));
+import { ALL_PAGES as PAGES } from './site.mjs';   // the same page list as the build, so it can never drift
 
 const target = process.argv[2];
 if (!target || !/^https?:\/\//.test(target)) {
@@ -30,13 +28,6 @@ if (!target || !/^https?:\/\//.test(target)) {
   process.exit(1);
 }
 const NEW_BASE = target.endsWith('/') ? target : target + '/';
-
-/* Same WORK source as tools/build.mjs, so the page list can never drift. */
-const WORK = new Function(`${readFileSync('content/work.js', 'utf8')}\nreturn WORK;`)();
-
-/* Every page is a folder; '' is the homepage. */
-const PAGES = ['', 'about/', 'experience/', 'projects/', 'research/']
-  .concat(WORK.map(w => `${w.type === 'Report' ? 'research' : 'projects'}/${w.id}/`));
 
 /* A stub is a real 200 response, so search engines follow the canonical
    and humans never see a broken page. */

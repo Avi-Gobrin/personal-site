@@ -14,11 +14,11 @@ The homepage is one screen: a pixel-art room with the name on the wall. Everythi
 | corkboard | Experience |
 | books | Research |
 | chalkboard | About |
-| trophy, cards, belt, window | their part of About |
+| trophy, cards, window | their part of About |
 | letter, mug | email |
 | lamp | switches the theme |
 
-The inner pages borrow the room: its two palettes (morning by day, dusk by night), pixel borders with hard shadows, and its objects as icons. Experience entries are notes pinned to the corkboard, projects are little editor windows, and reports are sheets of paper. Type is Alegreya for names and titles, Inter for reading, and Silkscreen (a pixel face) for tiny labels.
+The inner pages are quiet on purpose: the room's two palettes (morning by day, dusk by night), its objects as page icons, and otherwise just a date in the margin, a title, and one paragraph per job or project. Papers are just titled. Contact links are logos. Type is Alegreya for names and titles, Inter for reading, and Silkscreen (a pixel face) for tiny labels.
 
 ## Where things are
 
@@ -35,10 +35,11 @@ assets/js/hero.js          the homepage canvas harness
 assets/js/room.js          the room itself: palettes, layout, drawing, links
 assets/js/theme.js         the light switch
 assets/img/                favicon and link-preview card
-assets/reports/            course report PDFs
+assets/reports/            paper PDFs
 assets/Resumes/            the two public resumes (path kept stable: it is linked from outside)
 tools/build.mjs            fills shared parts and writes generated pages
-tools/icons.mjs            pixel icons for the inner pages
+tools/icons.mjs            pixel icons and contact logos for the inner pages
+tools/site.mjs             the site address, content/work.js, and the page list, shared by the tools
 tools/serve.mjs            local preview server
 tools/make-redirects.mjs   only needed if the site ever moves
 ```
@@ -63,7 +64,7 @@ It needs Node 18 or newer. It fills every `<!-- build:NAME -->` block (head, nav
 
 To add a project or report, add one object to `WORK` in `content/work.js` (the comment at the top lists the fields), then rebuild.
 
-The room lives in `assets/js/room.js`: `PALETTES` and `PAIRS` at the top pick the colours, `layout()` places things, and `DOORS` holds the labels and links. The resumes are the source of truth: when a fact changes there (a number, a title, a date), change it in the pages, in `content/work.js`, and in the room's labels.
+The room lives in `assets/js/room.js`: `PALETTES` at the top holds the colours, `layout()` and `desk()` place things, and `DOORS` holds the labels and links. The resumes are the source of truth: when a fact changes there (a number, a title, a date), change it in the pages, in `content/work.js`, and in the room's labels.
 
 ## Resumes
 
@@ -83,12 +84,12 @@ Then copy them in with `.	ools\sync-resumes.ps1 -From "<your resume folder>"` (a
 
 ## Moving the site
 
-Every absolute URL (canonical, link previews, structured data, sitemap, robots.txt, 404 page) derives from the `BASE` constant at the top of `tools/build.mjs`, so changing the site's address is a one-line edit plus a rerun.
+Every absolute URL (canonical, link previews, structured data, sitemap, robots.txt, 404 page) derives from the `BASE` constant in `tools/site.mjs`, so changing the site's address is a one-line edit plus a rerun.
 
 GitHub Pages does not redirect project-site URLs when a repository is renamed, so a plain rename would break every link already printed on a resume. To move from `avi-gobrin.github.io/personal-site/` to `avi-gobrin.github.io/` without breaking anything:
 
 1. Create a repository named exactly `Avi-Gobrin.github.io` and push this site to it. A repository with that name is served at the domain root.
-2. Set `BASE` in `tools/build.mjs` to `https://avi-gobrin.github.io/` and run `node tools/build.mjs`.
+2. Set `BASE` in `tools/site.mjs` to `https://avi-gobrin.github.io/` and run `node tools/build.mjs`.
 3. Generate forwarding pages for the old address with `node tools/make-redirects.mjs https://avi-gobrin.github.io/`.
 4. Replace the contents of the old `personal-site` repository with everything in `redirects/`, and leave its GitHub Pages enabled.
 

@@ -44,23 +44,28 @@
       <p class="meta">Apr 2026 · Course project · STA437, Methods for Multivariate Data</p>
     </header>
 
-    <article class="card paper">
-      <p class="hook">Over <strong>23,301</strong> student registrations, logistic regression lifts Distinction recall from <strong>3.2% to 39.3%</strong>.</p>
-      <p class="desc">The Open University Learning Analytics Dataset records six behavioral features for 25,820 student-course registrations, 23,301 of them complete, each labeled Distinction, Fail, Pass, or Withdrawn. This report runs a full multivariate pipeline (EDA, Mahalanobis-distance normality testing, PCA, varimax factor analysis, Gaussian mixture modeling, and LDA) to ask whether unsupervised structure in assessment behavior recovers the known outcomes, and whether features observable before any grade is issued (submission count and timing) are enough to flag withdrawal early. Each method is motivated by the result before it.</p>
-      <h2 class="kicker">Findings</h2>
-      <ul class="hits">
-        <li>Parallel analysis and varimax rotation give three factors: <em>Engagement</em> (submission count and timing; top communality h²&nbsp;=&nbsp;0.84), <em>Consistent Performance</em> (mean score and score SD; top communality h²&nbsp;=&nbsp;0.72), and <em>Prior Commitment</em> (credits and prior attempts)</li>
-        <li>FA, GMM, and LDA converge on the same two dimensions; Prior Commitment describes academic history but barely moves LDA or the clusters</li>
-        <li>GMM at K&nbsp;=&nbsp;4 reaches an adjusted Rand index of 0.137: assessment behavior partly recovers the four outcomes, and Distinction and Pass students share the high-engagement cluster</li>
-        <li>Under 5-fold CV, LDA reaches 64.5% against a 53.0% baseline with 63.2% Withdrawn recall but 3.2% Distinction recall; logistic regression reaches 67.0% and lifts Distinction recall to 39.3% by dropping the shared-covariance assumption</li>
-      </ul>
-      <h2 class="kicker">Methods</h2>
-      <p class="stack">PCA · factor analysis · Gaussian mixture models · LDA · logistic regression</p>
-      <p class="links"><a href="../../assets/reports/oulad-sta437.pdf">Read the report (PDF)</a></p>
-    </article>
+    <p class="lede">The Open University Learning Analytics Dataset records six behavioral features for 25,820 student-course registrations, 23,301 of them complete, each labeled Distinction, Fail, Pass, or Withdrawn. This report runs a full multivariate pipeline (EDA, Mahalanobis-distance normality testing, PCA, varimax factor analysis, Gaussian mixture modeling, and LDA) to ask whether unsupervised structure in assessment behavior recovers the known outcomes, and whether features observable before any grade is issued (submission count and timing) are enough to flag withdrawal early. Each method is motivated by the result before it.</p>
+
+    <h2 class="kicker">Findings</h2>
+    <ul class="points">
+      <li>Parallel analysis and varimax rotation give three factors: <em>Engagement</em> (submission count and timing; top communality h²&nbsp;=&nbsp;0.84), <em>Consistent Performance</em> (mean score and score SD; top communality h²&nbsp;=&nbsp;0.72), and <em>Prior Commitment</em> (credits and prior attempts)</li>
+      <li>FA, GMM, and LDA converge on the same two dimensions; Prior Commitment describes academic history but barely moves LDA or the clusters</li>
+      <li>GMM at K&nbsp;=&nbsp;4 reaches an adjusted Rand index of 0.137: assessment behavior partly recovers the four outcomes, and Distinction and Pass students share the high-engagement cluster</li>
+      <li>Under 5-fold CV, LDA reaches 64.5% against a 53.0% baseline with 63.2% Withdrawn recall but 3.2% Distinction recall; logistic regression reaches 67.0% and lifts Distinction recall to 39.3% by dropping the shared-covariance assumption</li>
+    </ul>
+
+    <h2 class="kicker">Methods</h2>
+    <p class="stack">PCA · factor analysis · Gaussian mixture models · LDA · logistic regression</p>
+
+    <p class="links"><a href="../../assets/reports/oulad-sta437.pdf">PDF</a></p>
   </main>
   <footer class="footer">
-    <p class="foot-links"><a href="mailto:avichaigobrin@gmail.com">Email</a><a href="https://github.com/Avi-Gobrin">GitHub</a><a href="https://www.linkedin.com/in/avigobrin/">LinkedIn</a><a href="https://x.com/AvichaiGobrin">X</a></p>
+    <p class="logos">
+    <a class="logo" href="mailto:avichaigobrin@gmail.com" data-label="Email"><svg aria-hidden="true" viewBox="0 0 16 16" width="20" height="20" fill="currentColor"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" d="M1.75 3.25h12.5v9.5H1.75zM1.75 3.75 8 8.75l6.25-5"/></svg><span class="sr-only">Email</span></a>
+    <a class="logo" href="https://github.com/Avi-Gobrin" data-label="GitHub"><svg aria-hidden="true" viewBox="0 0 16 16" width="20" height="20" fill="currentColor"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span class="sr-only">GitHub</span></a>
+    <a class="logo" href="https://www.linkedin.com/in/avigobrin/" data-label="LinkedIn"><svg aria-hidden="true" viewBox="0 0 16 16" width="20" height="20" fill="currentColor"><path fill-rule="evenodd" d="M2.6 1h10.8c.9 0 1.6.7 1.6 1.6v10.8c0 .9-.7 1.6-1.6 1.6H2.6c-.9 0-1.6-.7-1.6-1.6V2.6C1 1.7 1.7 1 2.6 1zM4.5 3.2a1.2 1.2 0 1 0 0 2.4a1.2 1.2 0 1 0 0-2.4zM3.5 6.5h2v6.3h-2zM7 6.5h1.9v.9c.3-.5 1-1.1 2.1-1.1 1.9 0 2.5 1.2 2.5 3v3.5h-2V9.7c0-.8-.1-1.6-1.1-1.6s-1.4.8-1.4 1.6v3.1H7z"/></svg><span class="sr-only">LinkedIn</span></a>
+    <a class="logo" href="https://x.com/AvichaiGobrin" data-label="X"><svg aria-hidden="true" viewBox="0 0 16 16" width="20" height="20" fill="currentColor"><path fill-rule="evenodd" d="M1 1.5h4.6l9.4 13h-4.6zM3 2.5l7.9 11h1.9L4.9 2.5z"/><path d="M13.4 1.5h1.5L9.3 7.8l-.8-1.1zM6.7 8.4l.8 1.1-4.8 5H1.2z"/></svg><span class="sr-only">X</span></a>
+    </p>
     <p class="fine">Hand-built in plain HTML, CSS, and a little JavaScript. &copy; 2026 Avi Gobrin.</p>
   </footer>
   <script src="../../assets/js/theme.js"></script>

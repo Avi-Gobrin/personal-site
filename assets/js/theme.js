@@ -1,4 +1,4 @@
-/* Notebook by day, chalkboard by night. The choice is remembered;
+/* Morning by day, dusk by night. The choice is remembered;
    until you make one, the site follows your system setting. */
 (function () {
   var root = document.documentElement;

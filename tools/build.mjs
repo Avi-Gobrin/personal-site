@@ -14,28 +14,17 @@
    Safe to run repeatedly. Files are written with LF line endings.
    ============================================================ */
 import { readFileSync, writeFileSync, mkdirSync, rmSync, readdirSync, existsSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
-import { svg, ICON_NAMES } from './icons.mjs';
+import { svg, ICON_NAMES, logoLink } from './icons.mjs';
+import { BASE, WORK, isReport, dirOf, ALL_PAGES } from './site.mjs';
 
-process.chdir(fileURLToPath(new URL('..', import.meta.url)));
-
-/* Every absolute URL derives from BASE, so moving the site is a one-line change. */
-const BASE = 'https://avi-gobrin.github.io/personal-site/';
 const GITHUB_USER = 'Avi-Gobrin';
 const EMAIL = 'avichaigobrin@gmail.com';
-
-const WORK = new Function(`${readFileSync('content/work.js', 'utf8')}\nreturn WORK;`)();
-/* Each id becomes a folder name and an HTML id, so keep it plain. */
-for (const w of WORK) {
-  if (!/^[a-z0-9-]+$/.test(w.id)) throw new Error(`content/work.js: id "${w.id}" must be lowercase letters, digits, and hyphens`);
-}
+const RESUME = 'assets/Resumes/Avi_Gobrin_Resume_2026_ML.pdf';
 
 /* ---------- small helpers ---------- */
 function esc(s) {
   return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
-const isReport = w => w.type === 'Report';
-const dirOf = w => `${isReport(w) ? 'research' : 'projects'}/${w.id}/`;
 /* Links in work.js are relative to the site root; fix them up for the page they land on. */
 const hrefFrom = (href, root) => (/^(https?:|mailto:)/.test(href) ? href : root + href);
 const linkHtml = (l, root) => `<a href="${esc(hrefFrom(l.href, root))}">${esc(l.label)}</a>`;
@@ -78,34 +67,52 @@ function nav(current, root, section = false) {
 </div>`;
 }
 
-function footer() {
-  return `<p class="foot-links"><a href="mailto:${EMAIL}">Email</a><a href="https://github.com/${GITHUB_USER}">GitHub</a><a href="https://www.linkedin.com/in/avigobrin/">LinkedIn</a><a href="https://x.com/AvichaiGobrin">X</a></p>
+const CONTACT = {
+  email: [`mailto:${EMAIL}`, 'Email'],
+  resume: [RESUME, 'Resume (PDF)'],
+  github: [`https://github.com/${GITHUB_USER}`, 'GitHub'],
+  linkedin: ['https://www.linkedin.com/in/avigobrin/', 'LinkedIn'],
+  x: ['https://x.com/AvichaiGobrin', 'X']
+};
+function logos(names, root) {
+  return names.map(n => logoLink(n, hrefFrom(CONTACT[n][0], root), CONTACT[n][1])).join('\n');
+}
+
+function footer(root) {
+  return `<p class="logos">
+${logos(['email', 'github', 'linkedin', 'x'], root)}
+</p>
 <p class="fine">Hand-built in plain HTML, CSS, and a little JavaScript. &copy; 2026 Avi Gobrin.</p>`;
 }
+
+/* The homepage's row under the name. */
+const heroLinks = root => logos(['email', 'resume', 'github', 'linkedin'], root);
 
 /* ---------- list pages ---------- */
 function toolsLine(w) {
   return (w.tools || []).length ? `<p class="stack">${w.tools.map(esc).join(' · ')}</p>` : '';
 }
 
-function workCard(w, root) {
+/* One entry: the date in the margin, then the title, a line of
+   context, and (for projects) one paragraph. Papers are just titled. */
+function entry(w, root, level) {
   const href = root + dirOf(w);
-  const links = [`<a href="${href}">Read more</a>`].concat((w.links || []).map(l => linkHtml(l, root))).join('');
-  const bar = isReport(w) ? '' : `\n  <div class="card-bar" aria-hidden="true"><span></span><span></span><span></span></div>`;
-  return `<article class="card${isReport(w) ? ' paper' : ' window'}" id="${w.id}">${bar}
-  <div class="card-head">
-    <h2 class="card-title"><a href="${href}">${esc(w.title)}</a></h2>
-    <p class="when">${esc(w.when)}</p>
+  const links = (w.links || []).map(l => linkHtml(l, root)).join('');
+  const body = isReport(w) ? '' : `
+    <p>${esc(w.card)}</p>
+    ${toolsLine(w)}`;
+  return `<article class="entry" id="${w.id}">
+  <p class="when">${esc(w.when)}</p>
+  <div>
+    <h${level} class="entry-title"><a href="${href}">${esc(w.title)}</a></h${level}>
+    <p class="meta">${metaLine(w)}</p>${body}${links ? `
+    <p class="links">${links}</p>` : ''}
   </div>
-  <p class="meta">${metaLine(w)}</p>
-  <p class="hook">${w.hook}</p>
-  ${toolsLine(w)}
-  <p class="links">${links}</p>
 </article>`;
 }
 
-const projects = root => WORK.filter(w => !isReport(w)).map(w => workCard(w, root)).join('\n');
-const reports = root => WORK.filter(isReport).map(w => workCard(w, root).replace(/<(\/?)h2 class="card-title"/g, '<$1h3 class="card-title"').replace('</h2>', '</h3>')).join('\n');
+const projects = root => WORK.filter(w => !isReport(w)).map(w => entry(w, root, 2)).join('\n');
+const reports = root => WORK.filter(isReport).map(w => entry(w, root, 3)).join('\n');
 
 /* ---------- whole pages ---------- */
 function metaDescription(w) {
@@ -146,7 +153,7 @@ function shell({ title, description, url, ogType = 'website', root, current = ''
     ${indent(body, 4)}
   </main>
   <footer class="footer">
-    ${indent(footer(), 4)}
+    ${indent(footer(root), 4)}
   </footer>
   <script src="${root}assets/js/theme.js"></script>
 </body>
@@ -162,18 +169,14 @@ function detailPage(w) {
   <p class="crumb"><a href="${root}${list}">${label}</a></p>
   <h1 class="title">${esc(w.title)}</h1>
   <p class="meta">${esc(w.when)} · ${metaLine(w)}</p>
-</header>`];
-  const inner = [`<p class="hook">${w.hook}</p>`, `<p class="desc">${esc(w.desc)}</p>`];
-  if ((w.findings || []).length) inner.push(`<h2 class="kicker">${esc(w.findingsLabel || 'Details')}</h2>
-<ul class="hits">
+</header>`, `<p class="lede">${esc(w.desc)}</p>`];
+  if ((w.findings || []).length) parts.push(`<h2 class="kicker">${esc(w.findingsLabel || 'Details')}</h2>
+<ul class="points">
   ${w.findings.map(f => `<li>${f}</li>`).join('\n  ')}
 </ul>`);
-  if ((w.tools || []).length) inner.push(`<h2 class="kicker">${report ? 'Methods' : 'Built with'}</h2>
+  if ((w.tools || []).length) parts.push(`<h2 class="kicker">${report ? 'Methods' : 'Built with'}</h2>
 ${toolsLine(w)}`);
-  if ((w.links || []).length) inner.push(`<p class="links">${w.links.map(l => linkHtml(l, root)).join('')}</p>`);
-  parts.push(`<article class="card ${report ? 'paper' : 'window'}">${report ? '' : '\n  <div class="card-bar" aria-hidden="true"><span></span><span></span><span></span></div>'}
-  ${inner.join('\n').split('\n').join('\n  ')}
-</article>`);
+  if ((w.links || []).length) parts.push(`<p class="links">${w.links.map(l => linkHtml(l, root)).join('')}</p>`);
   return shell({
     title: `${esc(w.short || w.title)} | Avi Gobrin`,
     description: metaDescription(w),
@@ -244,7 +247,7 @@ function rewriteUrls(html, path) {
 /* ---------- run ---------- */
 /* The hand-written pages: the folder each lives in, and its extra blocks. */
 const PAGES = {
-  '': {},
+  '': { links: heroLinks },
   'about/': {},
   'experience/': {},
   'projects/': { projects },
@@ -257,7 +260,7 @@ for (const [dir, blocks] of Object.entries(PAGES)) {
   let html = readFileSync(file, 'utf8').replace(/\r\n/g, '\n');
   html = fill(html, 'head', head(root), file);
   html = fill(html, 'nav', nav(dir, root), file);
-  if (dir) html = fill(html, 'footer', footer(), file);   // the homepage is one screen, no footer
+  if (dir) html = fill(html, 'footer', footer(root), file);   // the homepage is one screen, no footer
   for (const [name, render] of Object.entries(blocks)) html = fill(html, name, render(root), file);
   html = fillIcons(html, file);
   writeFileSync(file, tidy(rewriteUrls(html, dir)));
@@ -282,11 +285,10 @@ for (const w of WORK) {
 writeFileSync('404.html', tidy(notFoundPage()));
 console.log('  ✓ 404.html');
 
-const SITE_PAGES = Object.keys(PAGES).concat(WORK.map(dirOf));
 /* No <lastmod>: stamping every page with the build date would be false. */
 writeFileSync('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${SITE_PAGES.map(p => `  <url>\n    <loc>${BASE}${p}</loc>\n  </url>`).join('\n')}
+${ALL_PAGES.map(p => `  <url>\n    <loc>${BASE}${p}</loc>\n  </url>`).join('\n')}
 </urlset>
 `);
 console.log('  ✓ sitemap.xml');
