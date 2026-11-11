@@ -53,16 +53,30 @@ const ICONS = {
     g.r(2, 13, 16, 1, 'wood-dark'); g.r(5, 12, 2, 1, 'chalk');
     return g;
   },
-  /* StarCraft II: the GM trophy. */
+  /* StarCraft II: the Grandmaster emblem, as in the room. */
   trophy() {
-    const g = grid(13, 16);
-    g.r(2, 0, 9, 3, 'gold'); g.r(3, 3, 7, 1, 'gold'); g.r(4, 4, 5, 1, 'gold'); g.r(5, 5, 3, 1, 'gold');
-    g.r(8, 1, 2, 4, 'gold-dark'); g.r(3, 1, 1, 2, 'shine');
-    g.px(1, 1, 'gold-dark'); g.px(1, 2, 'gold-dark'); g.px(2, 3, 'gold-dark');
-    g.px(11, 1, 'gold-dark'); g.px(11, 2, 'gold-dark'); g.px(10, 3, 'gold-dark');
-    g.r(6, 6, 1, 2, 'gold-dark'); g.r(4, 8, 5, 1, 'gold');
-    g.r(1, 9, 11, 7, 'line');
-    letters(g, 'GM', 2, 10, 'gold');
+    const g = grid(17, 19), keys = { L: 'line', O: 'gm-top', G: 'gold', D: 'gm-edge', K: 'gm-dark', S: 'gm-wing', W: 'gm-hi', R: 'gm-core' };
+    [
+      '........L........',
+      '......LLOLL......',
+      '....LLOOOOOLL....',
+      '..LLOOODGDOOOLL..',
+      'LLOOOOODGDOOOOOLL',
+      'LOOOOODWGGDOOOOOL',
+      'LOOOOODWGGDOOOOOL',
+      'LDWWWWWWGGGGGGGDL',
+      'LODWWWWRRRGGGGDOL',
+      'LSSDWWWRRRGGGDSSL',
+      'LKKKDDWRRRGDDKKKL',
+      'LSSSDWWWGGGGDSSSL',
+      'LKKKDWWWGGGGDKKKL',
+      'LSSSDWWDDDGGDSSSL',
+      'LLKKKDDKKKDDKKKLL',
+      '..LLKKKKKKKKKLL..',
+      '....LLKKKKKLL....',
+      '......LLKLL......',
+      '........L........'
+    ].forEach((row, y) => [...row].forEach((ch, x) => { if (keys[ch]) g.px(x, y, keys[ch]); }));
     return g;
   },
   /* Magic: a fanned hand, one card per colour, each rotated and sampled. */
@@ -95,20 +109,6 @@ const ICONS = {
     return g;
   }
 };
-
-/* A 3 by 5 pixel font, just the letters the icons need. */
-const FONT = {
-  G: ['.##', '#..', '#.#', '#.#', '.##'],
-  M: ['#...#', '##.##', '#.#.#', '#...#', '#...#']
-};
-function letters(g, text, x, y, k) {
-  let cx = x;
-  for (const ch of text) {
-    const glyph = FONT[ch] || [];
-    glyph.forEach((row, j) => [...row].forEach((c, i) => { if (c === '#') g.px(cx + i, y + j, k); }));
-    cx += (glyph[0] || '..').length + 1;
-  }
-}
 
 /* One <rect> per horizontal run of a colour. */
 export function svg(name, size = 4, label = '') {

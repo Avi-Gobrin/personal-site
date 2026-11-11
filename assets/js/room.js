@@ -21,7 +21,8 @@ Hero(function (api) {
   var SHARED = {
     chalk: '#f4f1e8', chalkDim: '#b9bfc4',
     manaW: '#f3ead0', manaU: '#4f8fd6', manaB: '#3d3448', manaR: '#d8574a', manaG: '#4f9a5a',
-    kw: '#ef93a0', fn: '#9cc9e6', str: '#f3d27e', com: '#5d5a7a', plain: '#cfc5dc'
+    kw: '#ef93a0', fn: '#9cc9e6', str: '#f3d27e', com: '#5d5a7a', plain: '#cfc5dc',
+    gmTop: '#c46c24', gmEdge: '#6e3010', gmDark: '#4a2410', gmWing: '#c8964a', gmHi: '#fff3c4', gmCore: '#e04828'
   };
   var PALETTES = {
     dusk: {
@@ -37,7 +38,7 @@ Hero(function (api) {
       screen: '#1d1530', dotA: '#ef93a0', dotB: '#f3d27e', dotC: '#9ad6a8',
       mug: '#f6e9dc', mugDark: '#bba69a', coffee: '#5a3a2a', steam: '#b892b0',
       book1: '#e0716a', book2: '#6c88c4', book3: '#f0c46a', pages: '#f6e9dc', leaf: '#7fb87a',
-      cardBorder: '#1b1222', cardFace: '#d7bf95', trophy: '#f0c46a', trophyDark: '#b4803a', seal: '#e05468',
+      cardBorder: '#1b1222', cardFace: '#d7bf95', trophy: '#f0c46a', seal: '#e05468',
       accent: '#ffcf7a',
       text: '#fff1e4', muted: '#e2c9d0', link: '#ffd08a', panel: '#2a1f38'
     },
@@ -54,7 +55,7 @@ Hero(function (api) {
       screen: '#fdfaf3', dotA: '#e58f9a', dotB: '#e9c45a', dotC: '#6fbf86',
       mug: '#ffffff', mugDark: '#cfc6b6', coffee: '#6a4632', steam: '#ffffff',
       book1: '#c45a5a', book2: '#4f7fb0', book3: '#e2b44f', pages: '#fffdf7', leaf: '#6fae6a',
-      cardBorder: '#2b2a3a', cardFace: '#d9c49a', trophy: '#e3b34a', trophyDark: '#b07f2a', seal: '#d8485a',
+      cardBorder: '#2b2a3a', cardFace: '#d9c49a', trophy: '#e3b34a', seal: '#d8485a',
       accent: '#d8485a',
       text: '#1f2638', muted: '#5a5f70', link: '#2f5aa8', panel: '#fffdf7',
       kw: '#c4505d', fn: '#2f5aa8', str: '#b07f2a', com: '#d3ccbd', plain: '#6a6f80'
@@ -145,7 +146,7 @@ Hero(function (api) {
     L = {
       deskY: deskY, top: top, by: by, cx: cx, ceiling: ceiling,
       laptop: { x: cx - 24, y: by - 36, w: 48, h: 36 },
-      trophy: shelf ? { x: shelf.x + 7, y: shelf.y, w: 15, h: 21 } : null,
+      trophy: shelf ? { x: shelf.x + 6, y: shelf.y, w: 17, h: 21 } : null,
       shelf: shelf, cork: wall.cork || null, chalk: wall.chalk || null,
       win: wall.win ? { x: wall.win.x, y: wall.win.y, w: 64, h: 50 } : null
     };
@@ -347,28 +348,31 @@ Hero(function (api) {
     note(b.x + 30, b.y + 21, 'note1', 15, 11);
   }
 
-  /* The Grandmaster trophy: a gold cup on a dark plaque. */
-  var TROPHY = [
-    '..LLLLLLLLLLL..',
-    'LLLHTTTTTTTDLLL',
-    'L.LHTTTTTTTDL.L',
-    'L.LHTTTTTTTDL.L',
-    '.LLHTTTTTTTDLL.',
-    '...LTTTTTTDL...',
-    '....LTTTTDL....',
-    '.....LTTDL.....',
-    '......LTL......',
-    '......LDL......',
-    '.....LTTDL.....',
-    '....LTTTTDL....',
-    '..LLLLLLLLLLL..',
-    '..LLLLLLLLLLL..', '..LLLLLLLLLLL..', '..LLLLLLLLLLL..', '..LLLLLLLLLLL..',
-    '..LLLLLLLLLLL..', '..LLLLLLLLLLL..', '..LLLLLLLLLLL..',
-    '.LLLLLLLLLLLLL.'
+  /* The StarCraft II Grandmaster emblem: a winged hexagon with a star, on a little stand. */
+  var EMBLEM = [
+    '........L........',
+    '......LLOLL......',
+    '....LLOOOOOLL....',
+    '..LLOOODGDOOOLL..',
+    'LLOOOOODGDOOOOOLL',
+    'LOOOOODWGGDOOOOOL',
+    'LOOOOODWGGDOOOOOL',
+    'LDWWWWWWGGGGGGGDL',
+    'LODWWWWRRRGGGGDOL',
+    'LSSDWWWRRRGGGDSSL',
+    'LKKKDDWRRRGDDKKKL',
+    'LSSSDWWWGGGGDSSSL',
+    'LKKKDWWWGGGGDKKKL',
+    'LSSSDWWDDDGGDSSSL',
+    'LLKKKDDKKKDDKKKLL',
+    '..LLKKKKKKKKKLL..',
+    '....LLKKKKKLL....',
+    '......LLKLL......',
+    '........L........'
   ];
   function paintTrophy(b) {
-    sprite(TROPHY, b.x, b.y, { L: 'line', T: 'trophy', D: 'trophyDark', H: 'pages' });
-    write('GM', b.x + 3, b.y + 14, 'trophy');
+    sprite(EMBLEM, b.x, b.y, { L: 'line', O: 'gmTop', G: 'trophy', D: 'gmEdge', K: 'gmDark', S: 'gmWing', W: 'gmHi', R: 'gmCore' });
+    r(b.x + 6, b.y + 19, 5, 2, 'line');
   }
 
   function paintLamp(b) {
@@ -524,9 +528,9 @@ Hero(function (api) {
       px(Math.round(st.x + Math.sin(st.age * 2.4 + st.p) * 1.2), Math.round(st.y), 'steam');
     }
     g.globalAlpha = 1;
-    /* Now and then the trophy glints. */
+    /* Now and then the emblem glints. */
     if (L.trophy && t % 3.2 < 0.5) {
-      var gx = L.trophy.x + 4, gy = L.trophy.y + 2;
+      var gx = L.trophy.x + 4, gy = L.trophy.y + 6;
       px(gx, gy - 1, 'pages'); px(gx - 1, gy, 'pages'); px(gx + 1, gy, 'pages'); px(gx, gy + 1, 'pages');
     }
     paintScreen(L.laptop);

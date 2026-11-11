@@ -14,6 +14,7 @@
    Safe to run repeatedly. Files are written with LF line endings.
    ============================================================ */
 import { readFileSync, writeFileSync, mkdirSync, rmSync, readdirSync, existsSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { svg, ICON_NAMES, logoLink } from './icons.mjs';
 import { BASE, WORK, isReport, dirOf, ALL_PAGES } from './site.mjs';
 
@@ -229,8 +230,12 @@ function fillIcons(html, file) {
   });
 }
 
-/* Indenting a blank line leaves trailing spaces; strip them. */
-const tidy = html => html.replace(/[ \t]+$/gm, '');
+/* Indenting a blank line leaves trailing spaces; strip them. Then stamp
+   every stylesheet and script link with a hash of the file, so a browser
+   never pairs new HTML with an old cached copy. */
+const stamp = file => createHash('sha1').update(readFileSync(file)).digest('hex').slice(0, 8);
+const tidy = html => html.replace(/[ \t]+$/gm, '')
+  .replace(/((?:href|src)="[^"]*?(assets\/(?:css\/[a-z-]+\.css|js\/[a-z-]+\.js|img\/favicon\.svg)))(?:\?v=[0-9a-f]+)?"/g, (m, url, file) => `${url}?v=${stamp(file)}"`);
 
 /* Canonical and preview URLs always derive from BASE. */
 function rewriteUrls(html, path) {
