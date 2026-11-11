@@ -204,8 +204,30 @@ function notFoundPage() {
   <h1 class="title">This page wandered off</h1>
   <p class="intro">It may have moved, or it never existed. Either way, it is somewhere in the fog of war.</p>
   <p class="links"><a href="${BASE}">Back to the room</a></p>
-</header>`
+</header>
+<script>${forwardScript()}</script>`
   });
+}
+
+/* Addresses from the old site, some printed on resumes already sent.
+   GitHub Pages cannot redirect, but it serves 404.html for any missing
+   path, so this page forwards each old address to where it lives now. */
+const MOVED = {
+  'assets/oulad-sta437.pdf': 'assets/reports/oulad-sta437.pdf',
+  'assets/apm-project.pdf': 'assets/reports/apm-project.pdf',
+  'experience.html': 'experience/',
+  'projects.html': 'projects/',
+  'research.html': 'research/',
+  'coursework.html': 'research/',
+  'work-gpt.html': 'projects/tiny-gpt/',
+  'work-agents.html': 'projects/agents/',
+  'work-plantinarium.html': 'projects/plantinarium/',
+  'work-oulad.html': 'research/oulad/',
+  'work-apm.html': 'research/apm/'
+};
+function forwardScript() {
+  const path = new URL(BASE).pathname;
+  return `(function(){var m=${JSON.stringify(MOVED)};var p=location.pathname.replace(${JSON.stringify(path)},'');if(m[p])location.replace(${JSON.stringify(BASE)}+m[p]+location.hash);})();`;
 }
 
 /* ---------- filling marked blocks ---------- */
