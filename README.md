@@ -10,13 +10,15 @@ The homepage is one screen: a pixel-art room with the name on the wall. Everythi
 
 | In the room | Goes to |
 |---|---|
+| chalkboard | Experience |
 | laptop | Projects |
-| corkboard | Experience |
 | books | Research |
-| chalkboard | About |
-| trophy, cards, window | their part of About |
-| letter, mug | email |
+| window | About |
+| trophy | the StarCraft part of About |
+| mug | email |
 | lamp | switches the theme |
+
+On a phone held upright, the chalkboard and the window move under the name.
 
 The inner pages are quiet on purpose: the room's two palettes (morning by day, dusk by night), its objects as page icons, and otherwise just a date in the margin, a title, and one paragraph per job or project. Papers are just titled. Contact links are logos. Type is Alegreya for names and titles, Inter for reading, and Silkscreen (a pixel face) for tiny labels.
 
@@ -28,8 +30,11 @@ about/ experience/         hand-written pages, one index.html each
 projects/ research/        hand-written list pages; projects/<id>/ and
                            research/<id>/ are generated from content/work.js
 404.html sitemap.xml robots.txt   generated; GitHub Pages wants them at the root
+.nojekyll                  tells GitHub Pages to serve the files as they are
+blog/                      generated from content/blog/, only while there are posts
 
 content/work.js            every project and report (data only)
+content/blog/              blog posts in Markdown (see its README); the blog appears with the first post
 assets/css/style.css       all the styles
 assets/js/hero.js          the homepage canvas harness
 assets/js/room.js          the room itself: palettes, layout, drawing, links
@@ -38,6 +43,7 @@ assets/img/                favicon and link-preview card
 assets/reports/            paper PDFs
 assets/Resumes/            the two public resumes (path kept stable: it is linked from outside)
 tools/build.mjs            fills shared parts and writes generated pages
+tools/markdown.mjs         the small Markdown converter for posts
 tools/icons.mjs            pixel icons and contact logos for the inner pages
 tools/site.mjs             the site address, content/work.js, and the page list, shared by the tools
 tools/serve.mjs            local preview server
@@ -60,9 +66,11 @@ After editing `content/work.js`, the nav, the footer, or the icons, rebuild:
 node tools/build.mjs
 ```
 
-It needs Node 18 or newer. It fills every `<!-- build:NAME -->` block (head, nav, footer, the project and report lists, and `<!-- build:icon-NAME -->` pixel icons), writes `projects/<id>/` and `research/<id>/`, and regenerates `404.html`, `sitemap.xml`, and `robots.txt`. It is safe to run repeatedly. Commit everything it writes, since GitHub Pages serves the files as they are.
+It needs Node 18 or newer. It fills every `<!-- build:NAME -->` block (head, nav, footer, the project and report lists, and `<!-- build:icon-NAME -->` pixel icons), writes `projects/<id>/` and `research/<id>/` (and `blog/` from `content/blog/`), and regenerates `404.html`, `sitemap.xml`, and `robots.txt`. It is safe to run repeatedly. Commit everything it writes, since GitHub Pages serves the files as they are.
 
 To add a project or report, add one object to `WORK` in `content/work.js` (the comment at the top lists the fields), then rebuild.
+
+To write a blog post, add a Markdown file to `content/blog/` (its README shows the header) and rebuild. The blog page and its nav link appear with the first post and disappear if the folder has none. Always run the build before committing: GitHub Pages serves the committed files as they are.
 
 The room lives in `assets/js/room.js`: `PALETTES` at the top holds the colours, `layout()` and `desk()` place things, and `DOORS` holds the labels and links. The resumes are the source of truth: when a fact changes there (a number, a title, a date), change it in the pages, in `content/work.js`, and in the room's labels.
 

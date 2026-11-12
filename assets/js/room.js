@@ -3,11 +3,10 @@
 
    A desk under a window: code types itself out on the laptop, the
    mug steams, and it snows on Toronto outside. Things in the room
-   are doors to the rest of the site: the laptop is Projects, the
-   corkboard is Experience, the books are Research, the chalkboard
-   is About, the mug is email, the trophy and the window open their
-   part of About, and the lamp is the light switch (it flips the
-   theme).
+   are doors to the rest of the site: the chalkboard is Experience,
+   the laptop is Projects, the books are Research, the window is
+   About, the trophy opens its part of About, the mug is email, and
+   the lamp is the light switch (it flips the theme).
 
    Everything is painted at a low resolution with plain rectangles,
    then scaled up by a whole number of device pixels, so every pixel
@@ -31,12 +30,12 @@ Hero(function (api) {
       deskEdge: '#6e4650', deskLip: '#35222e', deskFace: '#2f1e2a', shadow: '#3a2534',
       line: '#1b1222', sky: ['#7c4f8a', '#d0707c', '#f4a37f'], star: '#ffe3d1', starDim: '#b98aa8',
       moon: '#ffd28a', moonDark: '#f4b06a', sun: true, city: '#2b1d3d', cityWin: '#ffcf7a', cityWin2: '#c98bb0', snow: '#ffe9e0',
-      frame: '#5c4670', frameDark: '#332641', cork: '#9a6a48', corkDark: '#7a5238', corkFrame: '#4e3430', board: '#241c2e', chalkLine: '#544c5e',
-      note1: '#f3d27e', note2: '#ef93a0', note3: '#9cc9e6', paper: '#f6e9dc', paperDark: '#c4ab9c', scribble: '#7a5a5a', pin: '#e05468',
+      frame: '#5c4670', frameDark: '#332641', cork: '#9a6a48', corkFrame: '#4e3430', board: '#241c2e',
+      note1: '#f3d27e', note2: '#ef93a0', note3: '#9cc9e6',
       lamp: '#f0b45a', lampDark: '#a9703a', bulb: '#fff2c2', metal: '#a59ab4', metalLight: '#cfc5dc', metalDark: '#6a5d7c', bezel: '#22182e',
       screen: '#1d1530', dotA: '#ef93a0', dotB: '#f3d27e', dotC: '#9ad6a8',
       mug: '#f6e9dc', mugDark: '#bba69a', coffee: '#5a3a2a', steam: '#b892b0',
-      book1: '#e0716a', book2: '#6c88c4', book3: '#f0c46a', book4: '#9a84c8', book5: '#f0a070', pages: '#f6e9dc', leaf: '#7fb87a',
+      book1: '#e0716a', book2: '#6c88c4', book3: '#f0c46a', book4: '#9a84c8', book5: '#f0a070', pages: '#f6e9dc',
       trophy: '#f0c46a',
       accent: '#ffcf7a',
       text: '#fff1e4', muted: '#e2c9d0', link: '#ffd08a', panel: '#2a1f38'
@@ -48,12 +47,12 @@ Hero(function (api) {
       deskEdge: '#e6c49d', deskLip: '#a97c55', deskFace: '#b8875e', shadow: '#b08660',
       line: '#3a3346', sky: ['#9cc5e6', '#b4d4ee', '#cfe4f4'], star: false, starDim: false,
       moon: '#fff1b8', moonDark: '#ffe08a', sun: true, city: '#8eaacb', cityWin: '#c7d8ea', cityWin2: '#a9c0dc', snow: '#ffffff',
-      frame: '#fbf8f1', frameDark: '#cdbfa6', cork: '#c99a6a', corkDark: '#b0835a', corkFrame: '#8a6446', board: '#34404a', chalkLine: '#5d6a74',
-      note1: '#f3d77e', note2: '#f0a0aa', note3: '#a3cfe9', paper: '#fffdf7', paperDark: '#cfc3ad', scribble: '#8a7a6a', pin: '#d8485a',
+      frame: '#fbf8f1', frameDark: '#cdbfa6', cork: '#c99a6a', corkFrame: '#8a6446', board: '#34404a',
+      note1: '#f3d77e', note2: '#f0a0aa', note3: '#a3cfe9',
       lamp: '#d06a5a', lampDark: '#9a4a40', bulb: '#efe3c8', metal: '#b8bccb', metalLight: '#d9dce5', metalDark: '#7d8296', bezel: '#3a3d4c',
       screen: '#fdfaf3', dotA: '#e58f9a', dotB: '#e9c45a', dotC: '#6fbf86',
       mug: '#ffffff', mugDark: '#cfc6b6', coffee: '#6a4632', steam: '#ffffff',
-      book1: '#c45a5a', book2: '#4f7fb0', book3: '#e2b44f', book4: '#7e6aa8', book5: '#d98a4e', pages: '#fffdf7', leaf: '#6fae6a',
+      book1: '#c45a5a', book2: '#4f7fb0', book3: '#e2b44f', book4: '#7e6aa8', book5: '#d98a4e', pages: '#fffdf7',
       trophy: '#e3b34a',
       accent: '#d8485a',
       text: '#1f2638', muted: '#5a5f70', link: '#2f5aa8', panel: '#fffdf7',
@@ -99,52 +98,46 @@ Hero(function (api) {
   }
 
   /* ---------- where everything goes ---------- */
-  var SIZES = { chalk: [84, 57], cork: [54, 38], win: [64, 54] };
+  var SIZES = { chalk: [104, 59], win: [64, 54] };   // the window's height includes its sill
 
   function layout() {
-    var deskH = clamp(Math.round(vh * 0.2), 30, 70);
-    var deskY = vh - deskH, top = clamp(Math.round(deskH * 0.34), 7, 13);
-    var cx = Math.round(vw / 2), by = deskY + 4;
     var text = api.avoid.map(function (a) { return { x: a.x / S, y: a.y / S, w: a.w / S, h: a.h / S }; });
-    var ceiling = 0;
-    text.forEach(function (a) { if (a.y < vh * 0.15) ceiling = Math.max(ceiling, a.y + a.h); });
-    var body = text.filter(function (a) { return a.y >= vh * 0.15 && a.y < deskY; });
-    /* Wall things stand in two columns, either side of the name. If
-       the sides are too narrow (a phone), the chalkboard and window
-       go in a row above the name instead, and the rest stay home. */
-    var tl = vw, tr = 0, tt = deskY;
-    body.forEach(function (a) { tl = Math.min(tl, a.x); tr = Math.max(tr, a.x + a.w); tt = Math.min(tt, a.y); });
-    var edge = Math.max(6, Math.round(vw * 0.07)), lo = ceiling + 6, hi = deskY - 46;
+    /* The nav starts at the top of the hero (its box is padded upward, so y <= 0); the rest is the name and its links. */
+    var ceiling = 0, body = [];
+    text.forEach(function (a) { if (a.y <= 0) ceiling = Math.max(ceiling, a.y + a.h); else body.push(a); });
+    var tl = vw, tr = 0, tt = vh, tb = 0;
+    body.forEach(function (a) { tl = Math.min(tl, a.x); tr = Math.max(tr, a.x + a.w); tt = Math.min(tt, a.y); tb = Math.max(tb, a.y + a.h); });
+    var CW = SIZES.chalk[0], CH = SIZES.chalk[1], WW = SIZES.win[0], WH = SIZES.win[1];
+    /* Wide screens: the chalkboard left of the name and the window right of it, all on one line.
+       Tall ones (a phone held upright): both go on the wall under the name. */
+    var tall = !body.length || tl < CW + 6 || vw - tr < WW + 6;
+    var deskH = clamp(Math.round(vh * (tall ? 0.15 : 0.2)), 30, 70);
+    var deskY = vh - deskH, top = clamp(Math.round(deskH * 0.34), 7, 13);
+    /* On the narrowest phones the desk shifts right a few pixels, so the books keep clear of the screen edge. */
+    var cx = Math.round(vw / 2) + (vw < 170 ? 4 : vw < 200 ? 3 : 0), by = deskY + 4;
+    var lo = ceiling + 8, hi = by - 54;   // below the nav; above the lamp and the arrow over it
     var wall = {};
-    function column(names, x0, x1) {
-      var fit = names.filter(function (n) { return SIZES[n][0] <= x1 - x0; }), total = 0;
-      while (fit.length) {
-        total = fit.reduce(function (s, n) { return s + SIZES[n][1]; }, 0) + 12 * (fit.length - 1);
-        if (total <= hi - lo) break;
-        fit.pop();
-      }
-      var y = Math.round(lo + (hi - lo - total) / 2);
-      fit.forEach(function (n) {
-        var w = SIZES[n][0], h = SIZES[n][1];
-        wall[n] = { x: Math.round(x0 + (x1 - x0 - w) / 2), y: y, w: w, h: h };
-        y += h + 12;
-      });
-    }
-    if (body.length && tl - edge - 8 >= 84 && vw - edge - tr - 8 >= 64) {
-      column(['chalk', 'cork'], edge, tl - 8);
-      column(['win'], tr + 8, vw - edge);
+    function place(n, x, y) { wall[n] = { x: Math.round(x), y: Math.round(y), w: SIZES[n][0], h: SIZES[n][1] }; }
+    if (!tall) {
+      var mid = (tt + tb) / 2;
+      place('chalk', (tl - CW) / 2, clamp(mid - CH / 2, lo, Math.max(lo, hi - CH)));
+      place('win', tr + (vw - tr - WW) / 2, clamp(mid - WH / 2, lo, Math.max(lo, hi - WH)));
     } else if (body.length) {
-      var y = Math.round(tt - 10 - 57), gap = 10;
-      if (y > ceiling + 4 && vw >= 84 + 64 + gap + 8) {
-        var x = Math.round((vw - 84 - 64 - gap) / 2);
-        wall.chalk = { x: x, y: y, w: 84, h: 57 };
-        wall.win = { x: x + 84 + gap, y: y + 3, w: 64, h: 54 };
-      }
+      var zt = tb + 6, zone = hi - zt, room = vw - 8;
+      if (zone >= CH && CW + 4 + WW <= room) {            // side by side under the name
+        var gap = Math.min(14, room - CW - WW), x0 = (vw - CW - gap - WW) / 2, y = zt + (zone - CH) * 0.35;
+        place('chalk', x0, y);
+        place('win', x0 + CW + gap, y + (gap < 6 ? 0 : (CH - WH) / 2));   // too close for the sill to clear the tray: line the tops up
+      } else if (zone >= CH + 8 + WH) {                   // too narrow: the board high on the left, the window lower on the right
+        var y2 = zt + (zone - CH - 8 - WH) * 0.35;
+        place('chalk', 6 + (room - CW) * 0.15, y2);
+        place('win', vw - 6 - WW - (room - WW) * 0.15, y2 + CH + 8);
+      } else if (zone >= CH) place('chalk', (vw - CW) / 2, zt + (zone - CH) * 0.35);   // the smallest phones: just the board
     }
     L = {
-      deskY: deskY, top: top, by: by, cx: cx, ceiling: ceiling, wide: !!wall.cork,
+      deskY: deskY, top: top, by: by, cx: cx, ceiling: ceiling, wide: !tall,
       laptop: { x: cx - 24, y: by - 36, w: 48, h: 36 },
-      cork: wall.cork || null, chalk: wall.chalk || null,
+      chalk: wall.chalk || null,
       win: wall.win ? { x: wall.win.x, y: wall.win.y, w: 64, h: 50 } : null
     };
     desk(cx, by);
@@ -152,12 +145,14 @@ Hero(function (api) {
 
   /* The desk, set up like a real one: the lamp leans over the laptop,
      the mug sits at its elbow, and the books and the trophy keep to
-     the ends, a little further out on a wider desk. */
+     the ends, a little further out on a wider desk (and pulled in on
+     the narrowest phones, so the books stay on screen, with the lamp
+     nudged toward the laptop to keep clear of them). */
   function desk(cx, by) {
     var half = Math.min(vw / 2 - 4, 150);
-    L.lamp = { x: cx - 58, y: by - 46, w: 30, h: 46 };
+    var out = Math.min(clamp(Math.round(half * 0.72), 62, 110), cx - 31);
+    L.lamp = { x: Math.max(cx - 58, cx - out + 2), y: by - 46, w: 30, h: 46 };
     L.mug = { x: cx + 33, y: by - 9, w: 11, h: 9 };
-    var out = clamp(Math.round(half * 0.72), 62, 110);
     L.books = { x: cx - out - 28, y: by - 22, w: 28, h: 22 };
     L.trophy = { x: cx + out, y: by - 23, w: 17, h: 23 };
     var lamp = L.lamp;
@@ -211,7 +206,6 @@ Hero(function (api) {
     seed = 11;
     if (L.win) paintWindow(L.win);
     if (L.chalk) paintChalk(L.chalk);
-    if (L.cork) paintCork(L.cork);
     paintLamp(L.lamp);
     paintLaptop(L.laptop);
     paintMug(L.mug);
@@ -257,88 +251,65 @@ Hero(function (api) {
     r(b.x - 3, b.y + b.h + 3, b.w + 6, 1, 'frameDark');
   }
 
-  /* A 3 by 5 pixel font: just the letters the room writes. */
+  /* A 4 by 5 pixel font, just the letters the room writes (M, T, W, X, Y are 5 wide; I is 3). Add a glyph here if the board's words change. */
   var FONT = {
-    A: ['.#.', '#.#', '###', '#.#', '#.#'], B: ['##.', '#.#', '##.', '#.#', '##.'], C: ['.##', '#..', '#..', '#..', '.##'],
-    E: ['###', '#..', '##.', '#..', '###'], F: ['###', '#..', '##.', '#..', '#..'], G: ['.##', '#..', '#.#', '#.#', '.##'],
-    H: ['#.#', '#.#', '###', '#.#', '#.#'], L: ['#..', '#..', '#..', '#..', '###'], P: ['##.', '#.#', '##.', '#..', '#..'], M: ['#...#', '##.##', '#.#.#', '#...#', '#...#'],
-    O: ['.#.', '#.#', '#.#', '#.#', '.#.'], S: ['.##', '#..', '.#.', '..#', '##.'], T: ['###', '.#.', '.#.', '.#.', '.#.'],
-    U: ['#.#', '#.#', '#.#', '#.#', '###'], W: ['#...#', '#...#', '#.#.#', '##.##', '#...#'], 2: ['##.', '..#', '.#.', '#..', '###'],
-    7: ['###', '..#', '.#.', '.#.', '.#.'], "'": ['#', '#', '.', '.', '.'], ' ': ['..', '..', '..', '..', '..'], _: ['.', '.', '.', '.', '.']
+    A: ['.##.', '#..#', '####', '#..#', '#..#'], C: ['.###', '#...', '#...', '#...', '.###'], D: ['###.', '#..#', '#..#', '#..#', '###.'],
+    E: ['####', '#...', '###.', '#...', '####'], F: ['####', '#...', '###.', '#...', '#...'], H: ['#..#', '#..#', '####', '#..#', '#..#'],
+    I: ['###', '.#.', '.#.', '.#.', '###'], L: ['#...', '#...', '#...', '#...', '####'], M: ['#...#', '##.##', '#.#.#', '#...#', '#...#'],
+    N: ['#..#', '##.#', '#.##', '#..#', '#..#'], O: ['.##.', '#..#', '#..#', '#..#', '.##.'], P: ['###.', '#..#', '###.', '#...', '#...'],
+    R: ['###.', '#..#', '###.', '#.#.', '#..#'], S: ['.###', '#...', '.##.', '...#', '###.'], T: ['#####', '..#..', '..#..', '..#..', '..#..'],
+    U: ['#..#', '#..#', '#..#', '#..#', '####'], W: ['#...#', '#...#', '#.#.#', '##.##', '#...#'], X: ['#...#', '.#.#.', '..#..', '.#.#.', '#...#'],
+    Y: ['#...#', '.#.#.', '..#..', '..#..', '..#..'], 2: ['###.', '...#', '.##.', '#...', '####'], 7: ['####', '...#', '..#.', '.#..', '.#..'],
+    "'": ['#', '#', '.', '.', '.'], ' ': ['..', '..', '..', '..', '..']
   };
   function textWidth(text) {
     var w = 0;
     for (var n = 0; n < text.length; n++) w += (FONT[text[n]] || FONT[' '])[0].length + 1;
     return w - 1;
   }
-  function write(text, x, y, k, size) {
-    var z = size || 1;
+  function write(text, x, y, k) {
     for (var n = 0; n < text.length; n++) {
       var glyph = FONT[text[n]] || FONT[' '];
-      for (var j = 0; j < 5; j++) for (var i = 0; i < glyph[j].length; i++) if (glyph[j][i] === '#') r(x + i * z, y + j * z, z, z, k);
-      x += (glyph[0].length + 1) * z;
+      for (var j = 0; j < 5; j++) for (var i = 0; i < glyph[j].length; i++) if (glyph[j][i] === '#') r(x + i, y + j, 1, 1, k);
+      x += glyph[0].length + 1;
     }
     return x;
   }
 
+  /* The chalkboard is Experience: a wooden frame, a board with old chalk
+     dust (wiped clean behind the writing), each place in coloured chalk,
+     and a tray. */
   function paintChalk(b) {
-    /* A wooden frame, a board with old chalk dust on it, and a tray.
-       Everything on the board is centred on its middle, mx. */
-    var x = b.x, y = b.y, W = 84, mx = x + W / 2;
-    r(x, y, W, 54, 'line');
-    r(x + 1, y + 1, W - 2, 52, 'corkFrame');
+    var x = b.x, y = b.y, W = b.w, H = b.h - 3, mx = x + W / 2;   // H: the board and frame; the tray hangs below
+    r(x, y, W, H, 'line');
+    r(x + 1, y + 1, W - 2, H - 2, 'corkFrame');
     r(x + 1, y + 1, W - 2, 1, 'cork');
-    r(x + 3, y + 3, W - 6, 48, 'board');
+    r(x + 3, y + 3, W - 6, H - 6, 'board');
     ctx.globalAlpha = 0.18;
-    for (var i = 0; i < 80; i++) px(x + 4 + Math.floor(rand() * (W - 8)), y + 4 + Math.floor(rand() * 46), 'chalkDim');
+    for (var i = 0; i < 70; i++) px(x + 4 + Math.floor(rand() * (W - 8)), y + 4 + Math.floor(rand() * (H - 8)), 'chalkDim');
     ctx.globalAlpha = 1;
-    var t = 'ABOUT ME', tx = Math.round(mx - textWidth(t) / 2);
+    var t = 'EXPERIENCE', tw = textWidth(t), tx = Math.round(mx - tw / 2);
+    r(tx - 1, y + 6, tw + 2, 9, 'board');
     write(t, tx, y + 7, 'chalk');
-    r(tx, y + 13, textWidth(t), 1, 'chalkDim');
-    /* A neural network in coloured chalk, layer by layer. */
-    var layers = [[3, 'note3'], [3, 'note2'], [2, 'note1']], nodes = [];
-    layers.forEach(function (l, i) {
-      var n = l[0], col = [];
-      for (var j = 0; j < n; j++) col.push([Math.round(mx) + (i - 1) * 18, Math.round(y + 26 - (n - 1) * 3 + j * 6), l[1]]);
-      nodes.push(col);
+    r(tx, y + 13, tw, 1, 'chalkDim');
+    var lines = [
+      ['NEXTDOOR', ' ML INTERN', 'note3'],
+      ['SHOPIFY', ' SWE INTERN', 'note2'],
+      ['U OF T', ' ML RESEARCH', 'note1'],
+      ['U OF T', " MATH SPEC '27", 'note1']
+    ];
+    var widest = 0;
+    lines.forEach(function (l) { widest = Math.max(widest, textWidth(l[0] + l[1])); });
+    var lx = Math.round(mx - widest / 2);
+    lines.forEach(function (l, n) {
+      var ly = y + 18 + n * 8;
+      r(lx - 1, ly - 1, textWidth(l[0] + l[1]) + 2, 7, 'board');
+      write(l[1], write(l[0], lx, ly, l[2]), ly, 'chalk');
     });
-    for (i = 0; i + 1 < nodes.length; i++) nodes[i].forEach(function (p) { nodes[i + 1].forEach(function (q) { line(p[0] + 2, p[1], q[0] - 2, q[1], 'chalkLine'); }); });
-    nodes.forEach(function (col) { col.forEach(function (p) { sprite(['.#.', '###', '.#.'], p[0] - 1, p[1] - 1, { '#': p[2] }); }); });
-    t = "MATH_SPEC_U_OF_T_'27";   // '_' is a narrow space, so it fits on one line
-    write(t, Math.round(mx - textWidth(t) / 2), y + 40, 'chalk');
     /* The tray: two sticks of chalk and an eraser. */
-    r(x - 2, y + 53, W + 4, 3, 'corkFrame'); r(x - 2, y + 53, W + 4, 1, 'cork'); r(x - 2, y + 56, W + 4, 1, 'line');
-    r(x + 9, y + 52, 6, 1, 'chalk'); r(x + 17, y + 52, 4, 1, 'note2');
-    r(x + W - 22, y + 50, 10, 3, 'note3'); r(x + W - 22, y + 52, 10, 1, 'line');
-  }
-
-  function paintCork(b) {
-    r(b.x, b.y, b.w, b.h, 'corkFrame');
-    r(b.x + 2, b.y + 2, b.w - 4, b.h - 4, 'cork');
-    for (var i = 0; i < 46; i++) px(b.x + 2 + Math.floor(rand() * (b.w - 4)), b.y + 2 + Math.floor(rand() * (b.h - 4)), 'corkDark');
-    function note(x, y, k, w, h) {
-      r(x + 1, y + 1, w, h, 'corkDark');
-      r(x, y, w, h, k);
-      r(x + 2, y + 4, w - 4, 1, 'scribble');
-      r(x + 2, y + 7, w - 7, 1, 'scribble');
-      r(x + Math.floor(w / 2), y, 1, 2, 'pin');
-    }
-    function label(x, y, k, w, text) {
-      r(x + 1, y + 1, w, 10, 'corkDark');
-      r(x, y, w, 10, k);
-      write(text, x + 2, y + 3, 'scribble');
-      r(x + Math.floor(w / 2), y, 1, 2, 'pin');
-    }
-    label(b.x + 3, b.y + 4, 'note1', 13, 'ML');
-    label(b.x + 17, b.y + 6, 'note2', 17, 'SWE');
-    note(b.x + 38, b.y + 4, 'note3', 11, 12);
-    /* A photo: a tiny sky over a tiny hill. */
-    r(b.x + 10, b.y + 21, 15, 12, 'corkDark');
-    r(b.x + 9, b.y + 20, 15, 12, 'paper');
-    r(b.x + 10, b.y + 21, 13, 8, c.sky[2]);
-    r(b.x + 10, b.y + 26, 13, 3, 'leaf'); r(b.x + 14, b.y + 25, 6, 1, 'leaf');
-    r(b.x + 16, b.y + 20, 1, 2, 'pin');
-    note(b.x + 30, b.y + 21, 'note1', 15, 11);
+    r(x - 2, y + H - 1, W + 4, 3, 'corkFrame'); r(x - 2, y + H - 1, W + 4, 1, 'cork'); r(x - 2, y + H + 2, W + 4, 1, 'line');
+    r(x + 9, y + H - 2, 6, 1, 'chalk'); r(x + 17, y + H - 2, 4, 1, 'note2');
+    r(x + W - 22, y + H - 4, 10, 3, 'note3'); r(x + W - 22, y + H - 2, 10, 1, 'line');
   }
 
   /* The StarCraft II Grandmaster emblem: a winged hexagon with a star, on a little wooden stand. */
@@ -548,15 +519,14 @@ Hero(function (api) {
   /* ---------- doors: real links over the drawing ---------- */
   var DOORS = [
     { key: 'laptop', href: 'projects/', title: 'Projects', hint: 'a GPT in pure NumPy, and more' },
-    { key: 'cork', href: 'experience/', title: 'Experience', hint: 'ML at Nextdoor, SWE at Shopify' },
+    { key: 'chalk', href: 'experience/', title: 'Experience', hint: 'ML at Nextdoor, SWE at Shopify' },
     { key: 'books', href: 'research/', title: 'Research', hint: 'prompts as weight updates, and papers' },
-    { key: 'chalk', href: 'about/', title: 'About me', hint: 'ML at U of T, and the rest' },
     { key: 'mug', href: 'mailto:avichaigobrin@gmail.com', title: 'Coffee chat?', hint: 'happy to talk', act: 'click to write' },
     { key: 'lamp', lamp: true, title: 'The lamp', hint: 'lights on, lights off', act: 'click to switch' },
-    { key: 'win', href: 'about/#school', title: 'Toronto', hint: 'U of T, graduating 2027' },
+    { key: 'win', href: 'about/', title: 'About me', hint: 'Toronto, U of T, and the rest' },
     { key: 'trophy', href: 'about/#starcraft', title: 'StarCraft II', hint: 'Grandmaster, top 100 NA' }
   ];
-  var HINT_ORDER = ['laptop', 'cork', 'chalk', 'books', 'trophy', 'mug', 'lamp', 'win'];
+  var HINT_ORDER = ['laptop', 'chalk', 'books', 'win', 'trophy', 'mug', 'lamp'];
   var hinting = true;
   var TIP_H = 92, TIP_HALF = 130;   // a label's height and half its widest, in CSS pixels
 
@@ -594,8 +564,8 @@ Hero(function (api) {
       var act = document.createElement('i');
       act.textContent = d.act || 'click to open';
       tip.appendChild(act);
-      /* Labels open upward, unless that would cover the nav; and they never leave the screen. */
-      if (top - TIP_H < L.ceiling * S) tip.className += ' below';
+      /* Labels open upward, unless that would cover the nav (or, on a phone, the name above the chalkboard and the window); and they never leave the screen. */
+      if (top - TIP_H < L.ceiling * S || (!L.wide && (d.key === 'chalk' || d.key === 'win'))) tip.className += ' below';
       var mid = left + width / 2;
       if (mid - TIP_HALF < 8) tip.className += ' start';
       else if (mid + TIP_HALF > W - 8) tip.className += ' end';
@@ -638,9 +608,17 @@ Hero(function (api) {
     resize: function (w, h) {
       W = w;
       var ratio = Math.min(window.devicePixelRatio || 1, 2);
-      S = clamp(Math.round(w / 340), 2, 6);
-      P = Math.max(1, Math.round(S * ratio));
-      S = P / ratio;
+      /* Phones held upright get 2 CSS px per room pixel (tablets a little more). On wider
+         screens, step down a size if the chalkboard would not fit beside the name. */
+      var nameW = 0;
+      api.avoid.forEach(function (a) { if (a.y > 0) nameW = Math.max(nameW, a.w); });
+      var s = w < h ? clamp(Math.round(w / 256), 2, 6) : clamp(Math.round(w / 340), 2, 6);
+      for (;;) {
+        P = Math.max(1, Math.round(s * ratio));
+        S = P / ratio;
+        if (w < h || s <= 2 || (w - nameW) / 2 >= (SIZES.chalk[0] + 16) * S) break;
+        s--;
+      }
       vw = Math.ceil(w / S); vh = Math.ceil(h / S);
       low.width = vw; low.height = vh;
       layout();

@@ -8,7 +8,8 @@
       report lists, and pixel icons (<!-- build:icon-laptop --> and
       so on; see tools/icons.mjs).
    2. Writes one page per item in content/work.js (projects/<id>/ and
-      research/<id>/), the 404 page, sitemap.xml, and robots.txt.
+      research/<id>/), the blog pages from content/blog/ when there are
+      any, the 404 page, sitemap.xml, and robots.txt.
 
    Everything else on a page is hand-written HTML: edit it directly.
    Safe to run repeatedly. Files are written with LF line endings.
@@ -16,7 +17,8 @@
 import { readFileSync, writeFileSync, mkdirSync, rmSync, readdirSync, existsSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { svg, ICON_NAMES, logoLink } from './icons.mjs';
-import { BASE, WORK, isReport, dirOf, ALL_PAGES } from './site.mjs';
+import { BASE, WORK, isReport, dirOf, ALL_PAGES, POSTS, postDir } from './site.mjs';
+import { markdown } from './markdown.mjs';
 
 const GITHUB_USER = 'Avi-Gobrin';
 const EMAIL = 'avichaigobrin@gmail.com';
@@ -46,10 +48,12 @@ function head(root) {
 <link rel="stylesheet" href="${root}assets/css/style.css">`;
 }
 
+/* Blog appears in the nav only while content/blog/ has a post. */
 const NAV = [
   ['experience/', 'Experience'],
   ['projects/', 'Projects'],
   ['research/', 'Research'],
+  ...(POSTS.length ? [['blog/', 'Blog']] : []),
   ['about/', 'About']
 ];
 
@@ -83,7 +87,7 @@ function footer(root) {
   return `<p class="logos">
 ${logos(['email', 'github', 'linkedin', 'x'], root)}
 </p>
-<p class="fine">Hand-built in plain HTML, CSS, and a little JavaScript. &copy; 2026 Avi Gobrin.</p>`;
+<p class="fine">&copy; 2026 Avi Gobrin</p>`;
 }
 
 /* The homepage's row under the name. */
@@ -116,12 +120,13 @@ const projects = root => WORK.filter(w => !isReport(w)).map(w => entry(w, root, 
 const reports = root => WORK.filter(isReport).map(w => entry(w, root, 3)).join('\n');
 
 /* ---------- whole pages ---------- */
-function metaDescription(w) {
-  const raw = (w.card || w.desc || '').replace(/\s+/g, ' ').trim();
+function clip(text) {
+  const raw = String(text).replace(/\s+/g, ' ').trim();
   if (raw.length <= 155) return esc(raw);
   const cut = raw.slice(0, 153);
   return esc(cut.slice(0, cut.lastIndexOf(' ')).replace(/[,;:.]$/, '') + '...');
 }
+const metaDescription = w => clip(w.card || w.desc || '');
 
 function shell({ title, description, url, ogType = 'website', root, current = '', section = false, robots = '', body }) {
   const indent = (s, n) => s.trim().split('\n').join('\n' + ' '.repeat(n));
@@ -187,6 +192,50 @@ ${toolsLine(w)}`);
     current: list,
     section: true,
     body: parts.join('\n\n')
+  });
+}
+
+/* ---------- the blog (only while content/blog/ has posts) ---------- */
+const dateIn = (d, month) => new Date(d + 'T00:00:00Z').toLocaleDateString('en-US', { year: 'numeric', month, day: 'numeric', timeZone: 'UTC' });
+const plain = html => html.replace(/<[^>]+>/g, ' ').replace(/&#10;/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&amp;/g, '&');
+
+function blogIndex() {
+  const items = POSTS.map(p => `<article class="entry">
+  <p class="when"><time datetime="${p.date}">${dateIn(p.date, 'short')}</time></p>
+  <div>
+    <h2 class="entry-title"><a href="${p.slug}/">${esc(p.title)}</a></h2>${p.description ? `
+    <p>${esc(p.description)}</p>` : ''}
+  </div>
+</article>`);
+  return shell({
+    title: 'Blog | Avi Gobrin',
+    description: 'Writing by Avi Gobrin.',
+    url: BASE + 'blog/',
+    root: '../',
+    current: 'blog/',
+    body: [`<header class="page-head text">\n  <h1 class="title">Blog</h1>\n</header>`, ...items].join('\n\n')
+  });
+}
+
+function postPage(p) {
+  const root = '../../';
+  const html = markdown(p.body, root);
+  return shell({
+    title: `${esc(p.title)} | Avi Gobrin`,
+    description: clip(p.description || plain(html)),
+    url: BASE + postDir(p),
+    ogType: 'article',
+    root,
+    current: 'blog/',
+    section: true,
+    body: `<header class="page-head text">
+  <p class="crumb"><a href="${root}blog/">Blog</a></p>
+  <h1 class="title">${esc(p.title)}</h1>
+  <p class="meta"><time datetime="${p.date}">${dateIn(p.date, 'long')}</time></p>
+</header>
+<div class="prose">
+${html}
+</div>`
   });
 }
 
@@ -309,6 +358,25 @@ for (const w of WORK) {
   console.log(`  ✓ ${dirOf(w)}index.html`);
 }
 
+/* The blog exists only while content/blog/ has a post. With none, blog/ is deleted
+   (and the nav above has no Blog link), so there is never an empty blog page. */
+if (!POSTS.length) {
+  if (existsSync('blog')) { rmSync('blog', { recursive: true }); console.log('  - removed blog/ (no posts in content/blog/)'); }
+} else {
+  mkdirSync('blog', { recursive: true });
+  for (const d of readdirSync('blog', { withFileTypes: true })) {
+    if (d.isDirectory() && !POSTS.some(p => p.slug === d.name)) { rmSync(`blog/${d.name}`, { recursive: true }); console.log(`  - removed blog/${d.name}/`); }
+  }
+  writeFileSync('blog/index.html', tidy(blogIndex()));
+  console.log('  ✓ blog/index.html');
+  for (const p of POSTS) {
+    if (/[\u2013\u2014]/.test(p.title + p.description + p.body)) console.warn(`  ! content/blog/${p.file}: has an em or en dash`);
+    mkdirSync(postDir(p), { recursive: true });
+    writeFileSync(`${postDir(p)}index.html`, tidy(postPage(p)));
+    console.log(`  ✓ ${postDir(p)}index.html`);
+  }
+}
+
 writeFileSync('404.html', tidy(notFoundPage()));
 console.log('  ✓ 404.html');
 
@@ -322,5 +390,6 @@ console.log('  ✓ sitemap.xml');
 
 writeFileSync('robots.txt', `User-agent: *\nAllow: /\n\nSitemap: ${BASE}sitemap.xml\n`);
 console.log('  ✓ robots.txt');
+if (!existsSync('.nojekyll')) writeFileSync('.nojekyll', '');   // GitHub Pages: serve the files as they are, no Jekyll
 if (!existsSync('assets/img/og-card.png')) console.warn('  ! assets/img/og-card.png is missing');
 console.log('Done.');

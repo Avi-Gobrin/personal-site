@@ -16,16 +16,6 @@ function grid(w, h) {
 }
 
 const ICONS = {
-  /* Experience: the corkboard, with ML and SWE notes. */
-  cork() {
-    const g = grid(20, 15);
-    g.r(0, 0, 20, 15, 'wood'); g.r(1, 1, 18, 13, 'cork');
-    [[3, 3], [12, 2], [7, 10], [16, 11]].forEach(([x, y]) => g.px(x, y, 'cork-dark'));
-    g.r(2, 2, 7, 6, 'note-a'); g.r(3, 4, 5, 1, 'scribble'); g.r(3, 6, 3, 1, 'scribble'); g.px(5, 2, 'pin');
-    g.r(11, 3, 7, 5, 'note-b'); g.r(12, 5, 5, 1, 'scribble'); g.px(14, 3, 'pin');
-    g.r(4, 9, 8, 4, 'note-c'); g.r(5, 11, 6, 1, 'scribble'); g.px(8, 9, 'pin');
-    return g;
-  },
   /* Projects: the laptop, with code on the screen. */
   laptop() {
     const g = grid(20, 15);
@@ -43,7 +33,7 @@ const ICONS = {
     book(1, 10, 18, 5, 'book-a'); book(3, 5, 15, 5, 'book-b'); book(2, 0, 16, 5, 'book-c');
     return g;
   },
-  /* About: the chalkboard. */
+  /* Experience: the chalkboard. */
   chalk() {
     const g = grid(20, 15);
     g.r(0, 0, 20, 13, 'wood'); g.r(1, 1, 18, 11, 'board');
@@ -107,7 +97,7 @@ const ICONS = {
     g.r(10, 7, 2, 4, 'belt'); g.r(11, 10, 2, 3, 'belt');
     return g;
   },
-  /* Toronto: the window, with the CN Tower. */
+  /* About and Toronto: the window, with the CN Tower. */
   window() {
     const g = grid(18, 15);
     g.r(0, 0, 18, 15, 'frame-dark'); g.r(1, 1, 16, 13, 'frame'); g.r(2, 2, 14, 11, 'sky');
