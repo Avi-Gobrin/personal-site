@@ -117,17 +117,20 @@ Hero(function (api) {
     var cx = Math.round(vw / 2) + (vw < 170 ? 4 : vw < 200 ? 3 : 0), by = deskY + 4;
     var lo = ceiling + 8, hi = by - 54;   // below the nav; above the lamp and the arrow over it
     var wall = {};
-    function place(n, x, y) { wall[n] = { x: Math.round(x), y: Math.round(y), w: SIZES[n][0], h: SIZES[n][1] }; }
+    function place(n, x, y, w) { wall[n] = { x: Math.round(x), y: Math.round(y), w: w || SIZES[n][0], h: SIZES[n][1] }; }
     if (!tall) {
       var mid = (tt + tb) / 2;
       place('chalk', (tl - CW) / 2, clamp(mid - CH / 2, lo, Math.max(lo, hi - CH)));
       place('win', tr + (vw - tr - WW) / 2, clamp(mid - WH / 2, lo, Math.max(lo, hi - WH)));
     } else if (body.length) {
-      var zt = tb + 6, zone = hi - zt, room = vw - 8;
-      if (zone >= CH && CW + 4 + WW <= room) {            // side by side under the name
-        var gap = Math.min(14, room - CW - WW), x0 = (vw - CW - gap - WW) / 2, y = zt + (zone - CH) * 0.35;
+      /* Side by side under the name, with a few pixels of wall past the tray and the sill. On narrower
+         phones the window gets narrower (down to 34 wide) rather than leaving the room. */
+      var zt = tb + 6, zone = hi - zt, room = vw - 8, fit = vw - 13 - CW;
+      var ww = Math.min(WW, fit - 4), gap = Math.min(14, fit - ww);
+      if (zone >= CH && ww >= 34) {
+        var x0 = (vw - CW - gap - ww) / 2, y = zt + (zone - CH) * 0.35;
         place('chalk', x0, y);
-        place('win', x0 + CW + gap, y + (gap < 6 ? 0 : (CH - WH) / 2));   // too close for the sill to clear the tray: line the tops up
+        place('win', x0 + CW + gap, y + (gap < 6 ? 0 : (CH - WH) / 2), ww);   // too close for the sill to clear the tray: line the tops up
       } else if (zone >= CH + 8 + WH) {                   // too narrow: the board high on the left, the window lower on the right
         var y2 = zt + (zone - CH - 8 - WH) * 0.35;
         place('chalk', 6 + (room - CW) * 0.15, y2);
@@ -138,7 +141,7 @@ Hero(function (api) {
       deskY: deskY, top: top, by: by, cx: cx, ceiling: ceiling, wide: !tall,
       laptop: { x: cx - 24, y: by - 36, w: 48, h: 36 },
       chalk: wall.chalk || null,
-      win: wall.win ? { x: wall.win.x, y: wall.win.y, w: 64, h: 50 } : null
+      win: wall.win ? { x: wall.win.x, y: wall.win.y, w: wall.win.w, h: 50 } : null
     };
     desk(cx, by);
   }
@@ -157,6 +160,10 @@ Hero(function (api) {
     L.trophy = { x: cx + out, y: by - 23, w: 17, h: 23 };
     var lamp = L.lamp;
     lamp.bx = lamp.x + 8; lamp.hx = lamp.bx + 12; lamp.hy = by - 46;
+    /* Where the lamp leans over its neighbours (the narrowest phones), its link keeps to the gap between them. */
+    var left = L.books.x + L.books.w + 4, right = L.laptop.x - 4;
+    if (lamp.x < left) { lamp.w -= left - lamp.x; lamp.x = left; }
+    lamp.w = Math.min(lamp.w, right - lamp.x);
   }
 
   /* ---------- the still parts, painted once per size or palette ---------- */
@@ -238,14 +245,15 @@ Hero(function (api) {
       for (j = y0 + ph - bh + 2; j < y0 + ph - 1; j += 2) for (i = gx + 1; i < gx + bw - 1; i += 2) if (rand() < 0.3) px(i, j, rand() < 0.7 ? 'cityWin' : 'cityWin2');
       gx += bw;
     }
-    var tx = x0 + 14, ground = y0 + ph;
+    var mx = b.x + Math.floor(b.w / 2) - 1;   // the mullion; the tower stands in the middle of the left pane
+    var tx = x0 + Math.round((mx - x0) / 2), ground = y0 + ph;
     r(tx, ground - 34, 2, 34, 'city');
     r(tx - 2, ground - 25, 6, 3, 'city'); r(tx - 1, ground - 26, 4, 1, 'city');
     r(tx - 1, ground - 31, 4, 1, 'city');
     r(tx, ground - 40, 1, 6, 'city');
     px(tx + 3, ground - 24, 'cityWin');
     /* Mullions, and the sill. */
-    r(b.x + 31, y0, 2, ph, 'frame');
+    r(mx, y0, 2, ph, 'frame');
     r(x0, b.y + 22, pw, 2, 'frame');
     r(b.x - 3, b.y + b.h, b.w + 6, 3, 'frame');
     r(b.x - 3, b.y + b.h + 3, b.w + 6, 1, 'frameDark');
@@ -415,7 +423,8 @@ Hero(function (api) {
     steam = [];
     makeCode();
     if (!L.win) return;
-    for (var i = 0; i < 26; i++) snow.push({ x: Math.random() * 58, y: Math.random() * 44, v: 4 + Math.random() * 6, p: Math.random() * 6 });
+    var pw = L.win.w - 6;
+    for (var i = 0; i < Math.round(26 * pw / 58); i++) snow.push({ x: Math.random() * pw, y: Math.random() * 44, v: 4 + Math.random() * 6, p: Math.random() * 6 });
   }
 
   function step(dt) {
@@ -423,7 +432,7 @@ Hero(function (api) {
     for (var i = 0; i < snow.length; i++) {
       var s = snow[i];
       s.y += s.v * dt;
-      if (s.y > 44) { s.y -= 44; s.x = Math.random() * 58; }
+      if (s.y > 44) { s.y -= 44; s.x = Math.random() * (L.win.w - 6); }
     }
     steamClock += dt;
     if (steamClock > 0.35) {
@@ -445,10 +454,10 @@ Hero(function (api) {
     g.drawImage(base, 0, 0);
     /* Snow, behind the mullions. */
     if (L.win) {
-      var x0 = L.win.x + 3, y0 = L.win.y + 3;
+      var x0 = L.win.x + 3, y0 = L.win.y + 3, pw = L.win.w - 6, m = Math.floor(L.win.w / 2) - 4;   // m: the mullion, from the left of the glass
       for (var i = 0; i < snow.length; i++) {
         var s = snow[i], x = Math.floor(s.x + Math.sin(t * 0.8 + s.p) * 1.5), y = Math.floor(s.y);
-        if (x < 0 || x > 57 || x === 28 || x === 29 || y === 19 || y === 20) continue;
+        if (x < 0 || x >= pw || x === m || x === m + 1 || y === 19 || y === 20) continue;
         px(x0 + x, y0 + y, 'snow');
       }
     }

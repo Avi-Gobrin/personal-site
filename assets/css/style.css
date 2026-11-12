@@ -86,17 +86,32 @@ h1, h2, h3 { text-wrap: balance; }
 .nav a { color: var(--graphite); text-decoration: none; padding: 0.2rem 0; }
 .nav a:hover { color: var(--ink); }
 .nav a[aria-current] { color: var(--ink); font-weight: 600; }
+.name-link .px { display: none; }   /* on phones the portrait stands in for the name */
+/* The light switch is the room's lamp, unlit by day and lit at dusk. The button is a
+   44px target; its negative margins keep the lamp on the line of text. Its words are
+   for screen readers, and show on hover like the logos' labels. */
 .theme-toggle {
-  margin-left: auto;
-  font: inherit;
-  font-size: 0.975rem;
-  color: var(--graphite);
-  background: none;
+  position: relative;
+  flex: none;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin: -0.625rem -0.625rem -0.625rem auto;
+  padding: 0;
   border: 0;
-  padding: 0.2rem 0;
+  background: none;
+  color: var(--graphite);
   cursor: pointer;
 }
-.theme-toggle:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 0.25em; }
+.theme-toggle .px { width: 24px; height: 24px; }
+/* Only where there is a real pointer: a tap on a phone leaves :hover stuck on, which would leave the bulb or the label showing. */
+@media (hover: hover) {
+  .theme-toggle:hover { color: var(--ink); }
+  :root:not([data-theme="dark"]) .theme-toggle:hover .p-glow { fill: #e3b34a; }   /* by day, a hint that it switches on, as in the room */
+}
 .theme-toggle .to-light { display: none; }
 [data-theme="dark"] .theme-toggle .to-dark { display: none; }
 [data-theme="dark"] .theme-toggle .to-light { display: inline; }
@@ -107,6 +122,7 @@ h1, h2, h3 { text-wrap: balance; }
    paragraph. The room's pixel objects head each page. */
 .wrap { max-width: calc(var(--measure) + 2 * var(--edge-pad)); margin: 0 auto; padding: 3.5rem var(--edge-pad) 4rem; }
 .page-head { display: flex; align-items: center; gap: 1.4rem; margin-bottom: 1.5rem; }
+.page-icon { flex: none; }
 .page-head .px { width: 5rem; height: auto; }
 .page-head.text { display: block; }
 .title { font-family: var(--display); font-weight: 500; font-size: clamp(2.4rem, 5vw, 3.25rem); line-height: 1.05; letter-spacing: -0.01em; }
@@ -178,7 +194,11 @@ h1, h2, h3 { text-wrap: balance; }
 .p-gm-top { fill: #c46c24; } .p-gm-edge { fill: #6e3010; } .p-gm-dark { fill: #4a2410; } .p-gm-wing { fill: #c8964a; } .p-gm-hi { fill: #fff3c4; }
 .p-mana-w { fill: #f3ead0; } .p-mana-u { fill: #4f8fd6; } .p-mana-b { fill: #4a3f58; } .p-mana-r { fill: #d8574a; } .p-mana-g { fill: #4f9a5a; } .p-art { fill: #d9c49a; }
 .p-belt { fill: #16151c; } .p-belt-shine { fill: #55525e; }
-.p-frame { fill: #fbf8f1; } .p-frame-dark { fill: #cdbfa6; } .p-sky { fill: #b4d4ee; } .p-city { fill: #8eaacb; } .p-snow { fill: #ffffff; }
+.p-city { fill: #8eaacb; }
+.p-hair { fill: #6a4632; } .p-hair-dark { fill: #4a2e20; } .p-skin { fill: #f2c9a5; } .p-skin-shade { fill: #dba582; }
+.p-beard { fill: #b98868; } .p-mouth { fill: #7e4038; } .p-hoodie { fill: #4f7fb0; } .p-hoodie-dark { fill: #3d6592; }
+.p-ink { fill: currentColor; } .p-glow { fill: transparent; }
+[data-theme="dark"] .p-glow { fill: var(--accent); }
 [data-theme="dark"] .p-line { fill: #120c18; }
 
 /* ---------- footer ---------- */
@@ -195,7 +215,7 @@ body:not(.home-page) { display: flex; flex-direction: column; min-height: 100vh;
 .logo { position: relative; display: inline-flex; padding: 0.45rem; color: var(--graphite); }
 .logo:hover { color: var(--ink); }
 .logo svg { width: 1.25rem; height: 1.25rem; }
-.logo::after, .motion::after {
+.logo::after, .motion::after, .theme-toggle::after {
   position: absolute; left: 50%; top: calc(100% + 0.3rem); transform: translateX(-50%);
   display: none; white-space: nowrap; z-index: 3;
   padding: 0.1rem 0.45rem 0.15rem;
@@ -203,7 +223,12 @@ body:not(.home-page) { display: flex; flex-direction: column; min-height: 100vh;
   font-family: var(--pixel); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.03em;
 }
 .logo::after { content: attr(data-label); }
-.logo:hover::after, .logo:focus-visible::after, .motion:hover::after, .motion:focus-visible::after { display: block; }
+.theme-toggle::after { content: "Lights off"; content: "Lights off" / ""; left: auto; right: 0; top: calc(100% - 0.2rem); transform: none; }
+[data-theme="dark"] .theme-toggle::after { content: "Lights on"; content: "Lights on" / ""; }
+.logo:hover::after, .logo:focus-visible::after, .motion:hover::after, .motion:focus-visible::after,
+.theme-toggle:focus-visible::after { display: block; }
+@media (hover: hover) { .theme-toggle:hover::after { display: block; } }
+.theme-toggle:focus-visible::after { top: calc(100% + 0.5rem); }   /* clear of the focus ring */
 
 /* ---------- homepage ---------- */
 /* One screen: the room, with the name on the wall. room.js sets
@@ -246,7 +271,7 @@ body:not(.home-page) { display: flex; flex-direction: column; min-height: 100vh;
 .hero-text .logos { justify-content: center; margin: 0.9rem 0 0; gap: 0.6rem; }
 .hero-text .logo { color: var(--ink); }
 .hero-text .logo svg { width: 1.5rem; height: 1.5rem; }
-.hero-text .logo::after { background: var(--panel); color: var(--ink); border: 2px solid var(--edge-ink, var(--ink)); }
+.hero-text .logo::after, .hero .theme-toggle::after { background: var(--panel); color: var(--ink); border: 2px solid var(--edge-ink, var(--ink)); }
 
 .spots { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
 .spot {
@@ -309,18 +334,27 @@ body:not(.home-page) { display: flex; flex-direction: column; min-height: 100vh;
   .entry > .when { padding: 0; margin-bottom: 0.2rem; }
   .entry-title { font-size: 1.45rem; }
   .hero-text { top: 44%; }
+  /* The bar is one line: the portrait (the way home, on inner pages), the links, and the lamp. */
+  .bar { flex-wrap: nowrap; align-items: center; column-gap: 0.75rem; }
+  .name-link { flex: none; display: flex; }
+  .name-link .px { display: block; }
+  .name-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+  .nav { flex: 1 1 auto; min-width: 0; font-size: clamp(0.72rem, 3.6vw, 0.925rem); }
+  .nav:has(> a:nth-child(5)) { font-size: clamp(0.6875rem, 3.2vw, 0.925rem); }   /* with a Blog link */
+  .theme-toggle { margin-left: -0.625rem; }
 }
-/* Narrow phones: the name and the toggle share the first line; the links get the second, spread edge to edge. */
+/* Narrow phones: the links spread out between the portrait and the lamp. */
 @media (max-width: 560px) {
-  .bar { row-gap: 0.15rem; }
-  .theme-toggle { order: 1; margin-left: auto; white-space: nowrap; }
-  .nav { order: 2; flex-basis: 100%; justify-content: space-between; column-gap: 0.6rem; font-size: 0.925rem; }
+  .nav { justify-content: space-between; column-gap: 0.375rem; }
 }
-@media (max-width: 340px) {
-  .nav { column-gap: 0.4rem; font-size: 0.85rem; }
+/* The narrowest phones, with a Blog link: a little less space between things, so the bar stays one line. */
+@media (max-width: 359px) {
+  .bar:has(.nav > a:nth-child(5)) { column-gap: 0.5rem; }
+  .bar:has(.nav > a:nth-child(5)) .nav { column-gap: 0.25rem; }
+  .bar:has(.nav > a:nth-child(5)) .theme-toggle { margin-left: -0.5rem; }
 }
-/* Phones held upright: the name sits high, and the room fills the wall under it (room.js). */
-@media (max-aspect-ratio: 3/4) {
+/* Phones held upright (and narrow upright windows): the name sits high, and the room fills the wall under it (room.js). */
+@media (max-aspect-ratio: 3/4), (orientation: portrait) and (max-width: 1023px) {
   .hero-text { top: max(28%, 11.5rem); }
 }
 /* Phones held sideways: a shorter room and a smaller name, so the desk stays on screen. */

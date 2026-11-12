@@ -1,5 +1,5 @@
 /* ============================================================
-   Pixel icons: the room's objects, small, as inline SVG.
+   Pixel icons: the room's objects, a portrait, and the CN Tower, small, as inline SVG.
 
    Each icon paints rectangles into a grid of colour names; svg()
    merges each row into runs and writes one <rect> per run, with
@@ -13,6 +13,15 @@ function grid(w, h) {
     for (let j = y; j < y + rh; j++) for (let i = x; i < x + rw; i++) if (cells[j] && i >= 0 && i < w) cells[j][i] = k;
   };
   return { w, h, cells, r, px: (x, y, k) => r(x, y, 1, 1, k) };
+}
+
+/* Paint a grid from rows of characters; keys maps each character to a colour name. */
+function rows(g, keys, list) {
+  list.forEach((row, y) => {
+    if (row.length !== g.w) throw new Error(`icon row ${y} has length ${row.length}, expected ${g.w}`);
+    [...row].forEach((ch, x) => { if (keys[ch]) g.px(x, y, keys[ch]); });
+  });
+  return g;
 }
 
 const ICONS = {
@@ -97,15 +106,76 @@ const ICONS = {
     g.r(10, 7, 2, 4, 'belt'); g.r(11, 10, 2, 3, 'belt');
     return g;
   },
-  /* About and Toronto: the window, with the CN Tower. */
-  window() {
-    const g = grid(18, 15);
-    g.r(0, 0, 18, 15, 'frame-dark'); g.r(1, 1, 16, 13, 'frame'); g.r(2, 2, 14, 11, 'sky');
-    g.r(2, 10, 3, 3, 'city'); g.r(9, 9, 3, 4, 'city'); g.r(12, 11, 4, 2, 'city');
-    g.r(6, 4, 1, 9, 'city'); g.r(5, 6, 3, 1, 'city'); g.px(6, 3, 'city');
-    g.r(8, 2, 1, 11, 'frame'); g.r(2, 7, 14, 1, 'frame');
-    g.px(4, 4, 'snow'); g.px(12, 3, 'snow'); g.px(14, 9, 'snow'); g.px(10, 5, 'snow');
-    return g;
+  /* About: me, in a hoodie. */
+  portrait() {
+    return rows(grid(20, 20), { L: 'line', H: 'hair', h: 'hair-dark', S: 'skin', s: 'skin-shade', B: 'beard', M: 'mouth', D: 'hoodie', d: 'hoodie-dark', W: 'pages' }, [
+      '.....LL.LL.LL.L.....',
+      '....LHHLHHLHHLHL....',
+      '...LHHHHHhHHHHHHL...',
+      '..LHHhHHHHHHhHHhHL..',
+      '..LHHHHhHHHHHHHHHL..',
+      '..LHhHHSHSSHShHHHL..',
+      '..LHHSHHSSSSHHSHHL..',
+      '...LSSSSSSSSSSSSL...',
+      '..LSSSSLSSSSLSSSSL..',
+      '..LsSSSLSSSSLSSSsL..',
+      '...LSSSSSSsSSSSSL...',
+      '...LBSSSBBBBSSSBL...',
+      '...LBBBMBBBBMBBBL...',
+      '....LBBBMMMMBBBL....',
+      '...LDLLBBBBBBLLDL...',
+      '..LDDdLLssssLLdDDL..',
+      '.LDDDDdddssdddDDDDL.',
+      'LDDDDDDdWddWdDDDDDDL',
+      'LDDDDDDDWDDWDDDDDDDL',
+      'LDDDDDDDDDDDDDDDDDDL'
+    ]);
+  },
+  /* The University of Toronto: the CN Tower over the city. */
+  tower() {
+    return rows(grid(26, 24), { L: 'line', r: 'book-a', m: 'metal-light', t: 'metal', g: 'fn', c: 'city', w: 'str' }, [
+      '..........r...............',
+      '..........L...............',
+      '..........L...............',
+      '..........L...............',
+      '.........LmL..............',
+      '........LmmmL.............',
+      '.........LmL..............',
+      '.........LmL..............',
+      '.........LmL..............',
+      '.......LLLmLLL............',
+      '......LmmmmmmtL...........',
+      '.....LgggggggggL..........',
+      '......LmmmmmmtL...........',
+      '.......LLLmLLL............',
+      '.........LmL..............',
+      '.........LmL..............',
+      '........LmmtL....LLLLL....',
+      'LLLL....LmmtL....LcccL....',
+      'LccL....LmmtL....LcwcL....',
+      'LcwL....LmmtLLLLLLcccL....',
+      'LccLLLLLmmmmtLcccLccwLLLLL',
+      'LccLcccLmmmmtLwccLcccLcccL',
+      'LccLcwcLmmmmtLcccLwccLcwcL',
+      'LwcLcccLmmmmtLcwcLcccLcccL'
+    ]);
+  },
+  /* The light switch in the bar: the room's lamp. Ink is the text colour; the glow shows at dusk (style.css). */
+  lamp() {
+    return rows(grid(12, 12), { k: 'ink', g: 'glow' }, [
+      '.......kkk..',
+      '....kkkkkkk.',
+      '...k.kkkkkkk',
+      '..k....ggg..',
+      '.kk...g...g.',
+      '.kk..g..g..g',
+      '..k.........',
+      '...k........',
+      '...k........',
+      '....k.......',
+      '..kkkkkk....',
+      '.kkkkkkkk...'
+    ]);
   }
 };
 

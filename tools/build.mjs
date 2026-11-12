@@ -58,9 +58,10 @@ const NAV = [
 ];
 
 /* `current` is the section you are in. On a section's own page it is
-   aria-current="page"; on a project or report inside it, "true". */
+   aria-current="page"; on a project or report inside it, "true".
+   On phones the portrait stands in for the name (see style.css). */
 function nav(current, root, section = false) {
-  const home = current === '' ? '' : `\n  <a class="name-link" href="${root || './'}">Avi Gobrin</a>`;
+  const home = current === '' ? '' : `\n  <a class="name-link" href="${root || './'}">${svg('portrait', 1)}<span class="name-text">Avi Gobrin</span></a>`;
   const mark = section ? ' aria-current="true"' : ' aria-current="page"';
   const links = NAV.map(([href, label]) =>
     `<a href="${root}${href}"${href === current ? mark : ''}>${label}</a>`).join('\n    ');
@@ -68,7 +69,7 @@ function nav(current, root, section = false) {
   <nav class="nav" aria-label="Main">
     ${links}
   </nav>
-  <button class="theme-toggle" type="button"><span class="to-dark">Lights off<span class="sr-only"> (switch to dark theme)</span></span><span class="to-light">Lights on<span class="sr-only"> (switch to light theme)</span></span></button>
+  <button class="theme-toggle" type="button">${svg('lamp', 2)}<span class="sr-only to-dark">Lights off (switch to dark theme)</span><span class="sr-only to-light">Lights on (switch to light theme)</span></button>
 </div>`;
 }
 
